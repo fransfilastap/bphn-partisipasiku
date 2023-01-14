@@ -21,13 +21,14 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
     <Card
       as={Link}
       href={slug}
-      className='flex flex-col transition duration-200 ease-in-out cursor-pointer group bg-white/30 dark:bg-slate-600/30 dark:border-slate-600 dark:shadow-slate-800 dark:hover:border-gray-200/80 backdrop-blur-sm hover:border-slate-400/50 max-h-[380px]'
+      className='flex flex-col transition duration-200 ease-in-out cursor-pointer group bg-white/30 dark:bg-slate-600/30 dark:border-slate-600 dark:shadow-slate-800 dark:hover:border-gray-200/80 hover:border-slate-400/50 max-h-[380px]'
     >
       <div className='relative flex flex-grow-0 w-full h-[calc(22vh+1rem)] overflow-hidden'>
         <SmoothTransitionImage
           src={cover}
-          className='object-cover w-auto h-auto'
+          className='object-cover'
           fill
+          sizes='100vw'
           alt={title}
         />
       </div>

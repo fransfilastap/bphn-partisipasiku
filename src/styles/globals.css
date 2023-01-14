@@ -34,7 +34,7 @@
   }
 
   .unblur {
-    animation: unblur 10s linear;
+    animation: unblur 300ms linear;
   }
 
   @keyframes unblur {
