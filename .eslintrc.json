@@ -17,10 +17,9 @@
   "parserOptions": {
     "sourceType": "module",
     "project": "./tsconfig.json"
-
   },
   "rules": {
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off",
     "no-console": "warn",
     "@typescript-eslint/restrict-template-expressions": "off",
     "react/no-unescaped-entities": "off",
