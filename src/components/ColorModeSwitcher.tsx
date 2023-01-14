@@ -3,6 +3,7 @@ import useColorMode from '@/hooks/useColorMode';
 import { ColorMode } from '@/types';
 import useIsMounted from '@/hooks/useIsMounted';
 import { MoonIcon, SunIcon, SystemIcon } from '@/components/icons';
+import clsxtw from '@/lib/clsxtw';
 
 const Icons: Record<ColorMode, ReactElement> = {
   light: <SunIcon className='w-4 h-4' />,
@@ -12,13 +13,13 @@ const Icons: Record<ColorMode, ReactElement> = {
 type ColorModeSelectionProps = ComponentPropsWithRef<'select'>;
 
 const ColorModeSwitcher: FunctionComponent<ColorModeSelectionProps> = (
-  props
+  props: ColorModeSelectionProps
 ) => {
   const [colorMode, setColorMode] = useColorMode();
   useIsMounted();
 
   return (
-    <div className='relative z-10 flex flex-row items-center justify-between px-2 py-2 text-sm border border-gray-100 rounded group dark:border-gray-800'>
+    <div className='relative z-10 flex-row items-center justify-between hidden px-2 py-2 text-sm border border-gray-100 rounded md:flex group dark:border-gray-800'>
       <span className='absolute inline-flex cursor-pointer pointer-events-auto'>
         {Icons[colorMode ?? 'system']}
       </span>

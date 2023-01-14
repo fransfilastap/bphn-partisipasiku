@@ -37,7 +37,7 @@ const NavLink: FunctionComponent<PropsWithChildren<NavLinkProps>> = ({
   return (
     <Link
       className={clsxtw(
-        'text-gray-600 text-sm dark:text-gray-300',
+        'text-gray-500 font-[500] text-sm dark:text-gray-400 hover:text-black transition-colors ease-in-out duration-100',
         { 'text-black dark:text-white': isActive },
         className
       )}
