@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ColorMode } from '@/types';
-import useIsomorphicLayoutEffect from '@/hooks/useIsomorphicLayoutEffect';
-import useIsMounted from '@/hooks/useIsMounted';
+import { useIsomorphicLayoutEffect, useIsMounted } from '@/hooks';
 
 const updateColorMode = (): void => {
   if (
