@@ -3,7 +3,6 @@ import useColorMode from '@/hooks/useColorMode';
 import { ColorMode } from '@/types';
 import useIsMounted from '@/hooks/useIsMounted';
 import { MoonIcon, SunIcon, SystemIcon } from '@/components/icons';
-import clsxtw from '@/lib/clsxtw';
 
 const Icons: Record<ColorMode, ReactElement> = {
   light: <SunIcon className='w-4 h-4' />,

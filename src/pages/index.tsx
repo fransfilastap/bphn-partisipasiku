@@ -15,7 +15,6 @@ import mockFetchIssueCategories from '@/server/mocks/category';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import clsxtw from '@/lib/clsxtw';
 import { useToggle } from '@/hooks';
-import clsx from 'clsx';
 
 export default function Home({
   issues,
