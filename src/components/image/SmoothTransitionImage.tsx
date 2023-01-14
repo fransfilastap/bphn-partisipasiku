@@ -11,9 +11,10 @@ const SmoothTransitionImage: FunctionComponent<ImageProps> = (props) => {
 
   return (
     <Image
+      {...props}
       className={imageLoading ? 'img-blur' : 'unblur'}
       onLoadingComplete={onLoadingCompleteHandler}
-      {...props}
+      alt={props.alt}
     />
   );
 };

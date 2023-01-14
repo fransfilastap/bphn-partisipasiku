@@ -1,9 +1,6 @@
 import { Issue } from '@/types';
 
 export const mockFetchIssues = (): Issue[] => {
-  setTimeout(() => {
-    console.log('simulate latency...');
-  }, 30000);
   return [
     {
       id: 1,

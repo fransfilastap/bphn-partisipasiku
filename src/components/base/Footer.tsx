@@ -1,5 +1,4 @@
 import { ReactElement } from 'react';
-import Link from 'next/link';
 import Container from './Container';
 import Logo from './Logo';
 
