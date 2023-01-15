@@ -15,6 +15,7 @@ import mockFetchIssueCategories from '@/server/mocks/category';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import clsxtw from '@/lib/clsxtw';
 import { useToggle } from '@/hooks';
+import styles from './index.module.css';
 
 export default function Home({
   issues,
@@ -23,15 +24,8 @@ export default function Home({
   return (
     <RootLayout>
       <Seo />
-      <Container>
-        {/* <div
-          className="absolute z-[-1] inset-0 bg-grid-slate-800/[0.08] bg-[bottom_1px_center] dark:bg-grid-slate-400/10 dark:bg-bottom dark:border-b dark:border-slate-100/5"
-          style={{
-            maskImage: 'linear-gradient(to bottom, transparent, black)',
-            WebkitMaskImage: 'linear-gradient(to bottom, transparent, black)',
-          }}
-        ></div> */}
-        <Masthead />
+      <Masthead />
+      <Container className='p-6 md:p-4'>
         <ContentGrid
           issues={issues}
           categories={categories}
@@ -43,14 +37,28 @@ export default function Home({
 
 const Masthead = () => {
   return (
-    <section className='min-h-[40vh] flex flex-col items-center justify-center gap-y-3'>
-      <h5 className='w-full lg:w-[70vw]:p-4 text-5xl font-bold text-center tracking-tight text-black dark:text-white lg:text-7xl'>
-        Kolaborasi Membangun Hukum.
-      </h5>
-      <p className='text-lg text-center text-gray-500 md:text-2xl font-[400]'>
-        Sampaikan pendapatmu terhadap isu-isu terkait peraturan
-        perundang-undangan di Indonesia, di sini!
-      </p>
+    <section
+      className={clsxtw(
+        'relative h-[70vh] md:h-[50vh] inset-0 dark:bg-bottom bg-top bg-no-repeat bg-slate-50 dark:bg-black border-b-slate-500/[0.2] border-b',
+        styles.beams
+      )}
+    >
+      <div
+        className='absolute inset-0 bg-grid-slate-900/[0.04] bg-[bottom_1px_center] dark:bg-grid-slate-600/30 dark:bg-bottom dark:border-b dark:border-slate-100/5 z-[-1]'
+        style={{
+          maskImage: 'linear-gradient(to bottom, transparent, black)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent, black)',
+        }}
+      ></div>
+      <div className='flex flex-col items-center justify-center h-full p-4 gap-y-3'>
+        <h5 className='w-full p-4 text-5xl font-bold tracking-tight text-center text-black dark:text-white lg:text-7xl'>
+          Kolaborasi Membangun Hukum.
+        </h5>
+        <p className='text-lg text-center text-gray-500 md:text-2xl font-[400]'>
+          Sampaikan pendapatmu terhadap isu-isu terkait peraturan
+          perundang-undangan di Indonesia, di sini!
+        </p>
+      </div>
     </section>
   );
 };
@@ -71,7 +79,7 @@ const ContentGrid = ({
   }, []);
 
   return (
-    <section className='z-0 flex flex-col gap-10 md:gap-20 lg:flex-row'>
+    <section className='flex flex-col md:gap-20 lg:flex-row'>
       <IssueFilter categories={categories} />
       <div className='grid w-full grid-cols-1 gap-2 md:gap-8 md:grid-cols-3 lg:w-3/4'>
         {isLoading &&
@@ -86,6 +94,7 @@ const ContentGrid = ({
               slug={e.slug}
               title={e.title}
               key={i}
+              priority={i < 3}
             />
           ))}
       </div>
@@ -104,12 +113,14 @@ const IssueFilter: FunctionComponent<IssueFilterProps> = ({
 
   return (
     <aside className='flex flex-col justify-start w-full gap-2 lg:w-1/4'>
-      <h5 className='font-[600] text-[0.9em] dark:text-white'>Filter</h5>
+      <h5 className='font-[600] text-[0.9em] dark:text-white hidden md:block'>
+        Filter
+      </h5>
       <Input
         placeholder='Search...'
         leftIcon={<SearchIcon />}
       />
-      <div className='flex flex-col gap-2'>
+      <div className='flex flex-col gap-2 mb-4'>
         <button
           aria-label='filter button'
           onClick={() => setIsOpen(!isOpen)}

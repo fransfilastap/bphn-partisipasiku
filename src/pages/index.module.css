@@ -1,0 +1,9 @@
+.beams {
+  background-image: url(../../public/images/hero.jpg);
+  background-size: 150rem;
+  z-index: -1;
+}
+
+:global(.dark) .beams {
+  background-image: none;
+}

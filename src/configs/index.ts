@@ -2,14 +2,22 @@ import { IAppInfo } from '@/types';
 import * as process from 'process';
 
 const AppInfo: IAppInfo = {
-  siteName: 'Next.js + Typescript + TailwindCSS Starter',
-  siteDescription: 'Next.js + Typescript + TailwindCSS Starter boilerplate',
+  siteName: 'Partisipasiku! | Badan Pembinaan Hukum Nasional',
+  siteDescription:
+    'Platform kolaborasi masyarakat dan pemerintah dalam membangun hukum',
   url:
     process.env.NODE_ENV === 'production'
-      ? 'https://nextjs-starter.fransfp.dev'
-      : `'http://localhost/3000`,
+      ? 'https://bphn-partisipasiku.vercel.app/'
+      : 'http://localhost/3000',
   email: 'fransfilastap@live.com',
-  keywords: ['Next.js', 'Typescript', 'TailwindCSS', 'React'],
+  keywords: [
+    'Partisipasiku',
+    'BPHN',
+    'RUU',
+    'RPP',
+    'RPerpres',
+    'Naskah Akademik',
+  ],
   twitter: '@franspotter',
 };
 export { AppInfo };
