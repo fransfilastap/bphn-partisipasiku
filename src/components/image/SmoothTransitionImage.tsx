@@ -1,7 +1,12 @@
 import React, { FunctionComponent, useCallback, useState } from 'react';
 import Image, { ImageProps } from 'next/image';
+import clsxtw from '@/lib/clsxtw';
 
-const SmoothTransitionImage: FunctionComponent<ImageProps> = (props) => {
+const SmoothTransitionImage: FunctionComponent<ImageProps> = ({
+  className,
+  alt,
+  ...props
+}) => {
   const [imageLoading, setImageLoading] = useState<boolean>(true);
   const onLoadingCompleteHandler = useCallback(() => {
     setTimeout(() => {
@@ -12,9 +17,9 @@ const SmoothTransitionImage: FunctionComponent<ImageProps> = (props) => {
   return (
     <Image
       {...props}
-      className={imageLoading ? 'img-blur' : 'unblur'}
+      className={clsxtw(imageLoading ? 'img-blur' : 'unblur', className)}
       onLoadingComplete={onLoadingCompleteHandler}
-      alt={props.alt}
+      alt={alt}
     />
   );
 };
