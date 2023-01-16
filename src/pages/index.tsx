@@ -10,7 +10,6 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { mockFetchIssues } from '@/server/mocks/issue';
 import { Issue, IssueCategory } from '@/types';
 import IssueCardLoading from '@/components/card/IssueCardLoading';
-import IssuePile from '@/components/issue/CategoryCheckbox';
 import mockFetchIssueCategories from '@/server/mocks/category';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import clsxtw from '@/lib/clsxtw';
