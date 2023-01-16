@@ -9,15 +9,17 @@ import { ClassValue } from 'clsx';
 import { useRouter } from 'next/router';
 import clsxtw from '@/lib/clsxtw';
 
-type NavLinkProps = LinkProps & {
+export type NavLinkProps = PropsWithChildren<LinkProps> & {
   className?: string | ClassValue[];
+  activeClassname?: string | ClassValue[];
 };
 
-const NavLink: FunctionComponent<PropsWithChildren<NavLinkProps>> = ({
+const NavLink: FunctionComponent<NavLinkProps> = ({
   children,
   className,
+  activeClassname = 'text-black dark:text-white',
   ...props
-}) => {
+}: NavLinkProps) => {
   const { asPath, isReady } = useRouter();
   const [isActive, setIsActive] = useState<boolean>(false);
 
@@ -38,8 +40,8 @@ const NavLink: FunctionComponent<PropsWithChildren<NavLinkProps>> = ({
     <Link
       className={clsxtw(
         'text-gray-500 font-[500] text-sm dark:text-gray-400 hover:text-black transition-colors ease-in-out duration-100',
-        { 'text-black dark:text-white': isActive },
-        className
+        className,
+        isActive && activeClassname
       )}
       {...props}
     >

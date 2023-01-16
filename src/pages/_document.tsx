@@ -21,7 +21,7 @@ export default function Document(): ReactElement {
           }}
         />
       </Head>
-      <body className='antialiased transform-gpu'>
+      <body>
         <Main />
         <NextScript />
       </body>

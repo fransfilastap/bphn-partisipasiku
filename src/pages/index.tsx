@@ -10,12 +10,13 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { mockFetchIssues } from '@/server/mocks/issue';
 import { Issue, IssueCategory } from '@/types';
 import IssueCardLoading from '@/components/card/IssueCardLoading';
-import IssuePile from '@/components/issue/IssuePile';
+import IssuePile from '@/components/issue/CategoryCheckbox';
 import mockFetchIssueCategories from '@/server/mocks/category';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import clsxtw from '@/lib/clsxtw';
 import { useToggle } from '@/hooks';
 import styles from './index.module.css';
+import Checkbox from '@/components/base/Checkbox';
 
 export default function Home({
   issues,
@@ -138,12 +139,11 @@ const IssueFilter: FunctionComponent<IssueFilterProps> = ({
         </button>
         <div className={clsxtw('flex flex-col gap-1', { hidden: !isOpen })}>
           {categories.map((e) => (
-            <IssuePile
-              key={e.slug}
+            <Checkbox
+              key={e.id}
               value={e.slug}
-            >
-              {e.title}
-            </IssuePile>
+              label={e.title}
+            />
           ))}
         </div>
       </div>
