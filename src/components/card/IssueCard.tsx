@@ -23,7 +23,7 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
     <Card
       as={Link}
       href={slug}
-      className='flex flex-col transition duration-200 ease-in-out cursor-pointer group bg-white dark:bg-slate-600/30 dark:border-slate-600 dark:shadow-slate-800 dark:hover:border-gray-200/80 hover:border-slate-400/50 h-[300px]'
+      className='flex flex-col transition duration-200 ease-in-out cursor-pointer group bg-white dark:bg-slate-600/30 dark:border-slate-800 dark:shadow-slate-800 dark:hover:sc hover:border-slate-400/50 h-[300px]'
     >
       <div className='relative flex flex-col w-full h-[200px]'>
         <SmoothTransitionImage

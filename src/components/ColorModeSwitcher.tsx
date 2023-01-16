@@ -3,22 +3,29 @@ import useColorMode from '@/hooks/useColorMode';
 import { ColorMode } from '@/types';
 import useIsMounted from '@/hooks/useIsMounted';
 import { MoonIcon, SunIcon, SystemIcon } from '@/components/icons';
+import clsxtw from '@/lib/clsxtw';
 
 const Icons: Record<ColorMode, ReactElement> = {
-  light: <SunIcon className='w-4 h-4' />,
-  dark: <MoonIcon className='w-4 h-4' />,
-  system: <SystemIcon className='w-4 h-4' />,
+  light: <SunIcon className='w-5 h-5' />,
+  dark: <MoonIcon className='w-5 h-5' />,
+  system: <SystemIcon className='w-5 h-5' />,
 };
 type ColorModeSelectionProps = ComponentPropsWithRef<'select'>;
 
 const ColorModeSwitcher: FunctionComponent<ColorModeSelectionProps> = (
   props: ColorModeSelectionProps
 ) => {
+  const { className, ...rest } = props;
   const [colorMode, setColorMode] = useColorMode();
   useIsMounted();
 
   return (
-    <div className='relative z-10 flex-row items-center justify-between hidden px-2 py-2 text-sm border border-gray-100 rounded md:flex group dark:border-gray-800'>
+    <div
+      className={clsxtw(
+        'relative flex-row items-center justify-between px-2 py-2 text-sm border border-gray-100 rounded md:flex group dark:border-gray-800',
+        className
+      )}
+    >
       <span className='absolute inline-flex cursor-pointer pointer-events-auto'>
         {Icons[colorMode ?? 'system']}
       </span>
@@ -28,8 +35,14 @@ const ColorModeSwitcher: FunctionComponent<ColorModeSelectionProps> = (
         onChange={(event) => {
           setColorMode(event.target.value as ColorMode);
         }}
-        {...props}
+        {...rest}
       >
+        <option
+          className='flex flex-row'
+          value='system'
+        >
+          System
+        </option>
         <option
           className='flex flex-row'
           value='light'
@@ -41,12 +54,6 @@ const ColorModeSwitcher: FunctionComponent<ColorModeSelectionProps> = (
           value='dark'
         >
           Dark
-        </option>
-        <option
-          className='flex flex-row'
-          value='system'
-        >
-          System
         </option>
       </select>
       <span className='absolute right-0 inline-flex text-gray-500 pointer-events-none'>

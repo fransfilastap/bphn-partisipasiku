@@ -1,4 +1,9 @@
-import { ComponentPropsWithRef, FunctionComponent, ReactElement } from 'react';
+import {
+  ComponentPropsWithRef,
+  FunctionComponent,
+  ReactElement,
+  useRef,
+} from 'react';
 import clsxtw from '@/lib/clsxtw';
 import Container from '@/components/base/Container';
 import Logo from '@/components/base/Logo';
@@ -9,7 +14,8 @@ import MenuToggle from './MenuToggle';
 import { useToggle } from '@/hooks';
 import { AnimatePresence, motion } from 'framer-motion';
 import Portal from './Portal';
-import { XCircleIcon } from '../icons';
+import { ChevronRightIcon, XCircleIcon } from '../icons';
+import useOnClickOutside from '@/hooks/useOutsideClick';
 
 type HeaderProps = ComponentPropsWithRef<'header'>;
 
@@ -18,9 +24,12 @@ export default function Header({
   ...rest
 }: HeaderProps): ReactElement {
   const [isOpen, setIsOpen] = useToggle(false);
+  const menuRef = useRef<HTMLDivElement>(null);
   const closeMenuHandler = () => {
     setIsOpen(false);
   };
+
+  useOnClickOutside(menuRef, closeMenuHandler);
 
   return (
     <>
@@ -44,7 +53,7 @@ export default function Header({
             </ul>
           </Navigation>
           <MenuToggle onClick={() => setIsOpen(!isOpen)} />
-          <ColorModeSwitcher />
+          <ColorModeSwitcher className='hidden' />
         </Container>
       </header>
       <AnimatePresence>
@@ -58,15 +67,17 @@ export default function Header({
                 exit={{ opacity: 0 }}
                 className='fixed inset-0 w-full h-[100vh] z-[999] bg-black/30 backdrop-blur-md'
               ></motion.div>
-              <motion.div className='fixed z-[999999999] inset-0 flex flex-col items-center justify-start p-8'>
+              <motion.div className='fixed z-[999999999] inset-0 flex flex-col items-center justify-start p-4'>
                 <motion.div
-                  initial={{ y: -100 }}
+                  ref={menuRef}
+                  initial={{ y: -500 }}
                   animate={{ y: 0 }}
-                  exit={{ y: -100 }}
-                  className='flex flex-col w-full p-4 bg-white divide-y-2 divide-gray-200 rounded-md shadow-md divide-solid'
+                  exit={{ y: -500 }}
+                  transition={{ type: 'spring', stiffness: 100, delay: 0.05 }}
+                  className='flex flex-col w-full gap-2 p-4 bg-white divide-y divide-gray-100 rounded-lg shadow-md divide-solid'
                 >
                   <div className='flex items-center justify-between'>
-                    <h5 className='font-[600] text-black font-sans text-xl '>
+                    <h5 className='font-[500] text-black font-sans text-xl '>
                       Menu
                     </h5>
                     <button
@@ -81,6 +92,18 @@ export default function Header({
                     <MNavLink href='/'>Beranda</MNavLink>
                     <MNavLink href='/tentang-kami'>Tentang Kami</MNavLink>
                   </ul>
+                  <div className='flex flex-row items-center justify-between pt-2'>
+                    <label
+                      className='flex-1 block text-black'
+                      htmlFor='mobile-color-switch'
+                    >
+                      Color mode
+                    </label>
+                    <ColorModeSwitcher
+                      id='mobile-color-switch'
+                      className='flex-1 text-black'
+                    />
+                  </div>
                 </motion.div>
               </motion.div>
             </>
@@ -94,11 +117,12 @@ export default function Header({
 const MNavLink: FunctionComponent<NavLinkProps> = ({ href, children }) => {
   return (
     <NavLink
-      className='text-black text-md dark:text-gray-800'
-      activeClassname='text-blue-500 dark:text-blue-500'
+      className='text-[1.01em] text-black dark:text-gray-800 font-[400] flex flex-row gap-2 w-full items-center justify-between'
+      activeClassname='text-violet-500 dark:text-blue-500 font-[500]'
       href={href}
     >
       {children}
+      <ChevronRightIcon className='w-4 h-4' />
     </NavLink>
   );
 };
