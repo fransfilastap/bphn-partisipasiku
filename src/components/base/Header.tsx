@@ -91,11 +91,7 @@ export default function Header({
   );
 }
 
-const MNavLink: FunctionComponent<NavLinkProps> = ({
-  href,
-  children,
-  ...props
-}) => {
+const MNavLink: FunctionComponent<NavLinkProps> = ({ href, children }) => {
   return (
     <NavLink
       className='text-black text-md dark:text-gray-800'
