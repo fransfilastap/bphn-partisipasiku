@@ -1,5 +1,4 @@
 import { IAppInfo } from '@/types';
-import * as process from 'process';
 
 const AppInfo: IAppInfo = {
   siteName: 'Partisipasiku! | Badan Pembinaan Hukum Nasional',

@@ -10,7 +10,7 @@ export const mockFetchIssues = (): Issue[] => {
       title: 'Naskah Akademik ABC',
       description: 'Lorem ipsum dolor sit amet',
       placeholder: '',
-      slug: '',
+      slug: 'naskah-akademik-abc',
     },
     {
       id: 2,
@@ -20,7 +20,7 @@ export const mockFetchIssues = (): Issue[] => {
       title: 'Naskah Akademik ABC',
       description: 'Lorem ipsum dolor sit amet',
       placeholder: '',
-      slug: '',
+      slug: 'naskah-akademik-abc-xxx',
     },
     {
       id: 3,
@@ -30,7 +30,7 @@ export const mockFetchIssues = (): Issue[] => {
       title: 'Naskah Akademik ABC',
       description: 'Lorem ipsum dolor sit amet',
       placeholder: '',
-      slug: '',
+      slug: 'naskah-akademik-abc-dd',
     },
     {
       id: 3,
@@ -40,7 +40,7 @@ export const mockFetchIssues = (): Issue[] => {
       title: 'Naskah Akademik ABC',
       description: 'Lorem ipsum dolor sit amet',
       placeholder: '',
-      slug: '',
+      slug: 'naskah-akademik-abc-eex',
     },
     {
       id: 4,
@@ -50,7 +50,7 @@ export const mockFetchIssues = (): Issue[] => {
       title: 'Naskah Akademik ABC',
       description: 'Lorem ipsum dolor sit amet',
       placeholder: '',
-      slug: '',
+      slug: 'naskah-akademik-abc-ff',
     },
     {
       id: 5,
@@ -60,7 +60,7 @@ export const mockFetchIssues = (): Issue[] => {
       title: 'Naskah Akademik ABC',
       description: 'Lorem ipsum dolor sit amet',
       placeholder: '',
-      slug: '',
+      slug: 'naskah-akademik-abc-dd123',
     },
     {
       id: 6,
@@ -70,7 +70,7 @@ export const mockFetchIssues = (): Issue[] => {
       title: 'Naskah Akademik ABC',
       description: 'Lorem ipsum dolor sit amet',
       placeholder: '',
-      slug: '',
+      slug: 'naskah-akademik-abc-ee',
     },
   ];
 };

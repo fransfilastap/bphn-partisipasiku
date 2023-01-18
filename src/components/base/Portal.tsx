@@ -1,9 +1,5 @@
-import {
-  FunctionComponent,
-  PropsWithChildren,
-  useLayoutEffect,
-  useState,
-} from 'react';
+import { useIsomorphicLayoutEffect } from '@/hooks';
+import { FunctionComponent, PropsWithChildren, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 export interface PortalProps {
@@ -17,7 +13,7 @@ const Portal: FunctionComponent<PropsWithChildren<PortalProps>> = ({
     null
   );
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     let element = document.getElementById(id);
     let created = false;
 

@@ -6,29 +6,37 @@ import RootLayout from '@/components/layouts/RootLayout';
 import Input from '@/components/base/Input';
 import { ChevronDownIcon, SearchIcon } from '@/components/icons';
 import IssueCard from '@/components/card/IssueCard';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import { mockFetchIssues } from '@/server/mocks/issue';
-import { Issue, IssueCategory } from '@/types';
 import IssueCardLoading from '@/components/card/IssueCardLoading';
-import mockFetchIssueCategories from '@/server/mocks/category';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import clsxtw from '@/lib/clsxtw';
 import { useToggle } from '@/hooks';
 import styles from './index.module.css';
+import useSWR from 'swr';
 import Checkbox from '@/components/base/Checkbox';
+import fetcher from '@/lib/fetcher';
+import { AllCategoryQueryQuery, GetIssueDocumentQuery } from '@/gql/graphql';
+import { AllCategoryDocument, GetIssueDocument } from '@/types';
 
-export default function Home({
-  issues,
-  categories,
-}: InferGetStaticPropsType<typeof getStaticProps>): ReactElement {
+export default function Home(): ReactElement {
+  const {
+    data: categories,
+    isLoading: categoryIsLoading,
+    error: categoryError,
+  } = useSWR<AllCategoryQueryQuery>(AllCategoryDocument, fetcher);
+  const {
+    data: issues,
+    isLoading: issueIsloading,
+    error: issueError,
+  } = useSWR<GetIssueDocumentQuery>(GetIssueDocument, fetcher);
+
   return (
     <RootLayout>
       <Seo />
       <Masthead />
       <Container className='p-6 md:p-4'>
         <ContentGrid
-          issues={issues}
-          categories={categories}
+          issues={issues!}
+          categories={categories!}
         />
       </Container>
     </RootLayout>
@@ -67,8 +75,8 @@ const ContentGrid = ({
   issues,
   categories,
 }: {
-  issues: Issue[];
-  categories: IssueCategory[];
+  issues: GetIssueDocumentQuery;
+  categories: AllCategoryQueryQuery;
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -83,17 +91,17 @@ const ContentGrid = ({
       <IssueFilter categories={categories} />
       <div className='grid w-full grid-cols-1 gap-2 md:gap-8 md:grid-cols-3 lg:w-3/4'>
         {isLoading &&
-          [1, 2, 3, 4, 5, 6, 7, 8, 8, 9].map((e) => (
+          [1, 2, 3, 4, 5, 6, 7, 8, 11, 9].map((e) => (
             <IssueCardLoading key={e} />
           ))}
         {!isLoading &&
-          issues.map((e, i) => (
+          issues.issues?.data.map((e, i) => (
             <IssueCard
-              author={e.author}
-              cover={e.cover}
-              slug={e.slug}
-              title={e.title}
-              key={i}
+              author=""
+              cover={e.attributes?.Cover?.data?.attributes?.url!}
+              slug={e.attributes?.slug!}
+              title={e.attributes?.Title!}
+              key={e.attributes?.slug}
               priority={i < 3}
             />
           ))}
@@ -103,13 +111,13 @@ const ContentGrid = ({
 };
 
 type IssueFilterProps = {
-  categories: IssueCategory[];
+  categories: AllCategoryQueryQuery;
 };
 const IssueFilter: FunctionComponent<IssueFilterProps> = ({
   categories,
 }): ReactElement => {
   const isMediumSizedScreen = useMediaQuery('(min-width: 768px)');
-  const [isOpen, setIsOpen] = useToggle(!isMediumSizedScreen);
+  const [isOpen, setIsOpen] = useToggle(!isMediumSizedScreen); // <-- todo
 
   return (
     <aside className='flex flex-col justify-start w-full gap-2 lg:w-1/4'>
@@ -137,26 +145,16 @@ const IssueFilter: FunctionComponent<IssueFilterProps> = ({
           />
         </button>
         <div className={clsxtw('flex flex-col gap-1', { hidden: !isOpen })}>
-          {categories.map((e) => (
-            <Checkbox
-              key={e.id}
-              value={e.slug}
-              label={e.title}
-            />
-          ))}
+          {categories &&
+            categories?.categories?.data.map((e: any) => (
+              <Checkbox
+                key={e?.attributes.slug}
+                label={e?.attributes.name}
+                value={e?.id}
+              />
+            ))}
         </div>
       </div>
     </aside>
   );
-};
-
-export const getStaticProps: GetStaticProps = () => {
-  const issues = mockFetchIssues();
-  const categories = mockFetchIssueCategories();
-  return {
-    props: {
-      issues,
-      categories,
-    },
-  };
 };

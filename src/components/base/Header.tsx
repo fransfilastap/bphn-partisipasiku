@@ -74,12 +74,9 @@ export default function Header({
                   animate={{ y: 0 }}
                   exit={{ y: -500 }}
                   transition={{ type: 'spring', stiffness: 100, delay: 0.05 }}
-                  className='flex flex-col w-full gap-2 p-4 bg-white divide-y divide-gray-100 rounded-lg shadow-md divide-solid'
+                  className='flex flex-col w-full gap-2 p-4 bg-white rounded-lg shadow-md'
                 >
-                  <div className='flex items-center justify-between'>
-                    <h5 className='font-[500] text-black font-sans text-xl '>
-                      Menu
-                    </h5>
+                  <div className='flex items-center justify-end'>
                     <button
                       aria-label='close menu'
                       className='appearance-none'

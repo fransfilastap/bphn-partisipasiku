@@ -32,7 +32,7 @@ export default function Seo(seoProps: SeoProps): ReactElement {
       />
       <link
         rel='canonical'
-        href={`${seoProps.url}${router.asPath}`}
+        href={`${AppInfo.url}${seoProps.url && seoProps.url}`}
       />
 
       {/* Open Graph */}
