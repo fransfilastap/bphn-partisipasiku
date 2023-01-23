@@ -323,10 +323,10 @@
     hey-listen "^1.0.8"
     tslib "^2.3.1"
 
-"@next/env@13.1.1":
-  version "13.1.1"
-  resolved "https://registry.yarnpkg.com/@next/env/-/env-13.1.1.tgz#6ff26488dc7674ef2bfdd1ca28fe43eed1113bea"
-  integrity sha512-vFMyXtPjSAiOXOywMojxfKIqE3VWN5RCAx+tT3AS3pcKjMLFTCJFUWsKv8hC+87Z1F4W3r68qTwDFZIFmd5Xkw==
+"@next/env@13.1.2":
+  version "13.1.2"
+  resolved "https://registry.yarnpkg.com/@next/env/-/env-13.1.2.tgz#4f13e3e9d44bb17fdc1d4543827459097035f10f"
+  integrity sha512-PpT4UZIX66VMTqXt4HKEJ+/PwbS+tWmmhZlazaws1a+dbUA5pPdjntQ46Jvj616i3ZKN9doS9LHx3y50RLjAWg==
 
 "@next/eslint-plugin-next@13.1.2", "@next/eslint-plugin-next@^13.1.1":
   version "13.1.2"
@@ -1716,10 +1716,10 @@ fraction.js@^4.2.0:
   resolved "https://registry.yarnpkg.com/fraction.js/-/fraction.js-4.2.0.tgz#448e5109a313a3527f5a3ab2119ec4cf0e0e2950"
   integrity sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==
 
-framer-motion@^8.4.3:
-  version "8.4.3"
-  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-8.4.3.tgz#382bc016c1a957b4144eeed1bb186410b0d821fc"
-  integrity sha512-UMfJ8hEOlIObdJgI+U/VgaSSKY+W9/E0YtnFHPDsIE9rNPglaFZ+oycB0gj8ERuRBInGaIgNCFsil8iaJHZFgA==
+framer-motion@^8.5.0:
+  version "8.5.0"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-8.5.0.tgz#700cc132f7b22b1627d0031a4ae8d169998a9613"
+  integrity sha512-z5hQvIa+9uFcA2aFmT+6XsUfuVPl9Y1uhs5yntxU1Q0E6hm4wDRpvFlB/yYN/cdfXUctf/1Q1Rep/dqOipz8sg==
   dependencies:
     "@motionone/dom" "^10.15.3"
     hey-listen "^1.0.8"
