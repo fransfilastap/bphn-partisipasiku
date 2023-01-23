@@ -16,6 +16,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Portal from './Portal';
 import { ChevronRightIcon, XCircleIcon } from '../icons';
 import useOnClickOutside from '@/hooks/useOutsideClick';
+import { useGlobalState } from '@/store';
 
 type HeaderProps = ComponentPropsWithRef<'header'>;
 
@@ -23,10 +24,10 @@ export default function Header({
   className,
   ...rest
 }: HeaderProps): ReactElement {
-  const [isOpen, setIsOpen] = useToggle(false);
+  const { toggleMenu, menuOpen } = useGlobalState();
   const menuRef = useRef<HTMLDivElement>(null);
   const closeMenuHandler = () => {
-    setIsOpen(false);
+    toggleMenu(false);
   };
 
   useOnClickOutside(menuRef, closeMenuHandler);
@@ -52,13 +53,13 @@ export default function Header({
               </li>
             </ul>
           </Navigation>
-          <MenuToggle onClick={() => setIsOpen(!isOpen)} />
+          <MenuToggle onClick={() => toggleMenu()} />
           <ColorModeSwitcher className='hidden' />
         </Container>
       </header>
       <AnimatePresence>
         <Portal id='menu-container-wrapper'>
-          {isOpen && (
+          {menuOpen && (
             <>
               <motion.div
                 onClick={closeMenuHandler}
@@ -94,7 +95,7 @@ export default function Header({
                       className='flex-1 block text-black'
                       htmlFor='mobile-color-switch'
                     >
-                      Color mode
+                      Mode Warna
                     </label>
                     <ColorModeSwitcher
                       id='mobile-color-switch'

@@ -1,10 +1,9 @@
 import Container from '@/components/base/Container';
-import RootLayout from '@/components/layouts/RootLayout';
 import Seo from '@/components/seo/Seo';
 
 export default function AboutPage() {
   return (
-    <RootLayout>
+    <>
       <Seo
         pageTitle='Tentang Kami'
         description='Apa itu partisipasiku?'
@@ -37,6 +36,6 @@ export default function AboutPage() {
           perundang-undangan).
         </p>
       </Container>
-    </RootLayout>
+    </>
   );
 }

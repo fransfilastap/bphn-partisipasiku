@@ -1,8 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
-import { FunctionComponent, ReactElement, useEffect, useState } from 'react';
+import { Fragment, ReactElement, useEffect, useState } from 'react';
 import Container from '@/components/base/Container';
 import Seo from '@/components/seo/Seo';
-import RootLayout from '@/components/layouts/RootLayout';
 import Input from '@/components/base/Input';
 import { ChevronDownIcon, SearchIcon } from '@/components/icons';
 import IssueCard from '@/components/card/IssueCard';
@@ -11,35 +9,46 @@ import useMediaQuery from '@/hooks/useMediaQuery';
 import clsxtw from '@/lib/clsxtw';
 import { useToggle } from '@/hooks';
 import styles from './index.module.css';
-import useSWR from 'swr';
-import Checkbox from '@/components/base/Checkbox';
+import useSWR, { SWRConfig } from 'swr';
 import fetcher from '@/lib/fetcher';
-import { AllCategoryQueryQuery, GetIssueDocumentQuery } from '@/gql/graphql';
-import { AllCategoryDocument, GetIssueDocument } from '@/types';
+import {
+  GetIssueDocument,
+  GetIssueQuery,
+  GetTopicsDocument,
+  GetTopicsQuery,
+  PaginationArg,
+  TopicFiltersInput,
+} from '@/gql/graphql';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import TopicCard, { TopicCardLoading } from '@/components/card/TopicCard';
+import Section from '@/components/section';
+import gql from 'graphql-tag';
 
-export default function Home(): ReactElement {
-  const {
-    data: categories,
-    isLoading: categoryIsLoading,
-    error: categoryError,
-  } = useSWR<AllCategoryQueryQuery>(AllCategoryDocument, fetcher);
-  const {
-    data: issues,
-    isLoading: issueIsloading,
-    error: issueError,
-  } = useSWR<GetIssueDocumentQuery>(GetIssueDocument, fetcher);
+export const getStaticProps: GetStaticProps = async () => {
+  const issues = await fetcher(GetIssueDocument);
+  const topics = await fetcher(GetTopicsDocument, { pagination: { limit: 4 } });
 
+  return {
+    props: {
+      issues,
+      topics,
+    },
+  };
+};
+
+export default function Home({
+  issues,
+  topics,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <RootLayout>
+    <Fragment>
       <Seo />
       <Masthead />
       <Container className='p-6 md:p-4'>
-        <ContentGrid
-          issues={issues!}
-          categories={categories!}
-        />
+        <HighlightedTopics topics={topics} />
+        <HighlightedIssues issues={issues} />
       </Container>
-    </RootLayout>
+    </Fragment>
   );
 }
 
@@ -71,90 +80,51 @@ const Masthead = () => {
   );
 };
 
-const ContentGrid = ({
-  issues,
-  categories,
-}: {
-  issues: GetIssueDocumentQuery;
-  categories: AllCategoryQueryQuery;
-}) => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-  }, []);
-
+const HighlightedTopics = ({ topics }: { topics: GetTopicsQuery }) => {
   return (
-    <section className='flex flex-col md:gap-20 lg:flex-row'>
-      <IssueFilter categories={categories} />
-      <div className='grid w-full grid-cols-1 gap-2 md:gap-8 md:grid-cols-3 lg:w-3/4'>
-        {isLoading &&
-          [1, 2, 3, 4, 5, 6, 7, 8, 11, 9].map((e) => (
-            <IssueCardLoading key={e} />
-          ))}
-        {!isLoading &&
-          issues.issues?.data.map((e, i) => (
-            <IssueCard
-              author=""
-              cover={e.attributes?.Cover?.data?.attributes?.url!}
-              slug={e.attributes?.slug!}
-              title={e.attributes?.Title!}
-              key={e.attributes?.slug}
-              priority={i < 3}
-            />
-          ))}
+    <Section
+      sectionTitle='Topic Terpopuler'
+      className='py-2 overflow-hidden'
+      actionLink='/topics'
+      actionLabel='Lihat Semua'
+    >
+      <div className='flex overflow-x-auto flex-nowrap snap-x snap-mandatory lg:grid lg:grid-cols-4 lg:grid-rows-1'>
+        {topics.topics?.data.map((e, _) => (
+          <TopicCard
+            key={e.attributes?.slug}
+            id={e.id!}
+            name={e.attributes?.name!}
+            slug={e.attributes?.slug!}
+          />
+        ))}
       </div>
-    </section>
+    </Section>
   );
 };
 
-type IssueFilterProps = {
-  categories: AllCategoryQueryQuery;
-};
-const IssueFilter: FunctionComponent<IssueFilterProps> = ({
-  categories,
-}): ReactElement => {
-  const isMediumSizedScreen = useMediaQuery('(min-width: 768px)');
-  const [isOpen, setIsOpen] = useToggle(!isMediumSizedScreen); // <-- todo
-
+const HighlightedIssues = ({ issues }: { issues: GetIssueQuery }) => {
   return (
-    <aside className='flex flex-col justify-start w-full gap-2 lg:w-1/4'>
-      <h5 className='font-[600] text-[0.9em] dark:text-white hidden md:block'>
-        Filter
-      </h5>
-      <Input
-        placeholder='Search...'
-        leftIcon={<SearchIcon />}
-      />
-      <div className='flex flex-col gap-2 mb-4'>
-        <button
-          aria-label='filter button'
-          onClick={() => setIsOpen(!isOpen)}
-          className='flex flex-row items-center justify-between w-full gap-2 p-2 border-t border-b appearance-none lg:hidden border-b-gray-100 border-t-gray-100 dark:border-b-gray-700 dark:border-t-gray-700'
-        >
-          <span className='font-[600] text-[0.9em] dark:text-white'>
-            Filter By:
-          </span>
-          <ChevronDownIcon
-            className={clsxtw(
-              'transition duration-100 ease-linear -rotate-90',
-              { 'rotate-0': !isOpen }
-            )}
+    <Section
+      sectionTitle='Highlight'
+      className='py-2 overflow-hidden'
+      actionLink='/topics'
+      actionLabel='Lihat Semua'
+    >
+      <div className='grid w-full grid-cols-1 gap-2 md:gap-8 md:grid-cols-4'>
+        {issues?.issues?.data.map((e, i) => (
+          <IssueCard
+            author=''
+            cover={{
+              placeholder: e.attributes?.cover?.data?.attributes?.placeholder!,
+              url: e.attributes?.cover?.data?.attributes?.url!,
+              caption: e.attributes?.cover?.data?.attributes?.caption!,
+            }}
+            slug={e.attributes?.slug!}
+            title={e.attributes?.title!}
+            key={e.attributes?.slug}
           />
-        </button>
-        <div className={clsxtw('flex flex-col gap-1', { hidden: !isOpen })}>
-          {categories &&
-            categories?.categories?.data.map((e: any) => (
-              <Checkbox
-                key={e?.attributes.slug}
-                label={e?.attributes.name}
-                value={e?.id}
-              />
-            ))}
-        </div>
+        ))}
       </div>
-    </aside>
+    </Section>
   );
 };

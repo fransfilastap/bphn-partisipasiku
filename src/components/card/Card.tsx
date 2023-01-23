@@ -5,7 +5,7 @@ import { PolymorphicComponentProps } from '@/utils/polymorphic';
 // eslint-disable-next-line @typescript-eslint/ban-types
 type CardProps<C extends ElementType> = PolymorphicComponentProps<C, {}>;
 
-const Card = <T extends React.ElementType>({
+const Card = <T extends ElementType>({
   as,
   className,
   children,
