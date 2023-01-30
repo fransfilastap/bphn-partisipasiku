@@ -1,4 +1,3 @@
-import { GetIssueQuery, GetTopicsQuery } from '@/gql/graphql';
 import { create } from 'zustand';
 
 export interface GlobalState {
