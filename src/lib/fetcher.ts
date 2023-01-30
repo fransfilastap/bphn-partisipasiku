@@ -1,6 +1,7 @@
 import { GraphQLClient, RequestDocument, Variables } from 'graphql-request';
 import { TypedDocumentNode } from '@graphql-typed-document-node/core';
 import { STRAPI_API_TOKEN, STRAPI_GRAPHQL_API_ENDPOINT } from '@/configs/env';
+import { Query } from '@/gql/graphql';
 
 const gqlClient = new GraphQLClient(`${STRAPI_GRAPHQL_API_ENDPOINT}`, {
   headers: {
@@ -8,7 +9,7 @@ const gqlClient = new GraphQLClient(`${STRAPI_GRAPHQL_API_ENDPOINT}`, {
   },
 });
 
-const fetcher = (
+const fetcher = <T>(
   query: TypedDocumentNode | RequestDocument,
   variables?: Variables
 ) => {

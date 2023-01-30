@@ -1,32 +1,18 @@
-import { Fragment, ReactElement, useEffect, useState } from 'react';
+import { Fragment } from 'react';
 import Container from '@/components/base/Container';
 import Seo from '@/components/seo/Seo';
-import Input from '@/components/base/Input';
-import { ChevronDownIcon, SearchIcon } from '@/components/icons';
 import IssueCard from '@/components/card/IssueCard';
-import IssueCardLoading from '@/components/card/IssueCardLoading';
-import useMediaQuery from '@/hooks/useMediaQuery';
 import clsxtw from '@/lib/clsxtw';
-import { useToggle } from '@/hooks';
 import styles from './index.module.css';
-import useSWR, { SWRConfig } from 'swr';
-import fetcher from '@/lib/fetcher';
-import {
-  GetIssueDocument,
-  GetIssueQuery,
-  GetTopicsDocument,
-  GetTopicsQuery,
-  PaginationArg,
-  TopicFiltersInput,
-} from '@/gql/graphql';
+import { GetIssuesQuery, GetTopicsQuery } from '@/gql/graphql';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import TopicCard, { TopicCardLoading } from '@/components/card/TopicCard';
+import TopicCard from '@/components/card/TopicCard';
 import Section from '@/components/section';
-import gql from 'graphql-tag';
+import { getIssues, getTopics } from '@/lib/content';
 
 export const getStaticProps: GetStaticProps = async () => {
-  const issues = await fetcher(GetIssueDocument);
-  const topics = await fetcher(GetTopicsDocument, { pagination: { limit: 4 } });
+  const issues = await getIssues();
+  const topics = await getTopics({ limit: 4 });
 
   return {
     props: {
@@ -71,9 +57,9 @@ const Masthead = () => {
         <h5 className='w-full p-4 text-5xl font-bold tracking-tight text-center text-black dark:text-white lg:text-7xl'>
           Kolaborasi Membangun Hukum.
         </h5>
-        <p className='text-lg text-center text-gray-500 md:text-2xl font-[400]'>
-          Sampaikan pendapatmu terhadap isu-isu terkait peraturan
-          perundang-undangan di Indonesia, di sini!
+        <p className='font-mono text-lg text-center text-gray-500 md:text-2xl font-[400]'>
+          Sampaikan pendapatmu tentang isu peraturan perundang-undangan di
+          Indonesia di sini!
         </p>
       </div>
     </section>
@@ -83,12 +69,12 @@ const Masthead = () => {
 const HighlightedTopics = ({ topics }: { topics: GetTopicsQuery }) => {
   return (
     <Section
-      sectionTitle='Topic Terpopuler'
+      sectionTitle='Topik Terpopuler'
       className='py-2 overflow-hidden'
-      actionLink='/topics'
+      actionLink='/topik'
       actionLabel='Lihat Semua'
     >
-      <div className='flex overflow-x-auto flex-nowrap snap-x snap-mandatory lg:grid lg:grid-cols-4 lg:grid-rows-1'>
+      <div className='flex overflow-x-auto flex-nowrap snap-x snap-mandatory lg:grid lg:grid-cols-4 lg:grid-rows-1 scrollbar-hide'>
         {topics.topics?.data.map((e, _) => (
           <TopicCard
             key={e.attributes?.slug}
@@ -102,23 +88,23 @@ const HighlightedTopics = ({ topics }: { topics: GetTopicsQuery }) => {
   );
 };
 
-const HighlightedIssues = ({ issues }: { issues: GetIssueQuery }) => {
+const HighlightedIssues = ({ issues }: { issues: GetIssuesQuery }) => {
   return (
     <Section
-      sectionTitle='Highlight'
+      sectionTitle='Isu Pilihan'
       className='py-2 overflow-hidden'
-      actionLink='/topics'
+      actionLink='/isu'
       actionLabel='Lihat Semua'
     >
       <div className='grid w-full grid-cols-1 gap-2 md:gap-8 md:grid-cols-4'>
-        {issues?.issues?.data.map((e, i) => (
+        {issues.issues?.data.map((e, i) => (
           <IssueCard
-            author=''
             cover={{
               placeholder: e.attributes?.cover?.data?.attributes?.placeholder!,
               url: e.attributes?.cover?.data?.attributes?.url!,
               caption: e.attributes?.cover?.data?.attributes?.caption!,
             }}
+            priority={i <= 4}
             slug={e.attributes?.slug!}
             title={e.attributes?.title!}
             key={e.attributes?.slug}

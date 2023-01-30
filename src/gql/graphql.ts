@@ -18,7 +18,6 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  AboutBlocksDynamicZoneInput: any;
   /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   DateTime: any;
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
@@ -29,18 +28,12 @@ export type Scalars = {
 
 export type About = {
   __typename?: 'About';
-  blocks?: Maybe<Array<Maybe<AboutBlocksDynamicZone>>>;
+  Description: Scalars['String'];
+  Seo?: Maybe<ComponentSharedSeo>;
   createdAt?: Maybe<Scalars['DateTime']>;
   title?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
-
-export type AboutBlocksDynamicZone =
-  | ComponentSharedMedia
-  | ComponentSharedQuote
-  | ComponentSharedRichText
-  | ComponentSharedSlider
-  | Error;
 
 export type AboutEntity = {
   __typename?: 'AboutEntity';
@@ -54,7 +47,8 @@ export type AboutEntityResponse = {
 };
 
 export type AboutInput = {
-  blocks?: InputMaybe<Array<Scalars['AboutBlocksDynamicZoneInput']>>;
+  Description?: InputMaybe<Scalars['String']>;
+  Seo?: InputMaybe<ComponentSharedSeoInput>;
   title?: InputMaybe<Scalars['String']>;
 };
 
@@ -203,11 +197,11 @@ export type DateTimeFilterInput = {
   startsWith?: InputMaybe<Scalars['DateTime']>;
 };
 
-export type Error = {
-  __typename?: 'Error';
-  code: Scalars['String'];
-  message?: Maybe<Scalars['String']>;
-};
+export enum Enum_Websitebuilderlog_Trigger {
+  Cron = 'cron',
+  Event = 'event',
+  Manual = 'manual',
+}
 
 export type FileInfoInput = {
   alternativeText?: InputMaybe<Scalars['String']>;
@@ -255,7 +249,8 @@ export type GenericMorph =
   | UploadFolder
   | UsersPermissionsPermission
   | UsersPermissionsRole
-  | UsersPermissionsUser;
+  | UsersPermissionsUser
+  | WebsiteBuilderLog;
 
 export type Global = {
   __typename?: 'Global';
@@ -461,6 +456,7 @@ export type Mutation = {
   createUsersPermissionsRole?: Maybe<UsersPermissionsCreateRolePayload>;
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
+  createWebsiteBuilderLog?: Maybe<WebsiteBuilderLogEntityResponse>;
   deleteAbout?: Maybe<AboutEntityResponse>;
   deleteAuthor?: Maybe<AuthorEntityResponse>;
   deleteGlobal?: Maybe<GlobalEntityResponse>;
@@ -472,6 +468,7 @@ export type Mutation = {
   deleteUsersPermissionsRole?: Maybe<UsersPermissionsDeleteRolePayload>;
   /** Delete an existing user */
   deleteUsersPermissionsUser: UsersPermissionsUserEntityResponse;
+  deleteWebsiteBuilderLog?: Maybe<WebsiteBuilderLogEntityResponse>;
   /** Confirm an email users email address */
   emailConfirmation?: Maybe<UsersPermissionsLoginPayload>;
   /** Request a reset password token */
@@ -495,6 +492,7 @@ export type Mutation = {
   updateUsersPermissionsRole?: Maybe<UsersPermissionsUpdateRolePayload>;
   /** Update an existing user */
   updateUsersPermissionsUser: UsersPermissionsUserEntityResponse;
+  updateWebsiteBuilderLog?: Maybe<WebsiteBuilderLogEntityResponse>;
   upload: UploadFileEntityResponse;
 };
 
@@ -532,6 +530,10 @@ export type MutationCreateUsersPermissionsUserArgs = {
   data: UsersPermissionsUserInput;
 };
 
+export type MutationCreateWebsiteBuilderLogArgs = {
+  data: WebsiteBuilderLogInput;
+};
+
 export type MutationDeleteAuthorArgs = {
   id: Scalars['ID'];
 };
@@ -557,6 +559,10 @@ export type MutationDeleteUsersPermissionsRoleArgs = {
 };
 
 export type MutationDeleteUsersPermissionsUserArgs = {
+  id: Scalars['ID'];
+};
+
+export type MutationDeleteWebsiteBuilderLogArgs = {
   id: Scalars['ID'];
 };
 
@@ -641,6 +647,11 @@ export type MutationUpdateUsersPermissionsUserArgs = {
   id: Scalars['ID'];
 };
 
+export type MutationUpdateWebsiteBuilderLogArgs = {
+  data: WebsiteBuilderLogInput;
+  id: Scalars['ID'];
+};
+
 export type MutationUploadArgs = {
   field?: InputMaybe<Scalars['String']>;
   file: Scalars['Upload'];
@@ -690,6 +701,8 @@ export type Query = {
   usersPermissionsRoles?: Maybe<UsersPermissionsRoleEntityResponseCollection>;
   usersPermissionsUser?: Maybe<UsersPermissionsUserEntityResponse>;
   usersPermissionsUsers?: Maybe<UsersPermissionsUserEntityResponseCollection>;
+  websiteBuilderLog?: Maybe<WebsiteBuilderLogEntityResponse>;
+  websiteBuilderLogs?: Maybe<WebsiteBuilderLogEntityResponseCollection>;
 };
 
 export type QueryAuthorArgs = {
@@ -774,6 +787,16 @@ export type QueryUsersPermissionsUsersArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+export type QueryWebsiteBuilderLogArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+export type QueryWebsiteBuilderLogsArgs = {
+  filters?: InputMaybe<WebsiteBuilderLogFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
 export type ResponseCollectionMeta = {
   __typename?: 'ResponseCollectionMeta';
   pagination: Pagination;
@@ -805,12 +828,19 @@ export type StringFilterInput = {
 
 export type Topic = {
   __typename?: 'Topic';
+  attacments?: Maybe<UploadFileRelationResponseCollection>;
   createdAt?: Maybe<Scalars['DateTime']>;
   description?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   publishedAt?: Maybe<Scalars['DateTime']>;
   slug?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type TopicAttacmentsArgs = {
+  filters?: InputMaybe<UploadFileFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type TopicEntity = {
@@ -844,6 +874,7 @@ export type TopicFiltersInput = {
 };
 
 export type TopicInput = {
+  attacments?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   description?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
@@ -1222,105 +1253,77 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
-export type TopicFragment = {
-  __typename?: 'TopicEntityResponse';
-  data?: {
-    __typename?: 'TopicEntity';
-    id?: string | null;
-    attributes?: {
-      __typename?: 'Topic';
-      name: string;
-      slug?: string | null;
-      description?: string | null;
-      publishedAt?: any | null;
-    } | null;
-  } | null;
-} & { ' $fragmentName'?: 'TopicFragment' };
+export type WebsiteBuilderLog = {
+  __typename?: 'WebsiteBuilderLog';
+  createdAt?: Maybe<Scalars['DateTime']>;
+  status?: Maybe<Scalars['Int']>;
+  trigger?: Maybe<Enum_Websitebuilderlog_Trigger>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
 
-export type IssueFragment = {
-  __typename?: 'IssueEntityResponse';
-  data?: {
-    __typename?: 'IssueEntity';
-    id?: string | null;
-    attributes?: {
-      __typename?: 'Issue';
-      title: string;
-      slug: string;
-      background: string;
-      cover?: {
-        __typename?: 'UploadFileEntityResponse';
-        data?: {
-          __typename?: 'UploadFileEntity';
-          id?: string | null;
-          attributes?: {
-            __typename?: 'UploadFile';
-            url: string;
-            hash: string;
-            height?: number | null;
-            width?: number | null;
-            caption?: string | null;
-            name: string;
-            ext?: string | null;
-            alternativeText?: string | null;
-          } | null;
-        } | null;
-      } | null;
-      topic?: {
-        __typename?: 'TopicEntityResponse';
-        data?: {
-          __typename?: 'TopicEntity';
-          attributes?: { __typename?: 'Topic'; name: string } | null;
-        } | null;
-      } | null;
-    } | null;
-  } | null;
-} & { ' $fragmentName'?: 'IssueFragment' };
+export type WebsiteBuilderLogEntity = {
+  __typename?: 'WebsiteBuilderLogEntity';
+  attributes?: Maybe<WebsiteBuilderLog>;
+  id?: Maybe<Scalars['ID']>;
+};
 
-export type GetIssueQueryVariables = Exact<{
-  filter?: InputMaybe<IssueFiltersInput>;
-}>;
+export type WebsiteBuilderLogEntityResponse = {
+  __typename?: 'WebsiteBuilderLogEntityResponse';
+  data?: Maybe<WebsiteBuilderLogEntity>;
+};
 
-export type GetIssueQuery = {
+export type WebsiteBuilderLogEntityResponseCollection = {
+  __typename?: 'WebsiteBuilderLogEntityResponseCollection';
+  data: Array<WebsiteBuilderLogEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type WebsiteBuilderLogFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<WebsiteBuilderLogFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<WebsiteBuilderLogFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<WebsiteBuilderLogFiltersInput>>>;
+  status?: InputMaybe<IntFilterInput>;
+  trigger?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type WebsiteBuilderLogInput = {
+  status?: InputMaybe<Scalars['Int']>;
+  trigger?: InputMaybe<Enum_Websitebuilderlog_Trigger>;
+};
+
+export type GetAboutQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetAboutQuery = {
   __typename?: 'Query';
-  issues?: {
-    __typename?: 'IssueEntityResponseCollection';
-    data: Array<{
-      __typename?: 'IssueEntity';
-      id?: string | null;
+  about?: {
+    __typename?: 'AboutEntityResponse';
+    data?: {
+      __typename?: 'AboutEntity';
       attributes?: {
-        __typename?: 'Issue';
-        title: string;
-        slug: string;
-        background: string;
-        cover?: {
-          __typename?: 'UploadFileEntityResponse';
-          data?: {
-            __typename?: 'UploadFileEntity';
-            id?: string | null;
-            attributes?: {
-              __typename?: 'UploadFile';
-              url: string;
-              hash: string;
-              height?: number | null;
-              width?: number | null;
-              caption?: string | null;
-              name: string;
-              ext?: string | null;
-              alternativeText?: string | null;
-              placeholder?: string | null;
-              formats?: any | null;
+        __typename?: 'About';
+        title?: string | null;
+        Description: string;
+        Seo?: {
+          __typename?: 'ComponentSharedSeo';
+          metaTitle: string;
+          metaDescription: string;
+          shareImage?: {
+            __typename?: 'UploadFileEntityResponse';
+            data?: {
+              __typename?: 'UploadFileEntity';
+              attributes?: {
+                __typename?: 'UploadFile';
+                placeholder?: string | null;
+                url: string;
+              } | null;
             } | null;
           } | null;
         } | null;
-        topic?: {
-          __typename?: 'TopicEntityResponse';
-          data?: {
-            __typename?: 'TopicEntity';
-            attributes?: { __typename?: 'Topic'; name: string } | null;
-          } | null;
-        } | null;
       } | null;
-    }>;
+    } | null;
   } | null;
 };
 
@@ -1350,238 +1353,82 @@ export type GetTopicsQuery = {
   } | null;
 };
 
-export const TopicFragmentDoc = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'FragmentDefinition',
-      name: { kind: 'Name', value: 'Topic' },
-      typeCondition: {
-        kind: 'NamedType',
-        name: { kind: 'Name', value: 'TopicEntityResponse' },
-      },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'data' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'attributes' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'description' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'publishedAt' },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<TopicFragment, unknown>;
-export const IssueFragmentDoc = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'FragmentDefinition',
-      name: { kind: 'Name', value: 'Issue' },
-      typeCondition: {
-        kind: 'NamedType',
-        name: { kind: 'Name', value: 'IssueEntityResponse' },
-      },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'data' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'attributes' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'slug' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'background' },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'cover' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'data' },
-                              selectionSet: {
-                                kind: 'SelectionSet',
-                                selections: [
-                                  {
-                                    kind: 'Field',
-                                    name: { kind: 'Name', value: 'id' },
-                                  },
-                                  {
-                                    kind: 'Field',
-                                    name: { kind: 'Name', value: 'attributes' },
-                                    selectionSet: {
-                                      kind: 'SelectionSet',
-                                      selections: [
-                                        {
-                                          kind: 'Field',
-                                          name: { kind: 'Name', value: 'url' },
-                                        },
-                                        {
-                                          kind: 'Field',
-                                          name: { kind: 'Name', value: 'hash' },
-                                        },
-                                        {
-                                          kind: 'Field',
-                                          name: {
-                                            kind: 'Name',
-                                            value: 'height',
-                                          },
-                                        },
-                                        {
-                                          kind: 'Field',
-                                          name: {
-                                            kind: 'Name',
-                                            value: 'width',
-                                          },
-                                        },
-                                        {
-                                          kind: 'Field',
-                                          name: {
-                                            kind: 'Name',
-                                            value: 'caption',
-                                          },
-                                        },
-                                        {
-                                          kind: 'Field',
-                                          name: { kind: 'Name', value: 'name' },
-                                        },
-                                        {
-                                          kind: 'Field',
-                                          name: { kind: 'Name', value: 'ext' },
-                                        },
-                                        {
-                                          kind: 'Field',
-                                          name: {
-                                            kind: 'Name',
-                                            value: 'alternativeText',
-                                          },
-                                        },
-                                      ],
-                                    },
-                                  },
-                                ],
-                              },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'topic' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'data' },
-                              selectionSet: {
-                                kind: 'SelectionSet',
-                                selections: [
-                                  {
-                                    kind: 'Field',
-                                    name: { kind: 'Name', value: 'attributes' },
-                                    selectionSet: {
-                                      kind: 'SelectionSet',
-                                      selections: [
-                                        {
-                                          kind: 'Field',
-                                          name: { kind: 'Name', value: 'name' },
-                                        },
-                                      ],
-                                    },
-                                  },
-                                ],
-                              },
-                            },
-                          ],
-                        },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<IssueFragment, unknown>;
-export const GetIssueDocument = {
+export type GetIssuesQueryVariables = Exact<{
+  filters?: InputMaybe<IssueFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<
+    Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>
+  >;
+}>;
+
+export type GetIssuesQuery = {
+  __typename?: 'Query';
+  issues?: {
+    __typename?: 'IssueEntityResponseCollection';
+    data: Array<{
+      __typename?: 'IssueEntity';
+      id?: string | null;
+      attributes?: {
+        __typename?: 'Issue';
+        slug: string;
+        title: string;
+        background: string;
+        createdAt?: any | null;
+        seo?: {
+          __typename?: 'ComponentSharedSeo';
+          metaTitle: string;
+          metaDescription: string;
+          shareImage?: {
+            __typename?: 'UploadFileEntityResponse';
+            data?: {
+              __typename?: 'UploadFileEntity';
+              attributes?: { __typename?: 'UploadFile'; url: string } | null;
+            } | null;
+          } | null;
+        } | null;
+        topic?: {
+          __typename?: 'TopicEntityResponse';
+          data?: {
+            __typename?: 'TopicEntity';
+            attributes?: {
+              __typename?: 'Topic';
+              slug?: string | null;
+              name: string;
+            } | null;
+          } | null;
+        } | null;
+        cover?: {
+          __typename?: 'UploadFileEntityResponse';
+          data?: {
+            __typename?: 'UploadFileEntity';
+            attributes?: {
+              __typename?: 'UploadFile';
+              url: string;
+              caption?: string | null;
+              formats?: any | null;
+              alternativeText?: string | null;
+              placeholder?: string | null;
+            } | null;
+          } | null;
+        } | null;
+      } | null;
+    }>;
+  } | null;
+};
+
+export const GetAboutDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
       operation: 'query',
-      name: { kind: 'Name', value: 'getIssue' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'filter' },
-          },
-          type: {
-            kind: 'NamedType',
-            name: { kind: 'Name', value: 'IssueFiltersInput' },
-          },
-        },
-      ],
+      name: { kind: 'Name', value: 'GetAbout' },
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'issues' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'filters' },
-                value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'filter' },
-                },
-              },
-            ],
+            name: { kind: 'Name', value: 'about' },
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
@@ -1591,7 +1438,6 @@ export const GetIssueDocument = {
                   selectionSet: {
                     kind: 'SelectionSet',
                     selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                       {
                         kind: 'Field',
                         name: { kind: 'Name', value: 'attributes' },
@@ -1604,134 +1450,34 @@ export const GetIssueDocument = {
                             },
                             {
                               kind: 'Field',
-                              name: { kind: 'Name', value: 'slug' },
+                              name: { kind: 'Name', value: 'Description' },
                             },
                             {
                               kind: 'Field',
-                              name: { kind: 'Name', value: 'background' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'cover' },
+                              name: { kind: 'Name', value: 'Seo' },
                               selectionSet: {
                                 kind: 'SelectionSet',
                                 selections: [
                                   {
                                     kind: 'Field',
-                                    name: { kind: 'Name', value: 'data' },
-                                    selectionSet: {
-                                      kind: 'SelectionSet',
-                                      selections: [
-                                        {
-                                          kind: 'Field',
-                                          name: { kind: 'Name', value: 'id' },
-                                        },
-                                        {
-                                          kind: 'Field',
-                                          name: {
-                                            kind: 'Name',
-                                            value: 'attributes',
-                                          },
-                                          selectionSet: {
-                                            kind: 'SelectionSet',
-                                            selections: [
-                                              {
-                                                kind: 'Field',
-                                                name: {
-                                                  kind: 'Name',
-                                                  value: 'url',
-                                                },
-                                              },
-                                              {
-                                                kind: 'Field',
-                                                name: {
-                                                  kind: 'Name',
-                                                  value: 'hash',
-                                                },
-                                              },
-                                              {
-                                                kind: 'Field',
-                                                name: {
-                                                  kind: 'Name',
-                                                  value: 'height',
-                                                },
-                                              },
-                                              {
-                                                kind: 'Field',
-                                                name: {
-                                                  kind: 'Name',
-                                                  value: 'width',
-                                                },
-                                              },
-                                              {
-                                                kind: 'Field',
-                                                name: {
-                                                  kind: 'Name',
-                                                  value: 'caption',
-                                                },
-                                              },
-                                              {
-                                                kind: 'Field',
-                                                name: {
-                                                  kind: 'Name',
-                                                  value: 'name',
-                                                },
-                                              },
-                                              {
-                                                kind: 'Field',
-                                                name: {
-                                                  kind: 'Name',
-                                                  value: 'ext',
-                                                },
-                                              },
-                                              {
-                                                kind: 'Field',
-                                                name: {
-                                                  kind: 'Name',
-                                                  value: 'alternativeText',
-                                                },
-                                              },
-                                              {
-                                                kind: 'Field',
-                                                name: {
-                                                  kind: 'Name',
-                                                  value: 'placeholder',
-                                                },
-                                              },
-                                              {
-                                                kind: 'Field',
-                                                name: {
-                                                  kind: 'Name',
-                                                  value: 'formats',
-                                                },
-                                              },
-                                            ],
-                                          },
-                                        },
-                                      ],
+                                    name: { kind: 'Name', value: 'metaTitle' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'metaDescription',
                                     },
                                   },
-                                ],
-                              },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'topic' },
-                              selectionSet: {
-                                kind: 'SelectionSet',
-                                selections: [
                                   {
                                     kind: 'Field',
-                                    name: { kind: 'Name', value: 'data' },
+                                    name: { kind: 'Name', value: 'shareImage' },
                                     selectionSet: {
                                       kind: 'SelectionSet',
                                       selections: [
                                         {
                                           kind: 'Field',
-                                          name: {
-                                            kind: 'Name',
-                                            value: 'attributes',
-                                          },
+                                          name: { kind: 'Name', value: 'data' },
                                           selectionSet: {
                                             kind: 'SelectionSet',
                                             selections: [
@@ -1739,7 +1485,26 @@ export const GetIssueDocument = {
                                                 kind: 'Field',
                                                 name: {
                                                   kind: 'Name',
-                                                  value: 'name',
+                                                  value: 'attributes',
+                                                },
+                                                selectionSet: {
+                                                  kind: 'SelectionSet',
+                                                  selections: [
+                                                    {
+                                                      kind: 'Field',
+                                                      name: {
+                                                        kind: 'Name',
+                                                        value: 'placeholder',
+                                                      },
+                                                    },
+                                                    {
+                                                      kind: 'Field',
+                                                      name: {
+                                                        kind: 'Name',
+                                                        value: 'url',
+                                                      },
+                                                    },
+                                                  ],
                                                 },
                                               },
                                             ],
@@ -1764,7 +1529,7 @@ export const GetIssueDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<GetIssueQuery, GetIssueQueryVariables>;
+} as unknown as DocumentNode<GetAboutQuery, GetAboutQueryVariables>;
 export const GetTopicsDocument = {
   kind: 'Document',
   definitions: [
@@ -1885,3 +1650,289 @@ export const GetTopicsDocument = {
     },
   ],
 } as unknown as DocumentNode<GetTopicsQuery, GetTopicsQueryVariables>;
+export const GetIssuesDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetIssues' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'filters' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'IssueFiltersInput' },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'pagination' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'PaginationArg' },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'sort' } },
+          type: {
+            kind: 'ListType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'issues' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'filters' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'filters' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'pagination' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'pagination' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'sort' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'sort' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'data' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'attributes' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'slug' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'title' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'background' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'seo' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'metaTitle' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'metaDescription',
+                                    },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'shareImage' },
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: { kind: 'Name', value: 'data' },
+                                          selectionSet: {
+                                            kind: 'SelectionSet',
+                                            selections: [
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'attributes',
+                                                },
+                                                selectionSet: {
+                                                  kind: 'SelectionSet',
+                                                  selections: [
+                                                    {
+                                                      kind: 'Field',
+                                                      name: {
+                                                        kind: 'Name',
+                                                        value: 'url',
+                                                      },
+                                                    },
+                                                  ],
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'createdAt' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'topic' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'data' },
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'attributes',
+                                          },
+                                          selectionSet: {
+                                            kind: 'SelectionSet',
+                                            selections: [
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'slug',
+                                                },
+                                              },
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'name',
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'cover' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'data' },
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'attributes',
+                                          },
+                                          selectionSet: {
+                                            kind: 'SelectionSet',
+                                            selections: [
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'url',
+                                                },
+                                              },
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'caption',
+                                                },
+                                              },
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'formats',
+                                                },
+                                              },
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'alternativeText',
+                                                },
+                                              },
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'placeholder',
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetIssuesQuery, GetIssuesQueryVariables>;

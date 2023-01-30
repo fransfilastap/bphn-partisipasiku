@@ -7,6 +7,7 @@ import { useToggle } from '@/hooks';
 const SmoothTransitionImage: FunctionComponent<ImageProps> = ({
   className,
   alt,
+  priority = false,
   ...props
 }) => {
   const [loading, setIsLoading] = useToggle(true);
@@ -19,11 +20,11 @@ const SmoothTransitionImage: FunctionComponent<ImageProps> = ({
 
   return (
     <Image
-      {...props}
       loader={strapiImageLoader}
-      className={clsxtw(loading ? 'blur' : 'unblur', className)}
+      className={clsxtw(!priority ?? (loading ? 'blur' : 'unblur'), className)}
       onLoadingComplete={loadingCompleteHandler}
       alt={alt}
+      {...props}
     />
   );
 };

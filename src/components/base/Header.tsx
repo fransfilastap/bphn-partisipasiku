@@ -49,11 +49,20 @@ export default function Header({
                 <NavLink href='/'>Beranda</NavLink>
               </li>
               <li>
+                <NavLink href='/topik'>Topik</NavLink>
+              </li>
+              <li>
+                <NavLink href='/isu'>Daftar Isu</NavLink>
+              </li>
+              <li>
                 <NavLink href='/tentang-kami'>Tentang Kami</NavLink>
               </li>
             </ul>
           </Navigation>
-          <MenuToggle onClick={() => toggleMenu()} />
+          <MenuToggle
+            whileTap={{ scale: 0.8 }}
+            onClick={() => toggleMenu()}
+          />
           <ColorModeSwitcher className='hidden' />
         </Container>
       </header>
@@ -68,13 +77,13 @@ export default function Header({
                 exit={{ opacity: 0 }}
                 className='fixed inset-0 w-full h-[100vh] z-[999] bg-black/30 backdrop-blur-md'
               ></motion.div>
-              <motion.div className='fixed z-[999999999] inset-0 flex flex-col items-center justify-start p-4'>
+              <motion.div className='fixed z-[9999] inset-0 flex flex-col items-center justify-start p-4'>
                 <motion.div
                   ref={menuRef}
                   initial={{ y: -500 }}
                   animate={{ y: 0 }}
                   exit={{ y: -500 }}
-                  transition={{ type: 'spring', stiffness: 100, delay: 0.05 }}
+                  transition={{ type: 'spring', stiffness: 75, delay: 0.04 }}
                   className='flex flex-col w-full gap-2 p-4 bg-white rounded-lg shadow-md'
                 >
                   <div className='flex items-center justify-end'>
@@ -88,6 +97,8 @@ export default function Header({
                   </div>
                   <ul className='flex flex-col gap-1 py-2'>
                     <MNavLink href='/'>Beranda</MNavLink>
+                    <MNavLink href='/topik'>Topik</MNavLink>
+                    <MNavLink href='/isu'>Daftar Isu</MNavLink>
                     <MNavLink href='/tentang-kami'>Tentang Kami</MNavLink>
                   </ul>
                   <div className='flex flex-row items-center justify-between pt-2'>
