@@ -14,7 +14,7 @@
     "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
-    "@next/font": "13.1.4",
+    "@next/font": "13.1.6",
     "clsx": "^1.2.1",
     "disqus-react": "^1.1.5",
     "framer-motion": "^8.5.2",
