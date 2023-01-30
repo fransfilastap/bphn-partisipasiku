@@ -1,6 +1,6 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import fetcher from '@/lib/fetcher';
-import { GetIssueDocument, GetTopicsDocument } from '@/gql/graphql';
+import { GetTopicsDocument } from '@/gql/graphql';
 import { Fragment } from 'react';
 import Seo from '@/components/seo/Seo';
 import Container from '@/components/base/Container';
