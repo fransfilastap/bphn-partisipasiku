@@ -34,7 +34,7 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
       <div className='relative flex flex-col w-full h-[400px]'>
         <SmoothTransitionImage
           src={cover.url}
-          className='object-cover object-center'
+          className='object-cover'
           loading={priority ? 'eager' : 'lazy'}
           fill={true}
           alt={cover.altTxt ?? title}
@@ -43,8 +43,10 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
           blurDataURL={cover.placeholder ?? DEFAULT_PLACEHOLDER}
         />
       </div>
-      <div className='flex flex-col items-start justify-between flex-1 p-4'>
-        <h5 className='font-[600] text-[0.98em] tracking-tight'>{title}</h5>
+      <div className='flex h-[200px] flex-col items-start justify-between p-4'>
+        <h5 className='font-[600] text-[0.98em] tracking-tight line-clamp-2'>
+          {title}
+        </h5>
         <div className='flex flex-row items-center justify-between w-full text-gray-500 dark:text-gray-200'>
           <p className='text-[0.79em]'>
             <span>{author ?? 'BPHN'}</span>
