@@ -21,7 +21,7 @@ const SmoothTransitionImage: FunctionComponent<ImageProps> = ({
   return (
     <Image
       loader={strapiImageLoader}
-      className={clsxtw(!priority ?? (loading ? 'blur' : 'unblur'), className)}
+      className={clsxtw(loading ? 'blur' : 'unblur', className)}
       onLoadingComplete={loadingCompleteHandler}
       alt={alt}
       {...props}

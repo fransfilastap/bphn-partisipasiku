@@ -5,7 +5,7 @@ import { Query } from '@/gql/graphql';
 
 const gqlClient = new GraphQLClient(`${STRAPI_GRAPHQL_API_ENDPOINT}`, {
   headers: {
-    authorization: `Bearer ${STRAPI_API_TOKEN}`,
+    Authorization: `Bearer ${STRAPI_API_TOKEN}`,
   },
 });
 

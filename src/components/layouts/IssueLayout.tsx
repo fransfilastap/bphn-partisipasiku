@@ -34,43 +34,41 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
   markdownContent,
 }) => {
   return (
-    <Container
-      className="relative flex flex-col md:gap-6 md:divide-gray-300 gap-6"
-    >
+    <Container className='relative flex flex-col md:gap-6 md:divide-gray-300 gap-6'>
       <Seo
         pageTitle={title}
         description={description}
         title={title}
-        type="article"
+        type='article'
         url={`isu/${slug}`}
       />
-      <div className="md:flex-row flex flex-col">
-        <motion.aside className="w-full md:w-1/3">
-          <div
-            className="md:sticky static top-[80px] flex flex-col gap-2 min-h-[200px] justify-between"
-          >
-            <div className="flex flex-col">
+      <div className='md:flex-row flex flex-col'>
+        <motion.aside className='w-full md:w-1/3'>
+          <div className='md:sticky static top-[80px] flex flex-col gap-2 md:min-h-[200px] justify-between'>
+            <div className='flex flex-col'>
               <Link
-                href="/isu"
-                className="text-gray-400 inline-flex items-center text-sm"
+                href='/isu'
+                className='text-gray-400 inline-flex items-center text-sm'
               >
-                <ArrowSmallLeftIcon className="w-5 h-4" />
+                <ArrowSmallLeftIcon className='w-5 h-4' />
                 <span>Kembali</span>
               </Link>
-              <h5 className="text-5xl font-sans font-[700]">{title}</h5>
+              <h5 className='leading-tight text-3xl lg:text-5xl font-sans font-[700]'>
+                {title}
+              </h5>
             </div>
-            <a href="#disqus">Beri Komentar</a>
+            <a href='#disqus'>Beri Komentar</a>
           </div>
         </motion.aside>
-        <div className="flex flex-col gap-5 w-full md:w-2/3">
-          <figure className="relative aspect-video">
+        <div className='flex flex-col gap-5 w-full md:w-2/3'>
+          <figure className='relative aspect-video'>
             <SmoothTransitionImage
-              priority={true}
+              priority={false}
               src={cover.url}
-              alt={cover.alternateText}
+              alt={cover.alternateText ?? title}
               blurDataURL={cover.placeholder}
               fill
-              className="object-cover rounded-lg shadow"
+              className='object-cover rounded-lg shadow'
             />
             {cover.caption && <figcaption>{cover.caption}</figcaption>}
           </figure>
@@ -78,8 +76,8 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
         </div>
       </div>
       <Disqus
-        id="disqus"
-        className="w-full flex flex-col"
+        id='disqus'
+        className='w-full flex flex-col'
       />
     </Container>
   );

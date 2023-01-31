@@ -14,6 +14,7 @@ interface IssueCardProps {
     url: string;
     placeholder: string;
     caption: string;
+    altTxt?: string;
   };
 }
 
@@ -30,13 +31,13 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
       href={`/isu/${slug}`}
       className='flex flex-col transition duration-200 ease-in-out cursor-pointer group bg-white dark:bg-slate-600/30 dark:border-slate-800 dark:shadow-slate-800 dark:hover:sc h-[200px] md:h-[300px] rounded-2xl shadow-md hover:shadow-xl dark:shadow-none dark:hover:ring-blue-500'
     >
-      <div className='relative flex flex-col w-full h-[200px]'>
+      <div className='relative flex flex-col w-full h-[400px]'>
         <SmoothTransitionImage
           src={cover.url}
           className='object-cover object-center'
           loading={priority ? 'eager' : 'lazy'}
-          fill
-          alt={title}
+          fill={true}
+          alt={cover.altTxt ?? title}
           priority={priority}
           placeholder={priority ? 'empty' : 'blur'}
           blurDataURL={cover.placeholder ?? DEFAULT_PLACEHOLDER}

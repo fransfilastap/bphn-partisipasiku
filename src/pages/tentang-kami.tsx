@@ -44,7 +44,10 @@ export default function AboutPage({
             </p>
           </aside>
           <section className='flex flex-col w-full md:w-2/3'>
-            <Markdown mdx={parsedMarkdown} />
+            <Markdown
+              mdx={parsedMarkdown}
+              className="text-justify"
+            />
           </section>
         </div>
       </Container>

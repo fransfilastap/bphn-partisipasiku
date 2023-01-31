@@ -101,10 +101,11 @@ const HighlightedIssues = ({ issues }: { issues: GetIssuesQuery }) => {
           <IssueCard
             cover={{
               placeholder: e.attributes?.cover?.data?.attributes?.placeholder!,
-              url: e.attributes?.cover?.data?.attributes?.url!,
+              url: e.attributes?.cover?.data?.attributes?.formats.medium.url,
               caption: e.attributes?.cover?.data?.attributes?.caption!,
+              altTxt: e.attributes?.cover?.data?.attributes?.alternativeText!,
             }}
-            priority={i <= 4}
+            priority={false}
             slug={e.attributes?.slug!}
             title={e.attributes?.title!}
             key={e.attributes?.slug}

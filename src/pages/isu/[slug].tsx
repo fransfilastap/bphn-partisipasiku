@@ -1,6 +1,5 @@
 import { GetStaticProps, GetStaticPropsContext, NextPage } from 'next';
 import { getIssues } from '@/lib/content';
-import Container from '@/components/base/Container';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { GetIssuesQuery } from '@/gql/graphql';
 import { parseMarkdown } from '@/lib/markdown';
@@ -53,7 +52,8 @@ const IssuePage: NextPage<IssuePageProps> = ({ issue, markdown }) => {
         placeholder:
           issue.issues?.data[0].attributes?.cover?.data?.attributes
             ?.placeholder!,
-        url: issue.issues?.data[0].attributes?.cover?.data?.attributes?.url!,
+        url: issue.issues?.data[0].attributes?.cover?.data?.attributes?.formats
+          .medium.url,
         alternateText:
           issue.issues?.data[0].attributes?.cover?.data?.attributes
             ?.alternativeText!,

@@ -118,5 +118,6 @@ export const getIssues = async (
       }
     }
   `);
-  return await fetcher(query, variables);
+
+  return await fetcher(query, variables ?? {});
 };
