@@ -35,6 +35,7 @@ export const getStaticProps: GetStaticProps<
     props: {
       issue: issue,
     },
+    revalidate: 10,
   };
 };
 

@@ -12,6 +12,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       about,
     },
+    revalidate: 10,
   };
 };
 
@@ -31,7 +32,7 @@ export default function AboutPage({
       <Container className='flex flex-col items-center justify-start '>
         <div className='flex flex-col lg:flex-row w-full divide-gray-300 min-h-[90vh] md:gap-0 gap-5 py-10'>
           <aside className='flex flex-col w-full lg:w-1/3'>
-            <div className="flex flex-col">
+            <div className='flex flex-col'>
               <motion.h1 className='text-3xl lg:text-5xl font-[700] font-body leading-loose'>
                 {about.title}
               </motion.h1>

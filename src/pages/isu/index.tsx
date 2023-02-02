@@ -13,6 +13,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       issues,
     },
+    revalidate: 10,
   };
 };
 export default function IssuePage({
@@ -27,12 +28,12 @@ export default function IssuePage({
         type='article'
       />
       <Container className='p-6 md:p-4'>
-        <div className="py-10 flex flex-col gap-2">
+        <div className='py-10 flex flex-col gap-2'>
           <motion.h5
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1, stiffness: 200, type: 'spring' }}
-            className="text-5xl font-body font-bold"
+            className='text-5xl font-body font-bold'
           >
             Kumpulan Isu Hukum
           </motion.h5>
@@ -40,7 +41,7 @@ export default function IssuePage({
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.12, stiffness: 200, type: 'spring' }}
-            className="font-body text-xl tracking-tighter"
+            className='font-body text-xl tracking-tighter'
           >
             Pilih isu, lalu sampaikan pendapatmu.
           </motion.p>

@@ -21,6 +21,7 @@ export const getStaticProps: GetStaticProps = async () => {
       issues,
       topics,
     },
+    revalidate: 10,
   };
 };
 
