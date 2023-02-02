@@ -1,19 +1,19 @@
-import { GetStaticProps, GetStaticPropsContext, NextPage } from 'next';
-import { getIssues } from '@/lib/content';
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
-import { GetIssuesQuery } from '@/gql/graphql';
-import { parseMarkdown } from '@/lib/markdown';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { getIssue, getIssues } from '@/lib/content';
 import IssueLayout from '@/components/layouts/IssueLayout';
+import moment from 'moment/moment';
+import { ContentIssue } from '@/types/model';
+import { ParsedUrlQuery } from 'querystring';
+import { DEFAULT_PLACEHOLDER } from '@/lib/image';
 
 type IssuePageProps = {
-  issue: GetIssuesQuery;
-  markdown: MDXRemoteSerializeResult;
+  issue: ContentIssue;
 };
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const issues = await getIssues();
-  const paths = issues.issues?.data.map(({ attributes }, i) => ({
-    params: { slug: attributes?.slug },
+  const paths = issues.map(({ slug, id }: ContentIssue, i) => ({
+    params: { slug: slug },
   }));
 
   return {
@@ -21,46 +21,38 @@ export const getStaticPaths = async () => {
     fallback: 'blocking',
   };
 };
-export const getStaticProps: GetStaticProps = async (
-  ctx: GetStaticPropsContext
-) => {
-  const { params, locale } = ctx;
-  const issue = await getIssues({ filters: { slug: { eq: params?.slug } } });
+export const getStaticProps: GetStaticProps<
+  IssuePageProps,
+  ParsedUrlQuery
+> = async ({ params }) => {
+  const issue = await getIssue(params?.slug);
 
-  if (issue.issues?.data?.length! <= 0) {
+  if (!issue) {
     return { notFound: true };
   }
 
-  const mdx = await parseMarkdown(
-    issue.issues?.data[0].attributes?.background!
-  );
-
   return {
     props: {
-      issue,
-      markdown: mdx,
+      issue: issue,
     },
   };
 };
 
-const IssuePage: NextPage<IssuePageProps> = ({ issue, markdown }) => {
+const IssuePage: NextPage<IssuePageProps> = ({ issue }) => {
   return (
     <IssueLayout
-      title={issue.issues?.data[0].attributes?.title!}
-      slug={issue.issues?.data[0].attributes?.slug!}
+      title={issue.title}
+      slug={issue.slug}
       cover={{
-        placeholder:
-          issue.issues?.data[0].attributes?.cover?.data?.attributes
-            ?.placeholder!,
-        url: issue.issues?.data[0].attributes?.cover?.data?.attributes?.formats
-          .medium.url,
-        alternateText:
-          issue.issues?.data[0].attributes?.cover?.data?.attributes
-            ?.alternativeText!,
+        placeholder: DEFAULT_PLACEHOLDER,
+        url: issue.cover.url,
+        alternateText: issue.cover.alternativeText,
+        caption: issue.cover.caption,
       }}
-      description={issue.issues?.data[0].attributes?.seo?.metaDescription!}
-      topic={issue.issues?.data[0].attributes?.topic?.data?.attributes?.name!}
-      markdownContent={markdown}
+      description={issue.meta.description}
+      topic={issue.topic}
+      markdownContent={issue.markdown}
+      createdAt={moment(issue.createdAt).format('MMMM d, YYYY')}
     />
   );
 };

@@ -4,10 +4,10 @@ import Footer from '@/components/base/Footer';
 import Header from '@/components/base/Header';
 import { clsx } from 'clsx';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const firaSans = FiraSans({
   subsets: ['latin'],
-  variable: '--font-mono',
+  variable: '--font-fira',
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 });
 const RootLayout: FunctionComponent<PropsWithChildren> = ({

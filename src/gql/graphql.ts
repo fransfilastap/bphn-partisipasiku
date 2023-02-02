@@ -31,7 +31,7 @@ export type About = {
   Description: Scalars['String'];
   Seo?: Maybe<ComponentSharedSeo>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  title?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
@@ -367,7 +367,7 @@ export type IntFilterInput = {
 export type Issue = {
   __typename?: 'Issue';
   background: Scalars['String'];
-  cover?: Maybe<UploadFileEntityResponse>;
+  cover: UploadFileEntityResponse;
   createdAt?: Maybe<Scalars['DateTime']>;
   publishedAt?: Maybe<Scalars['DateTime']>;
   seo?: Maybe<ComponentSharedSeo>;
@@ -830,10 +830,10 @@ export type Topic = {
   __typename?: 'Topic';
   attacments?: Maybe<UploadFileRelationResponseCollection>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  description?: Maybe<Scalars['String']>;
+  description: Scalars['String'];
   name: Scalars['String'];
   publishedAt?: Maybe<Scalars['DateTime']>;
-  slug?: Maybe<Scalars['String']>;
+  slug: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
@@ -884,6 +884,7 @@ export type TopicInput = {
 export type UploadFile = {
   __typename?: 'UploadFile';
   alternativeText?: Maybe<Scalars['String']>;
+  blurhash?: Maybe<Scalars['String']>;
   caption?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   ext?: Maybe<Scalars['String']>;
@@ -923,6 +924,7 @@ export type UploadFileEntityResponseCollection = {
 export type UploadFileFiltersInput = {
   alternativeText?: InputMaybe<StringFilterInput>;
   and?: InputMaybe<Array<InputMaybe<UploadFileFiltersInput>>>;
+  blurhash?: InputMaybe<StringFilterInput>;
   caption?: InputMaybe<StringFilterInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   ext?: InputMaybe<StringFilterInput>;
@@ -948,6 +950,7 @@ export type UploadFileFiltersInput = {
 
 export type UploadFileInput = {
   alternativeText?: InputMaybe<Scalars['String']>;
+  blurhash?: InputMaybe<Scalars['String']>;
   caption?: InputMaybe<Scalars['String']>;
   ext?: InputMaybe<Scalars['String']>;
   folder?: InputMaybe<Scalars['ID']>;
@@ -1304,7 +1307,7 @@ export type GetAboutQuery = {
       __typename?: 'AboutEntity';
       attributes?: {
         __typename?: 'About';
-        title?: string | null;
+        title: string;
         Description: string;
         Seo?: {
           __typename?: 'ComponentSharedSeo';
@@ -1344,9 +1347,9 @@ export type GetTopicsQuery = {
       id?: string | null;
       attributes?: {
         __typename?: 'Topic';
-        description?: string | null;
+        description: string;
         name: string;
-        slug?: string | null;
+        slug: string;
         publishedAt?: any | null;
       } | null;
     }>;
@@ -1392,12 +1395,12 @@ export type GetIssuesQuery = {
             __typename?: 'TopicEntity';
             attributes?: {
               __typename?: 'Topic';
-              slug?: string | null;
+              slug: string;
               name: string;
             } | null;
           } | null;
         } | null;
-        cover?: {
+        cover: {
           __typename?: 'UploadFileEntityResponse';
           data?: {
             __typename?: 'UploadFileEntity';
@@ -1405,12 +1408,13 @@ export type GetIssuesQuery = {
               __typename?: 'UploadFile';
               url: string;
               caption?: string | null;
+              placeholder?: string | null;
+              blurhash?: string | null;
               formats?: any | null;
               alternativeText?: string | null;
-              placeholder?: string | null;
             } | null;
           } | null;
-        } | null;
+        };
       } | null;
     }>;
   } | null;
@@ -1896,6 +1900,20 @@ export const GetIssuesDocument = {
                                                 kind: 'Field',
                                                 name: {
                                                   kind: 'Name',
+                                                  value: 'placeholder',
+                                                },
+                                              },
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'blurhash',
+                                                },
+                                              },
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
                                                   value: 'formats',
                                                 },
                                               },
@@ -1904,13 +1922,6 @@ export const GetIssuesDocument = {
                                                 name: {
                                                   kind: 'Name',
                                                   value: 'alternativeText',
-                                                },
-                                              },
-                                              {
-                                                kind: 'Field',
-                                                name: {
-                                                  kind: 'Name',
-                                                  value: 'placeholder',
                                                 },
                                               },
                                             ],

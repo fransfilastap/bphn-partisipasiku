@@ -4,11 +4,13 @@ import Seo from '@/components/seo/Seo';
 import IssueCard from '@/components/card/IssueCard';
 import clsxtw from '@/lib/clsxtw';
 import styles from './index.module.css';
-import { GetIssuesQuery, GetTopicsQuery } from '@/gql/graphql';
+import { GetTopicsQuery } from '@/gql/graphql';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import TopicCard from '@/components/card/TopicCard';
 import Section from '@/components/section';
 import { getIssues, getTopics } from '@/lib/content';
+import { ContentIssue } from '@/types/model';
+import { DEFAULT_PLACEHOLDER } from '@/lib/image';
 
 export const getStaticProps: GetStaticProps = async () => {
   const issues = await getIssues();
@@ -54,12 +56,12 @@ const Masthead = () => {
         }}
       ></div>
       <div className='flex flex-col items-center justify-center h-full p-4 gap-y-3'>
-        <h5 className='w-full p-4 text-5xl font-bold tracking-tight text-center text-black dark:text-white lg:text-7xl'>
+        <h5 className='font-heading w-full p-4 text-5xl font-bold tracking-normal text-center text-black dark:text-white lg:text-7xl'>
           Kolaborasi Membangun Hukum.
         </h5>
-        <p className='font-mono text-lg text-center text-gray-500 md:text-2xl font-[400]'>
-          Sampaikan pendapatmu tentang isu peraturan perundang-undangan di
-          Indonesia di sini!
+        <p className='font-heading text-lg text-center text-gray-500 md:text-2xl font-[400]'>
+          Yuk! Sampaikan pendapatmu terkait isu peraturan perundang-undangan di
+          Indonesia 🇮🇩
         </p>
       </div>
     </section>
@@ -88,7 +90,7 @@ const HighlightedTopics = ({ topics }: { topics: GetTopicsQuery }) => {
   );
 };
 
-const HighlightedIssues = ({ issues }: { issues: GetIssuesQuery }) => {
+const HighlightedIssues = ({ issues }: { issues: ContentIssue[] }) => {
   return (
     <Section
       sectionTitle='Isu Pilihan'
@@ -97,18 +99,18 @@ const HighlightedIssues = ({ issues }: { issues: GetIssuesQuery }) => {
       actionLabel='Lihat Semua'
     >
       <div className='grid w-full grid-cols-1 gap-2 md:gap-8 md:grid-cols-4'>
-        {issues.issues?.data.map((e, i) => (
+        {issues.map((e, i) => (
           <IssueCard
             cover={{
-              placeholder: e.attributes?.cover?.data?.attributes?.placeholder!,
-              url: e.attributes?.cover?.data?.attributes?.formats.medium.url,
-              caption: e.attributes?.cover?.data?.attributes?.caption!,
-              altTxt: e.attributes?.cover?.data?.attributes?.alternativeText!,
+              placeholder: DEFAULT_PLACEHOLDER,
+              url: e.cover.url,
+              caption: e.cover.caption,
+              altTxt: e.cover.alternativeText,
             }}
             priority={false}
-            slug={e.attributes?.slug!}
-            title={e.attributes?.title!}
-            key={e.attributes?.slug}
+            slug={e.slug}
+            title={e.title}
+            key={e.slug}
           />
         ))}
       </div>

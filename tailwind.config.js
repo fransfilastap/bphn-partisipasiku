@@ -13,8 +13,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-sans, "")', ...defaultTheme.fontFamily.sans],
-        mono: ['var(--font-mono, "")', ...defaultTheme.fontFamily.mono],
+        body: ['var(--font-inter, "")', ...defaultTheme.fontFamily.sans],
+        heading: ['var(--font-fira, "")', ...defaultTheme.fontFamily.mono],
       },
       colors: {
         divider: {

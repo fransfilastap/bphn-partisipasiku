@@ -1,15 +1,13 @@
-import { FunctionComponent, Suspense } from 'react';
+import { FunctionComponent } from 'react';
 import { motion } from 'framer-motion';
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import Container from '@/components/base/Container';
 import Seo from '@/components/seo/Seo';
-import Link from 'next/link';
-import MarkdownComponents from '@/components/markdown';
 import SmoothTransitionImage from '@/components/image/SmoothTransitionImage';
-import { ArrowSmallLeftIcon } from '@/components/icons';
+import { ArrowSmallLeftIcon, CalendarDays } from '@/components/icons';
 import Markdown from '@/components/markdown/Markdown';
-import dynamic from 'next/dynamic';
-import Disqus from '@/components/Disqus';
+import { DEFAULT_PLACEHOLDER } from '@/lib/image';
+import Link from 'next/link';
 
 type IssueProps = {
   title: string;
@@ -23,6 +21,7 @@ type IssueProps = {
     alternateText: string;
   };
   markdownContent: MDXRemoteSerializeResult;
+  createdAt: string;
 };
 
 const IssueLayout: FunctionComponent<IssueProps> = ({
@@ -32,6 +31,7 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
   topic,
   cover,
   markdownContent,
+  createdAt,
 }) => {
   return (
     <Container className='relative flex flex-col md:gap-6 md:divide-gray-300 gap-6'>
@@ -42,43 +42,63 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
         type='article'
         url={`isu/${slug}`}
       />
-      <div className='md:flex-row flex flex-col'>
-        <motion.aside className='w-full md:w-1/3'>
-          <div className='md:sticky static top-[80px] flex flex-col gap-2 md:min-h-[200px] justify-between'>
-            <div className='flex flex-col'>
-              <Link
-                href='/isu'
-                className='text-gray-400 inline-flex items-center text-sm'
+      <div className='flex flex-col'>
+        <div className='flex flex-col gap-5 w-full'>
+          <div className='flex flex-col py-5 gap-2'>
+            <Link
+              href='/isu'
+              className='text-gray-400 inline-flex max-w-max items-center text-sm hover:text-gray-800 dark:hover:text-white transition-colors duration-200 ease-in-out'
+            >
+              <ArrowSmallLeftIcon className='w-5 h-4' />
+              <span>Kembali</span>
+            </Link>
+            <div>
+              <motion.h6
+                initial={{ opacity: 0, x: -100 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1, type: 'spring' }}
+                className="text-blue-500 font-[600] font-heading text-md lg:text-2xl"
               >
-                <ArrowSmallLeftIcon className='w-5 h-4' />
-                <span>Kembali</span>
-              </Link>
-              <h5 className='leading-tight text-3xl lg:text-5xl font-sans font-[700]'>
+                {topic}
+              </motion.h6>
+              <motion.h5
+                initial={{ opacity: 0, x: -100 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ type: 'spring' }}
+                className='text-3xl  lg:text-4xl lg:text-[4em] font-[700] font-heading leading-tight lg:leading-[1]'
+              >
                 {title}
-              </h5>
+              </motion.h5>
             </div>
-            <a href='#disqus'>Beri Komentar</a>
+            <div className="flex flex-row">
+              <p className="inline-flex gap-2 justify-center items-center">
+                <CalendarDays />
+                <span className="text-sm dark:text-gray-400">
+                  {createdAt}
+                </span>
+              </p>
+            </div>
           </div>
-        </motion.aside>
-        <div className='flex flex-col gap-5 w-full md:w-2/3'>
-          <figure className='relative aspect-video'>
-            <SmoothTransitionImage
-              priority={false}
-              src={cover.url}
-              alt={cover.alternateText ?? title}
-              blurDataURL={cover.placeholder}
-              fill
-              className='object-cover rounded-lg shadow'
-            />
-            {cover.caption && <figcaption>{cover.caption}</figcaption>}
-          </figure>
-          <Markdown mdx={markdownContent} />
+          <div className="flex flex-row">
+            <div className="w-full flex flex-col gap-6">
+              <figure className='relative aspect-video'>
+                <SmoothTransitionImage
+                  src={cover.url}
+                  fill={true}
+                  alt={cover.alternateText ?? title}
+                  blurDataURL={cover.placeholder}
+                  className='object-cover rounded-md'
+                />
+                {cover.caption && <figcaption>{cover.caption}</figcaption>}
+              </figure>
+              <Markdown
+                mdx={markdownContent}
+                className="prose-md font-body w-full lg:w-1/2 mx-auto"
+              />
+            </div>
+          </div>
         </div>
       </div>
-      <Disqus
-        id='disqus'
-        className='w-full flex flex-col'
-      />
     </Container>
   );
 };
