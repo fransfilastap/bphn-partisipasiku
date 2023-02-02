@@ -176,7 +176,7 @@ export const getIssues = async (variables?: Variables) => {
         slug: issue.attributes?.slug!,
         markdown: markdown,
         topic: issue.attributes?.topic?.data?.attributes?.name,
-        createdAt: moment(issue.attributes?.createdAt!).format('M d, YYYY'),
+        createdAt: issue.attributes?.createdAt,
       } as ContentIssue;
     })
   ).then((value) => value);

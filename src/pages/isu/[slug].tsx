@@ -44,7 +44,7 @@ const IssuePage: NextPage<IssuePageProps> = ({ issue }) => {
       title={issue.title}
       slug={issue.slug}
       cover={{
-        placeholder: DEFAULT_PLACEHOLDER,
+        placeholder: issue.cover.placeholder,
         url: issue.cover.url,
         alternateText: issue.cover.alternativeText,
         caption: issue.cover.caption,

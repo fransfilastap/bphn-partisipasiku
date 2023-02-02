@@ -53,34 +53,22 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
               <span>Kembali</span>
             </Link>
             <div>
-              <motion.h6
-                initial={{ opacity: 0, x: -100 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.1, type: 'spring' }}
-                className="text-blue-500 font-[600] font-heading text-md lg:text-2xl"
-              >
+              <h6 className='text-blue-500 font-[600] font-heading text-md lg:text-2xl'>
                 {topic}
-              </motion.h6>
-              <motion.h5
-                initial={{ opacity: 0, x: -100 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ type: 'spring' }}
-                className='text-3xl  lg:text-4xl lg:text-[4em] font-[700] font-heading leading-tight lg:leading-[1]'
-              >
+              </h6>
+              <h5 className='text-3xl  lg:text-4xl lg:text-[4em] font-[700] font-heading leading-tight lg:leading-[1]'>
                 {title}
-              </motion.h5>
+              </h5>
             </div>
-            <div className="flex flex-row">
-              <p className="inline-flex gap-2 justify-center items-center">
+            <div className='flex flex-row'>
+              <p className='inline-flex gap-2 justify-center items-center'>
                 <CalendarDays />
-                <span className="text-sm dark:text-gray-400">
-                  {createdAt}
-                </span>
+                <span className='text-sm dark:text-gray-400'>{createdAt}</span>
               </p>
             </div>
           </div>
-          <div className="flex flex-row">
-            <div className="w-full flex flex-col gap-6">
+          <div className='flex flex-row'>
+            <div className='w-full flex flex-col gap-6'>
               <figure className='relative aspect-video'>
                 <SmoothTransitionImage
                   src={cover.url}
@@ -93,7 +81,7 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
               </figure>
               <Markdown
                 mdx={markdownContent}
-                className="prose-md font-body w-full lg:w-1/2 mx-auto"
+                className='prose-md font-body w-full lg:w-1/2 mx-auto'
               />
             </div>
           </div>

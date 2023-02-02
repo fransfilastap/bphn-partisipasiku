@@ -8,7 +8,7 @@ export type ContentIssue = {
   cover: ContentImage;
   meta: ContentMeta;
   markdown: MDXRemoteSerializeResult;
-  createdAt: string;
+  createdAt: Date;
 };
 
 export type ContentMeta = {
