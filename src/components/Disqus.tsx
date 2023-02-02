@@ -4,21 +4,31 @@ import { DiscussionEmbed } from 'disqus-react';
 import { AppInfo } from '@/configs';
 import { DISQUS_SHORTNAME } from '@/configs/env';
 
-type DisqusProps = ComponentPropsWithoutRef<'div'>;
+type DisqusProps = ComponentPropsWithoutRef<'div'> & {
+  title: string;
+  identifier: string;
+  locale: string;
+};
 
-const Disqus: FunctionComponent<DisqusProps> = ({ className, ...props }) => {
+const Disqus: FunctionComponent<DisqusProps> = ({
+  className,
+  title,
+  identifier,
+  locale = 'id-ID',
+  ...props
+}) => {
   return (
     <div
-      className={clsxtw('w-full flex', className)}
+      className={clsxtw('w-full', className)}
       {...props}
     >
       <DiscussionEmbed
-        shortname={DISQUS_SHORTNAME}
+        shortname={DISQUS_SHORTNAME!}
         config={{
-          title: ``,
-          url: ``,
-          identifier: ``,
-          language: 'ID',
+          title: `${title}`,
+          url: `${AppInfo.url}/${identifier}`,
+          identifier: `${identifier}`,
+          language: locale,
         }}
       />
     </div>

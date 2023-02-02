@@ -30,7 +30,7 @@ const Input: FunctionComponent<InputProps> = ({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         className={clsxtw(
-          'w-full ring-0 focus-visible:outline-none bg-transparent focus-within:outline-none outline-offset-0 text-[0.9em] text-gray-700 rounded-none focus:outline-none focus:border-none',
+          'w-full ring-0 focus-visible:outline-none bg-transparent focus-within:outline-none outline-offset-0 text-[0.9em] text-gray-700 dark:focus:text-white rounded-none focus:outline-none focus:border-none',
           className
         )}
       />

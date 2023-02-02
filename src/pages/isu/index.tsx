@@ -1,11 +1,14 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import { Fragment } from 'react';
+import { ChangeEvent, Fragment, useCallback, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import Seo from '@/components/seo/Seo';
 import Container from '@/components/base/Container';
 import { getIssues } from '@/lib/content';
 import IssueCard from '@/components/card/IssueCard';
 import { ContentIssue } from '@/types/model';
+import Input from '@/components/base/Input';
+import { SearchIcon } from '@/components/icons';
+import debounce from 'lodash.debounce';
 
 export const getStaticProps: GetStaticProps = async () => {
   const issues = await getIssues();
@@ -19,6 +22,19 @@ export const getStaticProps: GetStaticProps = async () => {
 export default function IssuePage({
   issues,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const [searchValue, setSearchValue] = useState<string>('');
+  const filteredIssue = useMemo((): ContentIssue[] => {
+    return issues.filter((issue: ContentIssue) =>
+      issue.title.toLowerCase().includes(searchValue.toLowerCase())
+    );
+  }, [issues, searchValue]);
+
+  const handleQueryChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
+
+  const debounceQueryChange = debounce(handleQueryChange, 300);
+
   return (
     <Fragment>
       <Seo
@@ -35,7 +51,7 @@ export default function IssuePage({
             transition={{ delay: 0.1, stiffness: 200, type: 'spring' }}
             className='text-5xl font-body font-bold'
           >
-            Kumpulan Isu Hukum
+            Daftar Isu Hukum
           </motion.h5>
           <motion.p
             initial={{ opacity: 0, x: -100 }}
@@ -43,11 +59,19 @@ export default function IssuePage({
             transition={{ delay: 0.12, stiffness: 200, type: 'spring' }}
             className='font-body text-xl tracking-tighter'
           >
-            Pilih isu, lalu sampaikan pendapatmu.
+            Pilih isu lalu sampaikan pendapat anda!
           </motion.p>
         </div>
+
+        <div className="flex flex-col w-full my-8">
+          <Input
+            onChange={debounceQueryChange}
+            placeholder="Search"
+            leftIcon={<SearchIcon />}
+          />
+        </div>
         <div className='grid w-full grid-cols-1 gap-2 md:gap-8 md:grid-cols-4'>
-          {issues.map((e: ContentIssue, i: number) => {
+          {filteredIssue.map((e: ContentIssue, i: number) => {
             return (
               <IssueCard
                 author=''

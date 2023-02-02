@@ -43,7 +43,7 @@ export default function Header({
       >
         <Container className='flex flex-row items-center justify-between'>
           <Logo />
-          <div className="flex flex-row items-center justify-between gap-8">
+          <div className='flex flex-row items-center justify-between gap-8'>
             <Navigation className='flex-row items-center justify-between hidden md:flex md:gap-2'>
               <ul className='inline-flex gap-4'>
                 <li>
@@ -53,7 +53,7 @@ export default function Header({
                   <NavLink href='/topik'>Topik</NavLink>
                 </li>
                 <li>
-                  <NavLink href='/isu'>Kumpulan Isu</NavLink>
+                  <NavLink href='/isu'>Issue</NavLink>
                 </li>
                 <li>
                   <NavLink href='/tentang-kami'>Tentang Kami</NavLink>

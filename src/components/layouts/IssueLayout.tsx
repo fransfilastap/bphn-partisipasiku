@@ -8,6 +8,8 @@ import { ArrowSmallLeftIcon, CalendarDays } from '@/components/icons';
 import Markdown from '@/components/markdown/Markdown';
 import { DEFAULT_PLACEHOLDER } from '@/lib/image';
 import Link from 'next/link';
+import Cusdis from '@/components/Cusdis';
+import Disqus from '@/components/Disqus';
 
 type IssueProps = {
   title: string;
@@ -67,23 +69,27 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
               </p>
             </div>
           </div>
-          <div className='flex flex-row'>
-            <div className='w-full flex flex-col gap-6'>
-              <figure className='relative aspect-video'>
-                <SmoothTransitionImage
-                  src={cover.url}
-                  fill={true}
-                  alt={cover.alternateText ?? title}
-                  blurDataURL={cover.placeholder}
-                  className='object-cover rounded-md'
-                />
-                {cover.caption && <figcaption>{cover.caption}</figcaption>}
-              </figure>
-              <Markdown
-                mdx={markdownContent}
-                className='prose-md font-body w-full lg:w-1/2 mx-auto'
+          <div className='w-full flex flex-col gap-6'>
+            <figure className='relative aspect-video'>
+              <SmoothTransitionImage
+                src={cover.url}
+                fill={true}
+                alt={cover.alternateText ?? title}
+                blurDataURL={cover.placeholder}
+                className='object-cover rounded-md'
               />
-            </div>
+              {cover.caption && <figcaption>{cover.caption}</figcaption>}
+            </figure>
+            <Markdown
+              mdx={markdownContent}
+              className='prose-md font-body w-full lg:w-1/2 mx-auto'
+            />
+            <Disqus
+              className="lg:w-1/2 mx-auto"
+              identifier={`/isu/${slug}`}
+              title={title}
+              locale="id-ID"
+            />
           </div>
         </div>
       </div>
