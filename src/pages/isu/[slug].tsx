@@ -4,7 +4,6 @@ import IssueLayout from '@/components/layouts/IssueLayout';
 import moment from 'moment/moment';
 import { ContentIssue } from '@/types/model';
 import { ParsedUrlQuery } from 'querystring';
-import { DEFAULT_PLACEHOLDER } from '@/lib/image';
 
 type IssuePageProps = {
   issue: ContentIssue;
@@ -21,10 +20,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
     fallback: 'blocking',
   };
 };
-export const getStaticProps: GetStaticProps<
-  IssuePageProps,
-  ParsedUrlQuery
-> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<IssuePageProps> = async ({
+  params,
+}) => {
   const issue = await getIssue(params?.slug);
 
   if (!issue) {

@@ -159,7 +159,7 @@ export const getIssues = async (variables?: Variables) => {
           description: issue.attributes?.seo?.metaDescription! ?? '',
         },
         cover: {
-          url: issue.attributes?.cover?.data?.attributes?.formats.medium.url,
+          url: issue.attributes?.cover?.data?.attributes?.url,
           coverUrl:
             issue.attributes?.cover?.data?.attributes?.formats.large.url,
           alternativeText:
