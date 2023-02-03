@@ -3,7 +3,6 @@ import { getIssue, getIssues } from '@/lib/content';
 import IssueLayout from '@/components/layouts/IssueLayout';
 import moment from 'moment/moment';
 import { ContentIssue } from '@/types/model';
-import { ParsedUrlQuery } from 'querystring';
 
 type IssuePageProps = {
   issue: ContentIssue;

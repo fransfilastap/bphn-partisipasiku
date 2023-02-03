@@ -3,11 +3,11 @@ import { AppInfo } from '@/configs';
 export const getBaseUrl = () => {
   switch (process.env.NEXT_PUBLIC_VERCEL_ENV) {
     case 'production':
-      return AppInfo.url;
+      return 'https://bphn-partisipasiku.vercel.app';
     case 'preview':
       return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
     default:
-      return `http://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
+      return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
   }
 };
 
