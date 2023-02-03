@@ -9,7 +9,7 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import TopicCard from '@/components/card/TopicCard';
 import Section from '@/components/section';
 import { getIssues, getTopics } from '@/lib/content';
-import { ContentIssue } from '@/types/model';
+import { ContentIssue, ContentTopic } from '@/types/model';
 import { DEFAULT_PLACEHOLDER } from '@/lib/image';
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -69,7 +69,7 @@ const Masthead = () => {
   );
 };
 
-const HighlightedTopics = ({ topics }: { topics: GetTopicsQuery }) => {
+const HighlightedTopics = ({ topics }: { topics: ContentTopic[] }) => {
   return (
     <Section
       sectionTitle='Topik Terpopuler'
@@ -78,12 +78,12 @@ const HighlightedTopics = ({ topics }: { topics: GetTopicsQuery }) => {
       actionLabel='Lihat Semua'
     >
       <div className='flex overflow-x-auto flex-nowrap snap-x snap-mandatory lg:grid lg:grid-cols-4 lg:grid-rows-1 scrollbar-hide'>
-        {topics.topics?.data.map((e, _) => (
+        {topics.map((e, _) => (
           <TopicCard
-            key={e.attributes?.slug}
-            id={e.id!}
-            name={e.attributes?.name!}
-            slug={e.attributes?.slug!}
+            key={e.slug}
+            id={e.id}
+            name={e.name}
+            slug={e.slug}
           />
         ))}
       </div>

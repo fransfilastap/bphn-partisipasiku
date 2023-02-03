@@ -1350,6 +1350,7 @@ export type GetTopicsQuery = {
         description: string;
         name: string;
         slug: string;
+        createdAt?: any | null;
         publishedAt?: any | null;
       } | null;
     }>;
@@ -1635,6 +1636,10 @@ export const GetTopicsDocument = {
                             {
                               kind: 'Field',
                               name: { kind: 'Name', value: 'slug' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'createdAt' },
                             },
                             {
                               kind: 'Field',

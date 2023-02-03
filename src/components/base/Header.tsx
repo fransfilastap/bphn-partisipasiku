@@ -35,7 +35,7 @@ export default function Header({
     <>
       <header
         className={clsxtw(
-          'bg-white/80 backdrop-blur-sm dark:backdrop-blur-xl dark:bg-black/30 z-[999] top-0 w-screen bg-none border-b-gray-100 dark:border-b-gray-800 sticky',
+          'bg-white/80 backdrop-blur-sm dark:backdrop-blur-md dark:bg-black/30 z-[999] top-0 w-screen bg-none border-b-gray-100 dark:border-b-gray-800 sticky',
           className
         )}
         {...rest}

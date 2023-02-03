@@ -24,3 +24,12 @@ export type ContentImage = {
   caption: string;
   alternativeText: string;
 };
+
+export type ContentTopic = {
+  id: string;
+  description: string;
+  name: string;
+  slug: string;
+  createdAt: Date;
+  publishedAt: Date;
+};

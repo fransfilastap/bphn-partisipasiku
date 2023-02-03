@@ -34,7 +34,6 @@ export default function Seo(seoProps: SeoProps): ReactElement {
         rel='canonical'
         href={`${AppInfo.url}${seoProps.url && seoProps.url}`}
       />
-
       {/* Open Graph */}
       <meta
         property='og:type'

@@ -63,6 +63,7 @@ const FooterLink = forwardRef(
     ref: Ref<HTMLAnchorElement>
   ) => (
     <Link
+      ref={ref}
       href={href}
       className='text-gray-500 text-[0.99em] font-[400] hover:text-black dark:hover:text-gray-300'
     >

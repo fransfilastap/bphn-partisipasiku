@@ -1,4 +1,4 @@
-import { FunctionComponent, MouseEventHandler, useMemo } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import Container from '@/components/base/Container';
@@ -12,10 +12,10 @@ import {
 } from '@/components/icons';
 import Markdown from '@/components/markdown/Markdown';
 import Link from 'next/link';
-import Disqus from '@/components/Disqus';
 import useCurrentUrl from '@/hooks/useCurrentUrl';
 import useCopyToClipboard from '@/hooks/useCopyToClipboard';
 import { useRouter } from 'next/router';
+import Disqus from '@/components/Disqus';
 
 type IssueProps = {
   title: string;

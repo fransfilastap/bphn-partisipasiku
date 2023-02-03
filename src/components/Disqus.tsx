@@ -1,28 +1,45 @@
-import { ComponentPropsWithoutRef, FunctionComponent } from 'react';
+import {
+  ComponentPropsWithoutRef,
+  forwardRef,
+  FunctionComponent,
+  Ref,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import clsxtw from '@/lib/clsxtw';
 import { DiscussionEmbed } from 'disqus-react';
 import { AppInfo } from '@/configs';
 import { DISQUS_SHORTNAME } from '@/configs/env';
+import useColorMode from '@/hooks/useColorMode';
 
 type DisqusProps = ComponentPropsWithoutRef<'div'> & {
   title: string;
   identifier: string;
   locale: string;
+  colorMode: string;
 };
 
 const Disqus: FunctionComponent<DisqusProps> = ({
   className,
-  title,
+  locale,
   identifier,
-  locale = 'id-ID',
+  title,
   ...props
 }) => {
+  const [colorMode, setColorMode] = useColorMode();
+
+  useEffect(() => {
+    console.log(colorMode);
+  }, [colorMode]);
+
   return (
     <div
       className={clsxtw('w-full', className)}
       {...props}
     >
       <DiscussionEmbed
+        key={`${locale}`}
         shortname={DISQUS_SHORTNAME!}
         config={{
           title: `${title}`,

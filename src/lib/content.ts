@@ -2,16 +2,11 @@ import fetcher from '@/lib/fetcher';
 import { graphql } from '@/gql';
 import { GetAboutQuery, GetIssuesQuery, GetTopicsQuery } from '@/gql/graphql';
 import { Variables } from 'graphql-request';
-import { ContentIssue, ContentMeta } from '@/types/model';
+import { ContentIssue, ContentMeta, ContentTopic } from '@/types/model';
 import { parseMarkdown } from '@/lib/markdown';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { DEFAULT_PLACEHOLDER } from '@/lib/image';
-
-interface Pagination {
-  page?: number;
-  offset?: number;
-  limit?: number;
-}
+import slug from '@/pages/isu/[slug]';
 
 export const getAbout = async (): Promise<{
   title: string;
@@ -57,9 +52,9 @@ export const getAbout = async (): Promise<{
   };
 };
 
-export const getTopics = async ({
-  limit = 4,
-}: Pagination): Promise<GetTopicsQuery> => {
+export const getTopics = async (
+  variables?: Variables
+): Promise<ContentTopic[]> => {
   const query = graphql(
     /*GraphQL*/
     `
@@ -75,6 +70,7 @@ export const getTopics = async ({
               description
               name
               slug
+              createdAt
               publishedAt
             }
           }
@@ -82,7 +78,21 @@ export const getTopics = async ({
       }
     `
   );
-  return await fetcher(query, { pagination: { limit } });
+
+  const topics: GetTopicsQuery = await fetcher(query, variables);
+  const collection = topics.topics?.data!;
+
+  return Promise.all(
+    collection!.map(async (e, i): Promise<ContentTopic> => {
+      return {
+        slug: e.attributes?.slug,
+        createdAt: e.attributes?.createdAt,
+        description: e.attributes?.description,
+        name: e.attributes?.name,
+        publishedAt: e.attributes?.publishedAt,
+      } as ContentTopic;
+    })
+  ).then((value) => value);
 };
 
 export const getIssue = async (slug: string | string[] | undefined) => {
@@ -161,7 +171,7 @@ export const getIssues = async (variables?: Variables) => {
         cover: {
           url: issue.attributes?.cover?.data?.attributes?.url,
           coverUrl:
-            issue.attributes?.cover?.data?.attributes?.formats.medium.url,
+            issue.attributes?.cover?.data?.attributes?.formats.small.url,
           alternativeText:
             issue.attributes?.cover?.data?.attributes?.alternativeText!,
           caption: issue.attributes?.cover?.data?.attributes?.caption!,
