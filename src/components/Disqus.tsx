@@ -17,7 +17,6 @@ type DisqusProps = ComponentPropsWithoutRef<'div'> & {
   title: string;
   identifier: string;
   locale: string;
-  colorMode: string;
 };
 
 const Disqus: FunctionComponent<DisqusProps> = ({
@@ -27,12 +26,6 @@ const Disqus: FunctionComponent<DisqusProps> = ({
   title,
   ...props
 }) => {
-  const [colorMode, setColorMode] = useColorMode();
-
-  useEffect(() => {
-    console.log(colorMode);
-  }, [colorMode]);
-
   return (
     <div
       className={clsxtw('w-full', className)}
