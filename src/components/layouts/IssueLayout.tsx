@@ -1,4 +1,4 @@
-import { FunctionComponent, MouseEventHandler } from 'react';
+import { FunctionComponent, MouseEventHandler, useMemo } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import Container from '@/components/base/Container';
@@ -11,14 +11,11 @@ import {
   ShareIcon,
 } from '@/components/icons';
 import Markdown from '@/components/markdown/Markdown';
-import { DEFAULT_PLACEHOLDER } from '@/lib/image';
 import Link from 'next/link';
-import Cusdis from '@/components/Cusdis';
 import Disqus from '@/components/Disqus';
-import { AppInfo } from '@/configs';
 import useCurrentUrl from '@/hooks/useCurrentUrl';
-import * as console from 'console';
 import useCopyToClipboard from '@/hooks/useCopyToClipboard';
+import { useRouter } from 'next/router';
 
 type IssueProps = {
   title: string;
@@ -95,7 +92,7 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
             />
             <CommendAndShare />
             <Disqus
-              id="disqus"
+              id='disqus'
               className='lg:w-1/2 mx-auto'
               identifier={`/isu/${slug}`}
               title={title}
@@ -119,11 +116,11 @@ const CommendAndShare = () => {
         opacity: 1,
         transition: { delay: 0.8, type: 'spring', stiffness: 100 },
       }}
-      className="sticky bottom-[40px] gap-2 mx-auto max-w-max px-3 py-5 rounded-md ring-1 ring-slate-300 bg-white/30 dark:bg-black/30 backdrop-blur-2xl flex flex-row"
+      className='sticky bottom-[40px] gap-2 mx-auto max-w-max px-3 py-5 rounded-md ring-1 ring-slate-300 dark:ring-slate-700 bg-white/30 dark:bg-black/30 backdrop-blur-2xl flex flex-row'
     >
       <Link
-        href="#disqus"
-        aria-labelledby="Komentar"
+        href='#disqus'
+        aria-labelledby='Komentar'
       >
         <ChatBubbleBottomIcon />
       </Link>
@@ -134,11 +131,16 @@ const CommendAndShare = () => {
 
 const ShareButton = () => {
   const url = useCurrentUrl();
+  const { query } = useRouter();
+  const urlWithParams = useMemo(() => {
+    return url.replace('[slug]', `${query.slug}`);
+  }, [url, query.slug]);
+
   const [shareUrl, copy] = useCopyToClipboard();
   return (
     <button
-      onClick={() => copy(url)}
-      className="appearance-none"
+      onClick={() => copy(urlWithParams)}
+      className='appearance-none'
     >
       <ShareIcon />
       <AnimatePresence>
@@ -147,7 +149,7 @@ const ShareButton = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { delay: 1 } }}
-            className="text-[0.7em] text-gray-600"
+            className='text-[0.7em] text-gray-600'
           >
             Copied
           </motion.p>

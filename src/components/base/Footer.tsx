@@ -9,7 +9,7 @@ import clsxtw from '@/lib/clsxtw';
 export default function Footer(): ReactElement {
   return (
     <footer className='font-sans text-gray-600 flex py-3 text-sm gap-1 flex-row items-center justify-center border-t dark:border-t-gray-800 bg-[#fafafa] dark:bg-[#111]'>
-      <Container className='flex flex-col items-start justify-start'>
+      <Container className='flex flex-col items-start justify-between gap-20'>
         <div className='grid grid-rows-1 lg:grid-rows-none gap-10 lg:grid-cols-3 py-5'>
           <div className='w-full flex flex-col gap-2 justify-start items-start'>
             <Logo />
@@ -26,17 +26,17 @@ export default function Footer(): ReactElement {
                 </FooterLink>
               </li>
               <li>
-                <FooterLink href="https://kemenkumham.go.id">
+                <FooterLink href='https://kemenkumham.go.id'>
                   Kementerian Hukum dan HAM R.I
                 </FooterLink>
               </li>
               <li>
-                <FooterLink href="https://e-partisipasi.peraturan.go.id/">
+                <FooterLink href='https://e-partisipasi.peraturan.go.id/'>
                   e-Partisipasi Publik Ditjen PP
                 </FooterLink>
               </li>
               <li>
-                <FooterLink href="https://jdihn.go.id">JDIHN</FooterLink>
+                <FooterLink href='https://jdihn.go.id'>JDIHN</FooterLink>
               </li>
             </ul>
           </div>
@@ -64,7 +64,7 @@ const FooterLink = forwardRef(
   ) => (
     <Link
       href={href}
-      className="text-zinc-500 text-[0.99em] font-[400]"
+      className='text-gray-500 text-[0.99em] font-[400] hover:text-black dark:hover:text-gray-300'
     >
       {children}
     </Link>
