@@ -11,7 +11,6 @@ import Navigation from '@/components/base/Navigation';
 import ColorModeSwitcher from '@/components/ColorModeSwitcher';
 import NavLink, { NavLinkProps } from '@/components/base/NavLink';
 import MenuToggle from './MenuToggle';
-import { useToggle } from '@/hooks';
 import { AnimatePresence, motion } from 'framer-motion';
 import Portal from './Portal';
 import { ChevronRightIcon, XCircleIcon } from '../icons';
@@ -128,8 +127,8 @@ export default function Header({
 const MNavLink: FunctionComponent<NavLinkProps> = ({ href, children }) => {
   return (
     <NavLink
-      className='font-body font-bold text-lg text-black dark:text-gray-800 flex flex-row gap-2 w-full items-center justify-between'
-      activeClassname='text-violet-500 dark:text-blue-500 font-[500]'
+      className='font-[500] text-lg text-black dark:text-gray-800 flex flex-row gap-2 w-full items-center justify-between'
+      activeClassname='text-blue-500 dark:text-blue-500 font-[500]'
       href={href}
     >
       {children}

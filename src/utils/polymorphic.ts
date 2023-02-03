@@ -4,12 +4,11 @@ import {
   ComponentPropsWithoutRef,
 } from 'react';
 
-export type AsProps<C extends React.ElementType> = {
+export type AsProps<C extends ElementType> = {
   as?: C;
 };
 
-export type PropsToOmit<C extends React.ElementType, P> = keyof (AsProps<C> &
-  P);
+export type PropsToOmit<C extends ElementType, P> = keyof (AsProps<C> & P);
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type PolymorphicComponentProps<

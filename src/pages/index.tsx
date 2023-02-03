@@ -102,9 +102,10 @@ const HighlightedIssues = ({ issues }: { issues: ContentIssue[] }) => {
       <div className='grid w-full grid-cols-1 gap-2 md:gap-8 md:grid-cols-4'>
         {issues.map((e, i) => (
           <IssueCard
+            topic={e.topic}
             cover={{
               placeholder: DEFAULT_PLACEHOLDER,
-              url: e.cover.url,
+              url: e.cover.coverUrl,
               caption: e.cover.caption,
               altTxt: e.cover.alternativeText,
             }}

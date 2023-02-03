@@ -36,9 +36,6 @@ export default function AboutPage({
               <motion.h1 className='text-3xl lg:text-5xl font-[700] font-body leading-loose'>
                 {about.title}
               </motion.h1>
-              <h5 className='text-lg font-heading font-[400] text-gray-700 dark:text-gray-300 '>
-                Tentang Partisipasiku
-              </h5>
             </div>
           </aside>
           <Markdown

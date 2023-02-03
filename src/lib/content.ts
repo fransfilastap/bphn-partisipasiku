@@ -1,14 +1,8 @@
 import fetcher from '@/lib/fetcher';
 import { graphql } from '@/gql';
-import {
-  GetAboutQuery,
-  GetIssuesQuery,
-  GetTopicsQuery,
-  IssueEntityResponse,
-} from '@/gql/graphql';
+import { GetAboutQuery, GetIssuesQuery, GetTopicsQuery } from '@/gql/graphql';
 import { Variables } from 'graphql-request';
 import { ContentIssue, ContentMeta } from '@/types/model';
-import moment from 'moment/moment';
 import { parseMarkdown } from '@/lib/markdown';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { DEFAULT_PLACEHOLDER } from '@/lib/image';
@@ -165,7 +159,9 @@ export const getIssues = async (variables?: Variables) => {
           description: issue.attributes?.seo?.metaDescription! ?? '',
         },
         cover: {
-          url: issue.attributes?.cover?.data?.attributes?.url!,
+          url: issue.attributes?.cover?.data?.attributes?.formats.medium.url,
+          coverUrl:
+            issue.attributes?.cover?.data?.attributes?.formats.large.url,
           alternativeText:
             issue.attributes?.cover?.data?.attributes?.alternativeText!,
           caption: issue.attributes?.cover?.data?.attributes?.caption!,

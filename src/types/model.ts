@@ -19,6 +19,7 @@ export type ContentMeta = {
 
 export type ContentImage = {
   url: string;
+  coverUrl: string;
   placeholder: string;
   caption: string;
   alternativeText: string;

@@ -8,7 +8,7 @@ import { DEFAULT_PLACEHOLDER } from '@/lib/image';
 interface IssueCardProps {
   title: string;
   slug: string;
-  author?: string;
+  topic?: string;
   priority?: boolean;
   cover: {
     url: string;
@@ -21,7 +21,7 @@ interface IssueCardProps {
 const IssueCard: FunctionComponent<IssueCardProps> = ({
   title,
   slug,
-  author,
+  topic,
   cover,
   priority = false,
 }: IssueCardProps) => {
@@ -48,7 +48,7 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
         </h5>
         <div className='flex flex-row items-center justify-between w-full text-gray-500 dark:text-gray-200'>
           <p className='text-[0.79em]'>
-            <span>{author ?? 'BPHN'}</span>
+            <span>{topic}</span>
           </p>
           <ArrowLongIcon className='w-8 h-8 transition-transform duration-100 ease-linear -translate-x-2 group-hover:translate-x-0 group-hover:text-blue-500' />
         </div>
