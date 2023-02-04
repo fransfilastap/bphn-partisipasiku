@@ -29,19 +29,12 @@ export default function AboutPage({
         url='/tentang-kami'
         type='article'
       />
-      <Container className='flex flex-col items-center justify-start '>
-        <div className='flex flex-col lg:flex-row w-full divide-gray-300 min-h-[90vh] md:gap-0 gap-5 py-10'>
-          <aside className='flex flex-col w-full lg:w-1/3'>
-            <div className='flex flex-col'>
-              <motion.h1 className='text-3xl lg:text-5xl font-[700] font-body leading-loose'>
-                {about.title}
-              </motion.h1>
-            </div>
-          </aside>
-          <Markdown
-            mdx={about.markdown}
-            className='w-full lg:w-2/3 '
-          />
+      <Container className='flex flex-col w-full'>
+        <div className='flex flex-col w-1/2 mx-auto divide-gray-300 min-h-[90vh] gap-5 mt-10'>
+          <motion.h1 className='text-3xl lg:text-5xl font-[700] font-body leading-loose'>
+            {about.title}
+          </motion.h1>
+          <Markdown mdx={about.markdown} />
         </div>
       </Container>
     </>

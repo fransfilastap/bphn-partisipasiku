@@ -51,7 +51,7 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
         url={`isu/${slug}`}
       />
       <div className='flex flex-col'>
-        <div className='flex flex-col gap-5 w-full'>
+        <div className='flex flex-col gap-5 w-full lg:w-1/2 mx-auto'>
           <div className='flex flex-col py-5 gap-2'>
             <Link
               href='/isu'
@@ -64,7 +64,7 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
               <h6 className='text-blue-500 font-[600] font-heading text-md lg:text-2xl'>
                 {topic}
               </h6>
-              <h5 className='text-3xl  lg:text-4xl lg:text-[4em] font-[700] font-heading leading-tight lg:leading-[1]'>
+              <h5 className='text-3xl lg:text-[3em] font-[700] font-heading leading-tight lg:leading-[1.2]'>
                 {title}
               </h5>
             </div>
@@ -88,12 +88,11 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
             </figure>
             <Markdown
               mdx={markdownContent}
-              className='prose-md font-body w-full lg:w-1/2 mx-auto pb-10 border-b border-b-gray-100'
+              className='prose-md font-body pb-10 border-b border-b-gray-100 dark:border-b-gray-800'
             />
             <CommendAndShare />
             <Disqus
               id='disqus'
-              className='lg:w-1/2 mx-auto'
               identifier={`/isu/${slug}`}
               title={title}
               locale='id-ID'

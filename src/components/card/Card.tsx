@@ -17,7 +17,7 @@ const Card = <T extends ElementType>({
     <Component
       {...props}
       className={clsxtw(
-        'rounded-md border border-gray-100/30 shadow-gray-200/[0.9] shadow-sm bg-white/30 overflow-hidden',
+        'rounded-md border border-gray-100/30 dark:border-gray-500/30 shadow-gray-200/[0.9] shadow-sm overflow-hidden',
         className
       )}
     >

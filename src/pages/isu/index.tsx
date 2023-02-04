@@ -44,25 +44,14 @@ export default function IssuePage({
         type='article'
       />
       <Container className='p-6 md:p-4'>
-        <div className='py-10 flex flex-col gap-2'>
-          <motion.h5
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.1 }}
-            className='text-5xl font-body font-bold'
-          >
-            Daftar Isu Hukum
-          </motion.h5>
-          <motion.p
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className='font-body text-xl tracking-tighter'
-          >
-            Pilih isu lalu sampaikan pendapat anda!
-          </motion.p>
-        </div>
-
+        <motion.h5
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.1 }}
+          className='text-2xl tracking-normal mt-10 font-heading font-[500] border-b-4 border-b-violet-500 max-w-max'
+        >
+          Daftar Isu
+        </motion.h5>
         <div className='flex flex-col w-full my-8'>
           <Input
             onChange={debounceQueryChange}

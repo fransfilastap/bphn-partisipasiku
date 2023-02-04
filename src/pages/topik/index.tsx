@@ -27,26 +27,16 @@ export default function TopicPage({
         title='Topik/Kategori Isu Peraturan Perundangan-undangan'
         type='article'
       />
-      <Container className='p-6 md:p-4'>
-        <div className='py-10 flex flex-col gap-2'>
-          <motion.h5
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.1 }}
-            className='text-5xl font-body font-bold'
-          >
-            Topik/Kategori Isu
-          </motion.h5>
-          <motion.p
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className='font-body text-xl tracking-tighter'
-          >
-            Topik/Kategori Isu
-          </motion.p>
-        </div>
-        <div className='flex overflow-x-auto flex-nowrap snap-x snap-mandatory lg:grid lg:grid-cols-4 lg:grid-rows-1 scrollbar-hide'>
+      <Container className='p-6 md:p-4 min-h-[80vh] w-full lg:w-2/3'>
+        <motion.h5
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.1 }}
+          className='text-2xl font-body my-10 font-bold border-b-4 border-b-violet-500 max-w-max'
+        >
+          Topik/Kategori
+        </motion.h5>
+        <div className='grid grid-cols-2 lg:grid-cols-4'>
           {topics.map((e: ContentTopic) => (
             <TopicCard
               key={e.slug}

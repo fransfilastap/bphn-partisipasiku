@@ -33,7 +33,7 @@ export default function Home({
     <Fragment>
       <Seo />
       <Masthead />
-      <Container className='p-6 md:p-4'>
+      <Container className='p-6 flex flex-col gap-10 md:p-4'>
         <HighlightedTopics topics={topics} />
         <HighlightedIssues issues={issues} />
       </Container>
@@ -77,7 +77,7 @@ const HighlightedTopics = ({ topics }: { topics: ContentTopic[] }) => {
       actionLink='/topik'
       actionLabel='Lihat Semua'
     >
-      <div className='flex overflow-x-auto flex-nowrap snap-x snap-mandatory lg:grid lg:grid-cols-4 lg:grid-rows-1 scrollbar-hide'>
+      <div className='flex overflow-x-auto flex-nowrap snap-x snap-mandatory scrollbar-hide'>
         {topics.map((e, _) => (
           <TopicCard
             key={e.slug}
@@ -99,7 +99,7 @@ const HighlightedIssues = ({ issues }: { issues: ContentIssue[] }) => {
       actionLink='/isu'
       actionLabel='Lihat Semua'
     >
-      <div className='grid w-full grid-cols-1 gap-2 md:gap-8 md:grid-cols-4'>
+      <div className='grid grid-cols-1 gap-2 lg:gap-8 lg:grid-cols-3'>
         {issues.map((e, i) => (
           <IssueCard
             topic={e.topic}
