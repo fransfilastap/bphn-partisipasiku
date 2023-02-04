@@ -5,6 +5,7 @@
 }
 
 :global(.dark) .beams {
-  background-image: url(../../public/images/hero-dark@90.jpg);
-  background-size: 100rem;
+  background-image: url(../../public/images/Carinae.png);
+  background-size: 30rem;
+  background-position: top right;
 }

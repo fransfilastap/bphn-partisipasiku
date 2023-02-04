@@ -43,12 +43,12 @@ const Masthead = () => {
   return (
     <section
       className={clsxtw(
-        'relative h-[70vh] md:h-[50vh] inset-0 dark:bg-bottom bg-top bg-no-repeat bg-slate-50 dark:bg-black border-b-slate-500/[0.2] border-b',
+        'relative h-[60vh] inset-0 dark:bg-bottom bg-top bg-no-repeat bg-slate-50 dark:bg-black border-b-slate-500/[0.2] border-b',
         styles.beams
       )}
     >
       <div
-        className='absolute inset-0 bg-grid-slate-900/[0.04] bg-[bottom_1px_center] dark:bg-grid-slate-600/30 dark:bg-bottom dark:border-b dark:border-slate-100/5 z-[-1]'
+        className='absolute inset-0 bg-grid-slate-900/[0.04] dark:hidden bg-[bottom_1px_center] dark:bg-grid-slate-600/30 dark:bg-bottom dark:border-b dark:border-slate-100/5 z-[-1]'
         style={{
           maskImage: 'linear-gradient(to bottom, transparent, black)',
           WebkitMaskImage: 'linear-gradient(to bottom, transparent, black)',
@@ -58,7 +58,7 @@ const Masthead = () => {
         <h5 className='font-heading w-full p-4 text-5xl font-bold tracking-normal text-center text-black dark:text-white lg:text-7xl'>
           Kolaborasi Membangun Hukum.
         </h5>
-        <p className='font-heading text-lg text-center text-gray-500 md:text-2xl font-[400]'>
+        <p className='font-heading text-lg text-center text-gray-500 dark:text-gray-100/80 md:text-2xl font-[400]'>
           Yuk! Sampaikan pendapatmu terkait isu peraturan perundang-undangan di
           Indonesia 🇮🇩
         </p>
@@ -75,7 +75,7 @@ const HighlightedTopics = ({ topics }: { topics: ContentTopic[] }) => {
       actionLink='/kategori'
       actionLabel='Lihat Semua'
     >
-      <div className='flex overflow-x-auto flex-nowrap snap-x snap-mandatory scrollbar-hide'>
+      <div className='grid grid-cols-2  gap-1 lg:flex lg:flex-row lg:gap-2'>
         {topics.map((e, _) => (
           <TopicCard
             key={e.slug}
