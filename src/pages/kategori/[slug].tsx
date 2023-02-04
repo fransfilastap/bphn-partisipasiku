@@ -70,12 +70,12 @@ export default function IssueByTopicPage({
         type='article'
       />
       <Container className='p-6 md:p-4'>
-        <div className='flex flex-col gap-2'>
+        <div className='flex flex-col gap-2 mt-10'>
           <motion.h5
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
-            className='text-2xl lg:text-5xl font-heading font-[500]'
+            className='text-2xl lg:text-4xl font-heading font-[500]'
           >
             {topic.name}
           </motion.h5>
