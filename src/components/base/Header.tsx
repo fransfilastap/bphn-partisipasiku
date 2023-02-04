@@ -35,7 +35,7 @@ export default function Header({
     <>
       <header
         className={clsxtw(
-          'bg-white/80 backdrop-blur-sm dark:backdrop-blur-md dark:bg-black/30 z-[999] top-0 w-screen bg-none border-b-gray-100 dark:border-b-gray-800 sticky',
+          'bg-white/80 backdrop-blur-sm dark:backdrop-blur-md dark:bg-black/30 z-[999] top-0 w-screen bg-none border-b border-b-gray-200 dark:border-b-gray-800 sticky',
           className
         )}
         {...rest}
@@ -49,10 +49,10 @@ export default function Header({
                   <NavLink href='/'>Beranda</NavLink>
                 </li>
                 <li>
-                  <NavLink href='/topik'>Topik</NavLink>
+                  <NavLink href='/kategori'>Kategori</NavLink>
                 </li>
                 <li>
-                  <NavLink href='/isu'>Issue</NavLink>
+                  <NavLink href='/diskusi'>Diskusi</NavLink>
                 </li>
                 <li>
                   <NavLink href='/tentang-kami'>Tentang Kami</NavLink>
@@ -98,8 +98,8 @@ export default function Header({
                   </div>
                   <ul className='flex flex-col gap-1 py-2'>
                     <MNavLink href='/'>Beranda</MNavLink>
-                    <MNavLink href='/topik'>Topik</MNavLink>
-                    <MNavLink href='/isu'>Kumpulan Isu</MNavLink>
+                    <MNavLink href='/kategori'>Kategori</MNavLink>
+                    <MNavLink href='/diskusi'>Diskusi</MNavLink>
                     <MNavLink href='/tentang-kami'>Tentang Kami</MNavLink>
                   </ul>
                   <div className='flex flex-row items-center justify-between pt-2'>

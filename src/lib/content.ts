@@ -6,7 +6,7 @@ import { ContentIssue, ContentMeta, ContentTopic } from '@/types/model';
 import { parseMarkdown } from '@/lib/markdown';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { DEFAULT_PLACEHOLDER } from '@/lib/image';
-import slug from '@/pages/isu/[slug]';
+import slug from '@/pages/diskusi/[slug]';
 
 export const getAbout = async (): Promise<{
   title: string;

@@ -16,6 +16,7 @@ import useCurrentUrl from '@/hooks/useCurrentUrl';
 import useCopyToClipboard from '@/hooks/useCopyToClipboard';
 import { useRouter } from 'next/router';
 import Disqus from '@/components/Disqus';
+import BackButton from '@/components/base/BackButton';
 
 type IssueProps = {
   title: string;
@@ -48,23 +49,17 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
         description={description}
         title={title}
         type='article'
-        url={`isu/${slug}`}
+        url={`diskusi/${slug}`}
       />
-      <div className='flex flex-col'>
-        <div className='flex flex-col gap-5 w-full lg:w-1/2 mx-auto'>
-          <div className='flex flex-col py-5 gap-2'>
-            <Link
-              href='/isu'
-              className='text-gray-400 inline-flex max-w-max items-center text-sm hover:text-gray-800 dark:hover:text-white transition-colors duration-200 ease-in-out'
-            >
-              <ArrowSmallLeftIcon className='w-5 h-4' />
-              <span>Kembali</span>
-            </Link>
-            <div>
-              <h6 className='text-blue-500 font-[600] font-heading text-md lg:text-2xl'>
+      <div className='flex flex-col '>
+        <div className='flex flex-col gap-5 w-full lg:w-2/3 mx-auto'>
+          <div className='flex flex-col py-5 gap-4'>
+            <BackButton />
+            <div className="flex flex-col gap-2">
+              <h6 className='text-blue-500 font-[600] font-heading text-md text-md'>
                 {topic}
               </h6>
-              <h5 className='text-3xl lg:text-[3em] font-[700] font-heading leading-tight lg:leading-[1.2]'>
+              <h5 className='text-[2.5em] font-bold leading-tight lg:leading-[1.2]'>
                 {title}
               </h5>
             </div>
@@ -93,7 +88,7 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
             <CommendAndShare />
             <Disqus
               id='disqus'
-              identifier={`/isu/${slug}`}
+              identifier={`/diskusi/${slug}`}
               title={title}
               locale='id-ID'
             />

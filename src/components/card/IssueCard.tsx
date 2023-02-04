@@ -33,8 +33,8 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
     >
       <Card
         as={Link}
-        href={`/isu/${slug}`}
-        className='flex p-3 flex-col transition duration-200 ease-in-out cursor-pointer group bg-none hover:bg-gray-100 dark:ring-gray-900 dark:hover:bg-slate-600/30  rounded-md shadow-none h-full'
+        href={`/diskusi/${slug}`}
+        className='flex p-3 flex-col transition duration-200 ease-in-out cursor-pointer group bg-gray-200/30 hover:bg-gray-100 dark:ring-gray-900 dark:hover:bg-slate-600/30  rounded-md shadow-none h-full'
       >
         <div className='relative lg:block hidden aspect-video'>
           <SmoothTransitionImage
@@ -49,7 +49,7 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
           />
         </div>
         <div className='flex flex-col justify-between px-0 py-3 lg:p-4'>
-          <h5 className='font-heading font-[400] text-xl leading-7 tracking-tight line-clamp-3'>
+          <h5 className='font-heading text-gray-800 dark:text-white font-[500] text-[1em] leading-[1.4] -tracking-tighter line-clamp-3'>
             {title}
           </h5>
           <div className='flex flex-row items-center justify-between w-full text-gray-500 dark:text-gray-200'>

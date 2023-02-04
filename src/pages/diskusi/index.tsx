@@ -48,9 +48,9 @@ export default function IssuePage({
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.1 }}
-          className='text-2xl tracking-normal mt-10 font-heading font-[500] border-b-4 border-b-violet-500 max-w-max'
+          className='text-2xl font-body my-10 font-bold border-b-4 border-b-blue-500 max-w-max'
         >
-          Daftar Isu
+          Daftar Diskusi.
         </motion.h5>
         <div className='flex flex-col w-full my-8'>
           <Input

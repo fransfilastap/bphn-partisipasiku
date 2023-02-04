@@ -70,12 +70,12 @@ export default function IssueByTopicPage({
         type='article'
       />
       <Container className='p-6 md:p-4'>
-        <div className='flex flex-col gap-2 mt-10'>
+        <div className='flex flex-col mt-10 gap-2'>
           <motion.h5
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
-            className='text-2xl lg:text-4xl font-heading font-[500]'
+            className='text-2xl lg:text-4xl font-bold tracking-normal'
           >
             {topic.name}
           </motion.h5>
@@ -83,7 +83,7 @@ export default function IssueByTopicPage({
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className='font-body text-md tracking-tighter'
+            className='font-body text-md tracking-tighter text-gray-600'
           >
             {topic.description}
           </motion.p>

@@ -65,7 +65,7 @@ const FooterLink = forwardRef(
     <Link
       ref={ref}
       href={href}
-      className='text-gray-500 text-[0.99em] font-[400] hover:text-black dark:hover:text-gray-300'
+      className='text-gray-500 text-[0.99em] font-[300] hover:text-black dark:hover:text-gray-300'
     >
       {children}
     </Link>

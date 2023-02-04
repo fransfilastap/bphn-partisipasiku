@@ -22,9 +22,9 @@ export default function TopicPage({
   return (
     <Fragment>
       <Seo
-        pageTitle='Topik/Kategori Isu'
-        description='Topik/Kategori Isu Peraturan Perundangan-undangan'
-        title='Topik/Kategori Isu Peraturan Perundangan-undangan'
+        pageTitle='Kategori Topik'
+        description='Kategori Topik Isu Peraturan Perundangan-undangan'
+        title='Kategori Topik isu Peraturan Perundangan-undangan'
         type='article'
       />
       <Container className='p-6 md:p-4 min-h-[80vh] w-full lg:w-2/3'>
@@ -32,9 +32,9 @@ export default function TopicPage({
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.1 }}
-          className='text-2xl font-body my-10 font-bold border-b-4 border-b-violet-500 max-w-max'
+          className='text-2xl font-body my-10 font-bold border-b-4 border-b-blue-500 max-w-max'
         >
-          Topik/Kategori
+          Kategori Topik
         </motion.h5>
         <div className='grid grid-cols-2 lg:grid-cols-4'>
           {topics.map((e: ContentTopic) => (

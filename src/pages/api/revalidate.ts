@@ -24,13 +24,13 @@ export default async function handler(
     await res.revalidate('/');
 
     if (model === 'topic') {
-      await res.revalidate('/topik');
-      await res.revalidate(`/topik/${slug}`);
+      await res.revalidate('/kategori');
+      await res.revalidate(`/kategori/${slug}`);
     }
 
     if (model === 'issue') {
-      await res.revalidate('/isu');
-      await res.revalidate(`/isu/${slug}`);
+      await res.revalidate('/diskusi');
+      await res.revalidate(`/diskusi/${slug}`);
     }
 
     return res.status(200).json({

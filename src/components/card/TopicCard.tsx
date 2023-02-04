@@ -13,10 +13,10 @@ const TopicCard: FunctionComponent<TopicCardProps> = (props) => {
   return (
     <Card
       as={Link}
-      href={`topik/${props.slug}`}
-      className='group flex flex-row flex-none snap-always snap-center justify-between shadow items-center p-4 gap-6 transition duration-200 ease-in-out cursor-pointer bg-white/30 dark:bg-slate-800/30 rounded-md h-[60px] shadow-none border-none ring-1 ring-gray-200 dark:ring-slate-900 dark:hover:ring-slate-600 hover:ring-black my-2 mx-2'
+      href={`kategori/${props.slug}`}
+      className='group flex flex-row flex-none snap-always snap-center justify-between shadow items-center p-10 gap-6 transition duration-200 ease-in-out cursor-pointer bg-gray-100/30 dark:bg-slate-800/30 rounded-md h-[60px] shadow-none border-none ring-1 ring-gray-200 dark:ring-slate-900 dark:hover:ring-slate-600 hover:ring-black my-2 mx-2'
     >
-      <span className='text-[0.9rem] md:text-[1rem] font-heading tracking-normal text-gray-700 dark:text-gray-100 font-[400]'>
+      <span className='text-[0.9rem] md:text-[1rem] font-heading tracking-normal text-gray-700 dark:text-gray-100 font-[300]'>
         {props.name}
       </span>
     </Card>

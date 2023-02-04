@@ -1,16 +1,14 @@
 import { Fragment } from 'react';
 import Container from '@/components/base/Container';
 import Seo from '@/components/seo/Seo';
-import IssueCard from '@/components/card/IssueCard';
 import clsxtw from '@/lib/clsxtw';
 import styles from './index.module.css';
-import { GetTopicsQuery } from '@/gql/graphql';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import TopicCard from '@/components/card/TopicCard';
 import Section from '@/components/section';
 import { getIssues, getTopics } from '@/lib/content';
 import { ContentIssue, ContentTopic } from '@/types/model';
-import { DEFAULT_PLACEHOLDER } from '@/lib/image';
+import IssueGrid from '@/components/IssueGrid';
 
 export const getStaticProps: GetStaticProps = async () => {
   const issues = await getIssues();
@@ -72,9 +70,9 @@ const Masthead = () => {
 const HighlightedTopics = ({ topics }: { topics: ContentTopic[] }) => {
   return (
     <Section
-      sectionTitle='Topik Terpopuler'
+      sectionTitle='Pilih Kategori'
       className='py-2 overflow-hidden'
-      actionLink='/topik'
+      actionLink='/kategori'
       actionLabel='Lihat Semua'
     >
       <div className='flex overflow-x-auto flex-nowrap snap-x snap-mandatory scrollbar-hide'>
@@ -94,28 +92,12 @@ const HighlightedTopics = ({ topics }: { topics: ContentTopic[] }) => {
 const HighlightedIssues = ({ issues }: { issues: ContentIssue[] }) => {
   return (
     <Section
-      sectionTitle='Isu Pilihan'
+      sectionTitle='Topik Terbaru.'
       className='py-2 overflow-hidden'
-      actionLink='/isu'
+      actionLink='/diskusi'
       actionLabel='Lihat Semua'
     >
-      <div className='grid grid-cols-1 gap-2 lg:gap-8 lg:grid-cols-3'>
-        {issues.map((e, i) => (
-          <IssueCard
-            topic={e.topic}
-            cover={{
-              placeholder: DEFAULT_PLACEHOLDER,
-              url: e.cover.coverUrl,
-              caption: e.cover.caption,
-              altTxt: e.cover.alternativeText,
-            }}
-            priority={false}
-            slug={e.slug}
-            title={e.title}
-            key={e.slug}
-          />
-        ))}
-      </div>
+      <IssueGrid issues={issues} />
     </Section>
   );
 };

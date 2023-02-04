@@ -1,5 +1,7 @@
 import Container from '@/components/base/Container';
 import Seo from '@/components/seo/Seo';
+import notFound from '~/images/404.png';
+import Image from 'next/image';
 
 export default function NotFound() {
   return (
@@ -8,11 +10,14 @@ export default function NotFound() {
       <h1 className='font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white'>
         Halaman tidak ditemukan.
       </h1>
-      <p className='text-gray-600 dark:text-gray-400 mb-8'>
-        It seems you've found something that used to exist, or you spelled
-        something wrong. I'm guessing you spelled something wrong. Can you
-        double check that URL?
-      </p>
+      <div className="flex flex-col w-full h-[30vh]">
+        <Image
+          src={notFound}
+          alt="404 not found"
+          width={320}
+          height={200}
+        />
+      </div>
     </Container>
   );
 }

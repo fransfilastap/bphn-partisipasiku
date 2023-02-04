@@ -30,8 +30,8 @@ export default function AboutPage({
         type='article'
       />
       <Container className='flex flex-col w-full'>
-        <div className='flex flex-col w-1/2 mx-auto divide-gray-300 min-h-[90vh] gap-5 mt-10'>
-          <motion.h1 className='text-3xl lg:text-5xl font-[700] font-body leading-loose'>
+        <div className='flex flex-col mx-auto divide-gray-300 min-h-[90vh] gap-5 mt-10'>
+          <motion.h1 className='text-3xl font-[700] font-body leading-loose'>
             {about.title}
           </motion.h1>
           <Markdown mdx={about.markdown} />
