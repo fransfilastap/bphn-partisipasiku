@@ -5,7 +5,7 @@
 }
 
 :global(.dark) .beams {
-  background-image: url(../../public/images/Carinae.png);
+  background-image: url(../../public/images/Centauri.svg);
   background-size: 30rem;
   background-position: top right;
 }
