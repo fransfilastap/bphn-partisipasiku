@@ -30,7 +30,10 @@ export default function Home({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Fragment>
-      <Seo image={`${AppInfo.url}/og-bg.png`} />
+      <Seo
+        image={`${AppInfo.url}/og-bg.png`}
+        description={AppInfo.siteDescription}
+      />
       <Masthead />
       <Container className='p-6 flex flex-col gap-10 md:p-4'>
         <HighlightedTopics topics={topics} />

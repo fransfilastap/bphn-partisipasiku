@@ -39,9 +39,9 @@ export default function IssuePage({
   return (
     <Fragment>
       <Seo
-        pageTitle='Daftar Isu'
-        description='Daftar Isu Peraturan Perundangan-undangan'
-        title='Daftar Isu Peraturan Perundang-undangan'
+        pageTitle='Topik Isu Peraturan Perundang-undangan'
+        description='Sampaikan pendapat anda'
+        title='Topik Isu Peraturan Perundang-undangan'
         type='article'
       />
       <Container className='p-6 md:p-4'>

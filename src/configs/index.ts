@@ -8,7 +8,7 @@ const AppInfo: IAppInfo = {
     process.env.NODE_ENV === 'production'
       ? 'https://bphn-partisipasiku.vercel.app'
       : 'http://localhost:3000',
-  email: 'fransfilastap@live.com',
+  email: 'humas@bphn.go.id',
   keywords: [
     'Partisipasiku',
     'BPHN',
@@ -17,6 +17,6 @@ const AppInfo: IAppInfo = {
     'RPerpres',
     'Naskah Akademik',
   ],
-  twitter: '@franspotter',
+  twitter: '@bphn_kumham',
 };
 export { AppInfo };
