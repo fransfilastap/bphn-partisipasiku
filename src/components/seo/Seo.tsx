@@ -10,11 +10,12 @@ type SeoProps = {
 export default function Seo(seoProps: SeoProps): ReactElement {
   const router = useRouter();
   const title =
-    seoProps.pageTitle != null
-      ? `${seoProps.pageTitle} | ${seoProps.siteName ?? AppInfo.siteName}`
-      : AppInfo.siteName;
+    seoProps.pageTitle != null ? `${seoProps.pageTitle}` : AppInfo.siteName;
   const description = seoProps.description ?? AppInfo.siteDescription;
   const url = seoProps.url ?? AppInfo.url;
+
+  const ogImage = seoProps.image ?? `${AppInfo.url}/api/og?title=${title}`;
+
   return (
     <Head>
       <title>{title}</title>
@@ -54,7 +55,7 @@ export default function Seo(seoProps: SeoProps): ReactElement {
       <meta
         name='image'
         property='og:image'
-        content={seoProps.image}
+        content={ogImage}
       />
 
       {/* Twitter */}
@@ -76,7 +77,7 @@ export default function Seo(seoProps: SeoProps): ReactElement {
       />
       <meta
         name='twitter:image'
-        content={seoProps.image}
+        content={ogImage}
       />
     </Head>
   );

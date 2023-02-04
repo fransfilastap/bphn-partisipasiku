@@ -9,6 +9,7 @@ import Section from '@/components/section';
 import { getIssues, getTopics } from '@/lib/content';
 import { ContentIssue, ContentTopic } from '@/types/model';
 import IssueGrid from '@/components/IssueGrid';
+import { AppInfo } from '@/configs';
 
 export const getStaticProps: GetStaticProps = async () => {
   const issues = await getIssues({ pagination: { limit: 10 } });
@@ -29,7 +30,7 @@ export default function Home({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Fragment>
-      <Seo />
+      <Seo image={`${AppInfo.url}/og-bg.png`} />
       <Masthead />
       <Container className='p-6 flex flex-col gap-10 md:p-4'>
         <HighlightedTopics topics={topics} />

@@ -9,6 +9,7 @@ import Input from '@/components/base/Input';
 import { SearchIcon } from '@/components/icons';
 import debounce from 'lodash.debounce';
 import IssueGrid from '@/components/IssueGrid';
+import { AppInfo } from '@/configs';
 
 export const getStaticProps: GetStaticProps = async () => {
   const issues = await getIssues();
