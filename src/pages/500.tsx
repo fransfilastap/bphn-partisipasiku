@@ -3,12 +3,12 @@ import Seo from '@/components/seo/Seo';
 
 export default function NotFound() {
   return (
-    <Container className='items-center justify-center my-10 flex-col flex h-[80vh] border border-gray-300 rounded-md'>
+    <Container className='items-center justify-center flex-col flex h-[80vh]'>
       <Seo pageTitle='Halaman tidak ditemukan | 404' />
-      <h1 className='font-bold text-3xl tracking-tight mb-4 text-black dark:text-white'>
-        Halaman tidak ditemukan.
+      <h1 className='font-bold text-3xl md:text-5xl tracking-tight mb-4 text-black dark:text-white'>
+        Terjadi Kesalahan.
       </h1>
-      <div className='flex flex-col justify-center items-center '>
+      <div className='flex flex-col w-full justify-center items-center h-[30vh] border border-gray-300 rounded-md'>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           fill='none'
@@ -20,7 +20,7 @@ export default function NotFound() {
           <path
             strokeLinecap='round'
             strokeLinejoin='round'
-            d='M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636'
+            d='M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z'
           />
         </svg>
       </div>

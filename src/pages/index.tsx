@@ -11,8 +11,8 @@ import { ContentIssue, ContentTopic } from '@/types/model';
 import IssueGrid from '@/components/IssueGrid';
 
 export const getStaticProps: GetStaticProps = async () => {
-  const issues = await getIssues();
-  const topics = await getTopics({ limit: 4 });
+  const issues = await getIssues({ pagination: { limit: 10 } });
+  const topics = await getTopics({ pagination: { limit: 6 } });
 
   return {
     props: {

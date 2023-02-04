@@ -34,7 +34,7 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
       <Card
         as={Link}
         href={`/diskusi/${slug}`}
-        className='flex p-3 flex-col transition duration-200 ease-in-out cursor-pointer group bg-gray-200/30 hover:bg-gray-100 dark:ring-gray-900 dark:hover:bg-slate-600/30  rounded-md shadow-none h-full'
+        className='flex p-3 flex-col transition duration-200 ease-in-out cursor-pointer group bg-gray-200/30 dark:bg-gray-700/30 hover:bg-gray-100 dark:ring-gray-900 dark:hover:bg-slate-600/30  rounded-md shadow-none h-full'
       >
         <div className='relative lg:block hidden aspect-video'>
           <SmoothTransitionImage
@@ -48,16 +48,11 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
             blurDataURL={cover.placeholder ?? DEFAULT_PLACEHOLDER}
           />
         </div>
-        <div className='flex flex-col justify-between px-0 py-3 lg:p-4'>
+        <div className='flex flex-col flex-1 justify-between px-0 py-3 lg:p-4'>
           <h5 className='font-heading text-gray-800 dark:text-white font-[500] text-[1em] leading-[1.4] -tracking-tighter line-clamp-3'>
             {title}
           </h5>
-          <div className='flex flex-row items-center justify-between w-full text-gray-500 dark:text-gray-200'>
-            <p className='text-[0.79em] text-gray-600'>
-              <span>{topic}</span>
-            </p>
-            <ArrowLongIcon className='hidden w-8 h-8 transition-transform duration-100 ease-linear -translate-x-2 group-hover:translate-x-0 group-hover:text-blue-500' />
-          </div>
+          <p className='text-[0.79em] text-gray-500'>{topic}</p>
         </div>
       </Card>
     </motion.div>
