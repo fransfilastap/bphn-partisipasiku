@@ -25,22 +25,20 @@ export default async function handler(req: NextRequest) {
           flexDirection: 'column',
           alignItems: 'flex-start',
           justifyContent: 'center',
-          backgroundColor: '#FF3CAC',
-          backgroundImage: `linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%)`,
-          /* backgroundImage: `url(${AppInfo.url}/og-exp.jpg)`, */
+          backgroundImage: `url(${AppInfo.url}/og-bg.jpg)`,
         }}
       >
         <div
           style={{
-            marginLeft: 100,
-            marginRight: 100,
+            marginLeft: 190,
+            marginRight: 190,
             display: 'flex',
-            fontSize: 60,
+            fontSize: 130,
             fontFamily: 'Kaisei Tokumin',
             letterSpacing: '-0.05em',
             fontStyle: 'normal',
             color: 'white',
-            lineHeight: '60px',
+            lineHeight: '120px',
             whiteSpace: 'pre-wrap',
           }}
         >
@@ -49,8 +47,8 @@ export default async function handler(req: NextRequest) {
       </div>
     ),
     {
-      width: 1200,
-      height: 600,
+      width: 1920,
+      height: 1080,
       fonts: [
         {
           name: 'Kaisei Tokumin',

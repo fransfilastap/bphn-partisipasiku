@@ -51,7 +51,7 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
         title={title}
         type='article'
         url={`diskusi/${slug}`}
-        image={`${AppInfo.url}/api/og?title=${title}`}
+        image={`${AppInfo.url}/api/og?title=${encodeURI(title)}`}
       />
       <div className='flex flex-col '>
         <div className='flex flex-col gap-5 w-full lg:w-2/3 mx-auto'>

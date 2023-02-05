@@ -17,14 +17,15 @@ export default function Seo(seoProps: SeoProps): ReactElement {
       ? `${AppInfo.url}/${seoProps.url}`
       : `${AppInfo.url}${router.asPath}`;
   const cannonicalUrl = `${AppInfo.url}/${seoProps.url && seoProps.url}`;
-  const ogImage = seoProps.image ?? `${AppInfo.url}/api/og?title=${title}`;
+  const ogImage =
+    seoProps.image ?? `${AppInfo.url}/api/og?title=${encodeURI(title)}`;
 
   return (
     <Head>
       <title>{title}</title>
       <meta
         name='robots'
-        content="index,follow"
+        content='index,follow'
       />
       <meta
         content={description}
