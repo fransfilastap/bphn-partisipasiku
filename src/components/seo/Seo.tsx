@@ -24,7 +24,7 @@ export default function Seo(seoProps: SeoProps): ReactElement {
       <title>{title}</title>
       <meta
         name='robots'
-        content={seoProps.robots}
+        content="index,follow"
       />
       <meta
         content={description}
@@ -56,15 +56,14 @@ export default function Seo(seoProps: SeoProps): ReactElement {
         content={title}
       />
       <meta
-        name='image'
         property='og:image'
         content={ogImage}
       />
       <meta
-        name='image'
         property='og:image:secure_url'
         content={ogImage}
       />
+
       <meta
         property='og:image:type'
         content='image/jpeg'
