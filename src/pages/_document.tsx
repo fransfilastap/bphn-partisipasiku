@@ -4,10 +4,7 @@ import Favicons from '@/components/seo/Favicons';
 
 export default function Document(): ReactElement {
   return (
-    <Html
-      lang='en'
-      className="scroll-smooth"
-    >
+    <Html lang='id'>
       <Head>
         <Favicons />
         <script

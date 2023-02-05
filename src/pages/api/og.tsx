@@ -12,7 +12,8 @@ const font = fetch(
 
 export default async function handler(req: NextRequest) {
   const { searchParams } = req.nextUrl;
-  const postTitle = searchParams.get('title');
+  const topicTitle = searchParams.get('title');
+  const category = searchParams.get('category');
   const fontData = await font;
 
   return new ImageResponse(
@@ -28,6 +29,25 @@ export default async function handler(req: NextRequest) {
           backgroundImage: `url(${AppInfo.url}/og-bg.png)`,
         }}
       >
+        {category && (
+          <div
+            style={{
+              marginLeft: 190,
+              marginRight: 190,
+              display: 'flex',
+              fontSize: 60,
+              fontFamily: 'Kaisei Tokumin',
+              marginBottom: 20,
+              letterSpacing: '-0.05em',
+              fontStyle: 'normal',
+              color: 'white',
+              lineHeight: '40px',
+              whiteSpace: 'pre-wrap',
+            }}
+          >
+            #{category}
+          </div>
+        )}
         <div
           style={{
             marginLeft: 190,
@@ -42,7 +62,7 @@ export default async function handler(req: NextRequest) {
             whiteSpace: 'pre-wrap',
           }}
         >
-          {postTitle}
+          {topicTitle}
         </div>
       </div>
     ),

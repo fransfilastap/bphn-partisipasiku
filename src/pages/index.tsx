@@ -31,7 +31,7 @@ export default function Home({
   return (
     <Fragment>
       <Seo
-        image={`${AppInfo.url}/og-bg.png`}
+        image={`${AppInfo.url}/og.png`}
         description={AppInfo.siteDescription}
       />
       <Masthead />

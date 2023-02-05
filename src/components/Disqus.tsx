@@ -1,17 +1,8 @@
-import {
-  ComponentPropsWithoutRef,
-  forwardRef,
-  FunctionComponent,
-  Ref,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { ComponentPropsWithoutRef, FunctionComponent } from 'react';
 import clsxtw from '@/lib/clsxtw';
 import { DiscussionEmbed } from 'disqus-react';
 import { AppInfo } from '@/configs';
 import { DISQUS_SHORTNAME } from '@/configs/env';
-import useColorMode from '@/hooks/useColorMode';
 
 type DisqusProps = ComponentPropsWithoutRef<'div'> & {
   title: string;
