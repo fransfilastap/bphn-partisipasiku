@@ -56,10 +56,10 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
           <div className='flex flex-col py-5 gap-4'>
             <BackButton />
             <div className='flex flex-col gap-2'>
-              <h6 className='text-blue-500 font-[600] font-heading text-md text-md'>
+              <h6 className='block p-2 bg-blue-300 text-white max-w-max font-[600] font-heading text-xs rounded-full'>
                 {topic}
               </h6>
-              <h5 className='text-[2.3em] lg:text-[2.5em] font-bold leading-[1]'>
+              <h5 className='text-[2em] lg:text-[2.5em] font-[600] leading-[1]'>
                 {title}
               </h5>
             </div>

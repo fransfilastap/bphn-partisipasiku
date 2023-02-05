@@ -42,7 +42,7 @@ export default function Seo(seoProps: SeoProps): ReactElement {
       />
       <meta
         property='og:site_name'
-        content={seoProps.siteName}
+        content={AppInfo.siteName}
       />
       <meta
         property='og:description'
@@ -57,7 +57,15 @@ export default function Seo(seoProps: SeoProps): ReactElement {
         property='og:image'
         content={ogImage}
       />
-
+      <meta
+        name='image'
+        property='og:image:secure_url'
+        content={ogImage}
+      />
+      <meta
+        property='og:image:type'
+        content='image/png'
+      />
       {/* Twitter */}
       <meta
         name='twitter:card'

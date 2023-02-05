@@ -30,7 +30,7 @@ const ColorModeSwitcher: FunctionComponent<ColorModeSelectionProps> = (
         {Icons[colorMode ?? 'system']}
       </span>
       <select
-        className='w-full px-8 bg-transparent border-none outline-none appearance-none cursor-pointer ring-0 focus-visible:outline-none focus-within:outline-none outline-offset-0 focus:outline-none'
+        className='w-full px-8 bg-transparent border-none outline-none appearance-none cursor-pointer font-[300] ring-0 focus-visible:outline-none focus-within:outline-none outline-offset-0 focus:outline-none'
         value={colorMode ?? 'system'}
         onChange={(event) => {
           setColorMode(event.target.value as ColorMode);
