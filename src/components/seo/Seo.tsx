@@ -12,8 +12,11 @@ export default function Seo(seoProps: SeoProps): ReactElement {
   const title =
     seoProps.pageTitle != null ? `${seoProps.pageTitle}` : AppInfo.siteName;
   const description = seoProps.description ?? AppInfo.siteDescription;
-  const url = seoProps.url ?? AppInfo.url;
-
+  const url =
+    seoProps.url === null
+      ? `${AppInfo.url}/${seoProps.url}`
+      : `${AppInfo.url}${router.asPath}`;
+  const cannonicalUrl = `${AppInfo.url}/${seoProps.url && seoProps.url}`;
   const ogImage = seoProps.image ?? `${AppInfo.url}/api/og?title=${title}`;
 
   return (
@@ -29,11 +32,11 @@ export default function Seo(seoProps: SeoProps): ReactElement {
       />
       <meta
         property='og:url'
-        content={`${url}${router.asPath}`}
+        content={`${url}`}
       />
       <link
         rel='canonical'
-        href={`${AppInfo.url}/${seoProps.url && seoProps.url}`}
+        href={cannonicalUrl}
       />
       {/* Open Graph */}
       <meta
