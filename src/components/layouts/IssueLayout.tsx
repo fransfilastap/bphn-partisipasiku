@@ -112,7 +112,7 @@ const CommendAndShare = () => {
         opacity: 1,
         transition: { delay: 0.8, type: 'spring', stiffness: 100 },
       }}
-      className='sticky bottom-[40px] gap-2 mx-auto max-w-max px-3 py-5 rounded-md ring-1 ring-slate-300 dark:ring-slate-700 bg-white/30 dark:bg-black/30 backdrop-blur-2xl flex flex-row'
+      className='sticky bottom-[40px] gap-2 mx-auto max-w-max px-3 py-5 rounded-md ring-1 ring-gray-200 dark:ring-gray-800 bg-white/30 dark:bg-black/60 backdrop-blur-sm flex flex-row'
     >
       <Link
         href='#disqus'

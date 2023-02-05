@@ -20,13 +20,13 @@ export default async function handler(req: NextRequest) {
     (
       <div
         style={{
-          height: '100vh',
-          width: '100vw',
+          height: '100%',
+          width: '100%',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-start',
           justifyContent: 'center',
-          backgroundImage: `url(${AppInfo.url}/og-bg.png)`,
+          backgroundImage: `url(${AppInfo.url}/og-bg.jpg)`,
         }}
       >
         {category && (

@@ -64,7 +64,7 @@ export default function Seo(seoProps: SeoProps): ReactElement {
       />
       <meta
         property='og:image:type'
-        content='image/png'
+        content='image/jpeg'
       />
       {/* Twitter */}
       <meta
