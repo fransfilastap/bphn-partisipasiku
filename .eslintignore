@@ -41,3 +41,4 @@ next.config.js
 commitlint.config.js
 tailwind.config.js
 postcss.config.js
+next-sitemap.config.js
