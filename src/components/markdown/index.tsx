@@ -1,9 +1,9 @@
 import AdvanceImage from '@/components/image/AdvanceImage';
 import { ImageProps } from 'next/image';
-import { motion } from 'framer-motion';
 import { FunctionComponent, PropsWithChildren } from 'react';
 import { MDXComponents } from 'mdx/types';
 import Link, { LinkProps } from 'next/link';
+import { DEFAULT_PLACEHOLDER } from '@/lib/image';
 
 type MarkdownImageProps = ImageProps & {
   caption?: string;
@@ -15,6 +15,7 @@ const MarkdownImage: FunctionComponent<MarkdownImageProps> = (props) => {
       height={600}
       quality={70}
       className='rounded-xl shadow-md'
+      blurDataURL={DEFAULT_PLACEHOLDER}
       {...props}
     />
   );

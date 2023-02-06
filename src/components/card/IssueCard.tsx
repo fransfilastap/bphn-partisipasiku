@@ -1,10 +1,10 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Card from '@/components/card/Card';
-import { ArrowLongIcon } from '@/components/icons';
 import AdvanceImage from '../image/AdvanceImage';
-import { DEFAULT_PLACEHOLDER } from '@/lib/image';
+import { cloudinaryLoader, DEFAULT_PLACEHOLDER } from '@/lib/image';
+import useBreakpoint from '@/hooks/useBreakpoint';
 
 interface IssueCardProps {
   title: string;
@@ -27,6 +27,8 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
   cover,
   priority = false,
 }: IssueCardProps) => {
+  const imageSource = cloudinaryLoader(cover.publicId);
+
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}
@@ -39,7 +41,7 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
       >
         <div className='relative overflow-hidden rounded-md w-[80px] h-[80px] md:w-full md:h-[150px]'>
           <AdvanceImage
-            imageId={cover.publicId}
+            src={imageSource}
             className='object-cover rounded-md'
             loading={priority ? 'eager' : 'lazy'}
             fill={true}
@@ -49,11 +51,11 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
             blurDataURL={cover.placeholder ?? DEFAULT_PLACEHOLDER}
           />
         </div>
-        <div className='flex flex-col h-full md:max-h-max flex-1 justify-between px-0 py-1 lg:p-4'>
+        <div className='flex flex-col w-full h-full flex-1 justify-between px-0 py-1'>
           <h5 className='text-gray-800 dark:text-white font-[500] text-[1em] leading-[1.4] tracking-normal line-clamp-3'>
             {title}
           </h5>
-          <p className='text-[0.79em] text-gray-500'>{topic}</p>
+          <p className='text-[0.79em] text-gray-700'>{topic}</p>
         </div>
       </Card>
     </motion.div>

@@ -1,21 +1,11 @@
-import React, {
-  FunctionComponent,
-  useCallback,
-  useMemo,
-  useState,
-} from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import Image, { ImageProps } from 'next/image';
 import clsxtw from '@/lib/clsxtw';
 import { useToggle } from '@/hooks';
-import { cloudinaryLoader } from '@/lib/image';
 
-type AdvanceImageProps = Omit<ImageProps, 'placeholder'> & {
-  imageId?: string;
-};
+type AdvanceImageProps = Omit<ImageProps, 'placeholder'>;
 const AdvanceImage: FunctionComponent<AdvanceImageProps> = ({
   className,
-  imageId,
-  src,
   alt,
   priority = false,
   ...props
@@ -28,14 +18,8 @@ const AdvanceImage: FunctionComponent<AdvanceImageProps> = ({
     }, 100);
   }, [setIsLoading]);
 
-  const source = useMemo(
-    () => (imageId ? cloudinaryLoader(imageId!) : src),
-    [imageId, src]
-  );
-
   return (
     <Image
-      src={source}
       className={clsxtw(loading ? 'img-blur' : 'unblur', className)}
       onLoadingComplete={loadingCompleteHandler}
       alt={alt}

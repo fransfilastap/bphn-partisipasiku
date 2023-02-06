@@ -5,7 +5,6 @@ import Container from '@/components/base/Container';
 import Seo from '@/components/seo/Seo';
 import AdvanceImage from '@/components/image/AdvanceImage';
 import {
-  ArrowSmallLeftIcon,
   CalendarDays,
   ChatBubbleBottomIcon,
   ShareIcon,
@@ -18,6 +17,7 @@ import { useRouter } from 'next/router';
 import Disqus from '@/components/Disqus';
 import BackButton from '@/components/base/BackButton';
 import { AppInfo } from '@/configs';
+import { cloudinaryLoader } from '@/lib/image';
 
 type IssueProps = {
   title: string;
@@ -76,7 +76,7 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
           <div className='w-full flex flex-col gap-6'>
             <figure className='relative aspect-video overflow-hidden rounded-md'>
               <AdvanceImage
-                imageId={cover.cloudinaryImageId}
+                src={cloudinaryLoader(cover.cloudinaryImageId)}
                 fill={true}
                 alt={cover.alternateText ?? title}
                 blurDataURL={cover.placeholder}
