@@ -34,9 +34,9 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
       <Card
         as={Link}
         href={`/diskusi/${slug}`}
-        className='flex p-3 flex-col transition duration-200 ease-in-out cursor-pointer group bg-gray-200/30 dark:bg-gray-700/30 hover:bg-gray-100 dark:ring-gray-900 dark:hover:bg-slate-600/30  rounded-md shadow-none h-full'
+        className='flex p-3 gap-2 flex-row md:flex-col items-center transition duration-200 ease-in-out cursor-pointer group bg-gray-200/30 dark:bg-gray-700/30 hover:bg-gray-100 dark:ring-gray-900 dark:hover:bg-slate-600/30  rounded-md shadow-none h-full'
       >
-        <div className='relative lg:block hidden aspect-video'>
+        <div className='relative w-[80px] h-[80px] md:w-full md:h-[150px]'>
           <SmoothTransitionImage
             src={cover.url}
             className='object-cover rounded-md'
@@ -48,7 +48,7 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
             blurDataURL={cover.placeholder ?? DEFAULT_PLACEHOLDER}
           />
         </div>
-        <div className='flex flex-col flex-1 justify-between px-0 py-3 lg:p-4'>
+        <div className='flex flex-col h-full md:max-h-max flex-1 justify-between px-0 py-1 lg:p-4'>
           <h5 className='text-gray-800 dark:text-white font-[500] text-[1em] leading-[1.4] tracking-normal line-clamp-3'>
             {title}
           </h5>
