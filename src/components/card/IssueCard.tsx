@@ -38,13 +38,13 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
       >
         <div className='relative overflow-hidden rounded-md w-[80px] h-[80px] md:w-full md:h-[150px]'>
           <AdvanceImage
-            src={cover.publicId}
+            src={`small_${cover.publicId}`}
             className='object-cover w-full h-full'
             loading={priority ? 'eager' : 'lazy'}
             alt={cover.altTxt ?? title}
             priority={priority}
-            width={250}
-            height={150}
+            width={100}
+            height={70}
             blurDataURL={cover.placeholder ?? DEFAULT_PLACEHOLDER}
           />
         </div>
