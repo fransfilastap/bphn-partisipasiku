@@ -46,6 +46,7 @@ const IssuePage: NextPage<IssuePageProps> = ({ issue }) => {
         url: issue.cover.url,
         alternateText: issue.cover.alternativeText,
         caption: issue.cover.caption,
+        cloudinaryImageId: issue.cover.cloudinaryPublicId,
       }}
       description={issue.meta.description}
       topic={issue.topic}

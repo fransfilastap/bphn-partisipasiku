@@ -28,6 +28,7 @@ export const getAbout = async (): Promise<{
                   attributes {
                     placeholder
                     url
+                    provider_metadata
                   }
                 }
               }
@@ -145,6 +146,7 @@ export const getIssues = async (variables?: Variables) => {
                   blurhash
                   formats
                   alternativeText
+                  provider_metadata
                 }
               }
             }
@@ -178,6 +180,9 @@ export const getIssues = async (variables?: Variables) => {
           placeholder:
             issue.attributes?.cover.data?.attributes?.placeholder ??
             DEFAULT_PLACEHOLDER,
+          cloudinaryPublicId:
+            issue.attributes?.cover.data?.attributes?.provider_metadata
+              .public_id,
         },
         slug: issue.attributes?.slug!,
         markdown: markdown,

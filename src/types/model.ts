@@ -23,6 +23,7 @@ export type ContentImage = {
   placeholder: string;
   caption: string;
   alternativeText: string;
+  cloudinaryPublicId: string;
 };
 
 export type ContentTopic = {

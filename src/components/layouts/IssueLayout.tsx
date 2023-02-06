@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import Container from '@/components/base/Container';
 import Seo from '@/components/seo/Seo';
-import SmoothTransitionImage from '@/components/image/SmoothTransitionImage';
+import AdvanceImage from '@/components/image/AdvanceImage';
 import {
   ArrowSmallLeftIcon,
   CalendarDays,
@@ -29,6 +29,7 @@ type IssueProps = {
     placeholder: string;
     caption?: string;
     alternateText: string;
+    cloudinaryImageId: string;
   };
   markdownContent: MDXRemoteSerializeResult;
   createdAt: string;
@@ -73,9 +74,9 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
             </div>
           </div>
           <div className='w-full flex flex-col gap-6'>
-            <figure className='relative aspect-video'>
-              <SmoothTransitionImage
-                src={cover.url}
+            <figure className='relative aspect-video overflow-hidden rounded-md'>
+              <AdvanceImage
+                imageId={cover.cloudinaryImageId}
                 fill={true}
                 alt={cover.alternateText ?? title}
                 blurDataURL={cover.placeholder}

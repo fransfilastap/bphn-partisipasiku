@@ -1321,6 +1321,7 @@ export type GetAboutQuery = {
                 __typename?: 'UploadFile';
                 placeholder?: string | null;
                 url: string;
+                provider_metadata?: any | null;
               } | null;
             } | null;
           } | null;
@@ -1413,6 +1414,7 @@ export type GetIssuesQuery = {
               blurhash?: string | null;
               formats?: any | null;
               alternativeText?: string | null;
+              provider_metadata?: any | null;
             } | null;
           } | null;
         };
@@ -1507,6 +1509,14 @@ export const GetAboutDocument = {
                                                       name: {
                                                         kind: 'Name',
                                                         value: 'url',
+                                                      },
+                                                    },
+                                                    {
+                                                      kind: 'Field',
+                                                      name: {
+                                                        kind: 'Name',
+                                                        value:
+                                                          'provider_metadata',
                                                       },
                                                     },
                                                   ],
@@ -1927,6 +1937,13 @@ export const GetIssuesDocument = {
                                                 name: {
                                                   kind: 'Name',
                                                   value: 'alternativeText',
+                                                },
+                                              },
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'provider_metadata',
                                                 },
                                               },
                                             ],

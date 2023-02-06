@@ -17,6 +17,7 @@ export default function IssueGrid({ issues }: { issues: ContentIssue[] }) {
           <IssueCard
             topic={e.topic}
             cover={{
+              publicId: e.cover.cloudinaryPublicId,
               placeholder: e.cover.placeholder,
               url: e.cover.coverUrl,
               caption: e.cover.caption,

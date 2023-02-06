@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Card from '@/components/card/Card';
 import { ArrowLongIcon } from '@/components/icons';
-import SmoothTransitionImage from '../image/SmoothTransitionImage';
+import AdvanceImage from '../image/AdvanceImage';
 import { DEFAULT_PLACEHOLDER } from '@/lib/image';
 
 interface IssueCardProps {
@@ -13,6 +13,7 @@ interface IssueCardProps {
   priority?: boolean;
   cover: {
     url: string;
+    publicId: string;
     placeholder: string;
     caption: string;
     altTxt?: string;
@@ -36,9 +37,9 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
         href={`/diskusi/${slug}`}
         className='flex p-3 gap-2 flex-row md:flex-col items-center transition duration-200 ease-in-out cursor-pointer group bg-gray-200/30 dark:bg-gray-700/30 hover:bg-gray-100 dark:ring-gray-900 dark:hover:bg-slate-600/30  rounded-md shadow-none h-full'
       >
-        <div className='relative w-[80px] h-[80px] md:w-full md:h-[150px]'>
-          <SmoothTransitionImage
-            src={cover.url}
+        <div className='relative overflow-hidden rounded-md w-[80px] h-[80px] md:w-full md:h-[150px]'>
+          <AdvanceImage
+            imageId={cover.publicId}
             className='object-cover rounded-md'
             loading={priority ? 'eager' : 'lazy'}
             fill={true}

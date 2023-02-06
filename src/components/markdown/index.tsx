@@ -1,4 +1,4 @@
-import SmoothTransitionImage from '@/components/image/SmoothTransitionImage';
+import AdvanceImage from '@/components/image/AdvanceImage';
 import { ImageProps } from 'next/image';
 import { motion } from 'framer-motion';
 import { FunctionComponent, PropsWithChildren } from 'react';
@@ -10,12 +10,12 @@ type MarkdownImageProps = ImageProps & {
 };
 const MarkdownImage: FunctionComponent<MarkdownImageProps> = (props) => {
   return (
-    <SmoothTransitionImage
+    <AdvanceImage
       {...props}
       width={800}
       height={600}
       quality={70}
-      className="rounded-xl shadow-md"
+      className='rounded-xl shadow-md'
     />
   );
 };
@@ -28,7 +28,7 @@ const MarkdownLink: FunctionComponent<PropsWithChildren<LinkProps>> = ({
   return (
     <Link
       href={href}
-      className="text-blue-600"
+      className='text-blue-600'
       {...rest}
     >
       {children}
