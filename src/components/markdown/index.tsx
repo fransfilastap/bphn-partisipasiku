@@ -11,11 +11,11 @@ type MarkdownImageProps = ImageProps & {
 const MarkdownImage: FunctionComponent<MarkdownImageProps> = (props) => {
   return (
     <AdvanceImage
-      {...props}
       width={800}
       height={600}
       quality={70}
       className='rounded-xl shadow-md'
+      {...props}
     />
   );
 };

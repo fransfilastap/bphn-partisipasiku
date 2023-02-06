@@ -9,13 +9,13 @@ import clsxtw from '@/lib/clsxtw';
 import { useToggle } from '@/hooks';
 import { cloudinaryLoader } from '@/lib/image';
 
-type AdvanceImageProps = Omit<ImageProps, 'placeholder' | 'src'> & {
+type AdvanceImageProps = Omit<ImageProps, 'placeholder'> & {
   imageId?: string;
-  src?: string;
 };
 const AdvanceImage: FunctionComponent<AdvanceImageProps> = ({
   className,
   imageId,
+  src,
   alt,
   priority = false,
   ...props
@@ -29,13 +29,13 @@ const AdvanceImage: FunctionComponent<AdvanceImageProps> = ({
   }, [setIsLoading]);
 
   const source = useMemo(
-    () => (imageId ? cloudinaryLoader(imageId!) : props.src),
-    [imageId]
+    () => (imageId ? cloudinaryLoader(imageId!) : src),
+    [imageId, src]
   );
 
   return (
     <Image
-      src={source!}
+      src={source}
       className={clsxtw(loading ? 'img-blur' : 'unblur', className)}
       onLoadingComplete={loadingCompleteHandler}
       alt={alt}
