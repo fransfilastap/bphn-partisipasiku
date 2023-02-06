@@ -3,7 +3,7 @@ import { NextRequest } from 'next/server';
 import { AppInfo } from '@/configs';
 
 export const config = {
-  runtime: 'experimental-edge',
+  runtime: 'edge',
 };
 
 const font = fetch(

@@ -24,10 +24,6 @@ export default function Seo(seoProps: SeoProps): ReactElement {
     <Head>
       <title>{title}</title>
       <meta
-        name='robots'
-        content='index,follow'
-      />
-      <meta
         content={description}
         name='description'
       />
