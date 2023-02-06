@@ -23,6 +23,7 @@ export default function IssueGrid({ issues }: { issues: ContentIssue[] }) {
               caption: e.cover.caption,
               altTxt: e.cover.alternativeText,
             }}
+            priority={i <= 5}
             slug={e.slug}
             title={e.title}
             key={e.slug}

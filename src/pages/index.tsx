@@ -12,8 +12,14 @@ import IssueGrid from '@/components/IssueGrid';
 import { AppInfo } from '@/configs';
 
 export const getStaticProps: GetStaticProps = async () => {
-  const issues = await getIssues({ pagination: { limit: 10 } });
-  const topics = await getTopics({ pagination: { limit: 6 } });
+  const issues = await getIssues({
+    pagination: { limit: 10 },
+    sort: ['createdAt:desc'],
+  });
+  const topics = await getTopics({
+    pagination: { limit: 6 },
+    sort: ['createdAt:desc'],
+  });
 
   return {
     props: {
@@ -59,10 +65,10 @@ const Masthead = () => {
         }}
       ></div>
       <div className='flex flex-col items-center justify-center h-full p-4 gap-y-3'>
-        <h5 className='font-heading w-full p-4 text-5xl font-bold tracking-normal text-center text-black dark:text-white lg:text-7xl'>
+        <h5 className='font-heading w-full p-4 text-4xl font-bold tracking-normal text-center text-black dark:text-white lg:text-7xl'>
           Kolaborasi Membangun Hukum.
         </h5>
-        <p className='font-heading text-lg text-center text-gray-500 dark:text-gray-100/80 md:text-2xl font-[400]'>
+        <p className='font-heading text-md text-center text-gray-500 dark:text-gray-100/80 md:text-2xl font-[400]'>
           Yuk! Sampaikan pendapatmu terkait isu peraturan perundang-undangan di
           Indonesia 🇮🇩
         </p>

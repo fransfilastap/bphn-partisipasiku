@@ -17,7 +17,6 @@ import { useRouter } from 'next/router';
 import Disqus from '@/components/Disqus';
 import BackButton from '@/components/base/BackButton';
 import { AppInfo } from '@/configs';
-import { cloudinaryLoader } from '@/lib/image';
 
 type IssueProps = {
   title: string;
@@ -59,7 +58,7 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
           <div className='flex flex-col py-5 gap-4'>
             <BackButton />
             <div className='flex flex-col gap-2'>
-              <h6 className='block p-2 bg-blue-300 text-white max-w-max font-[600] font-heading text-xs rounded-full'>
+              <h6 className='block p-2 bg-blue-500 text-white max-w-max font-[500] font-heading text-[0.7em] rounded-full'>
                 {topic}
               </h6>
               <h5 className='text-[2em] lg:text-[2.5em] font-[600] leading-[1]'>
@@ -76,11 +75,13 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
           <div className='w-full flex flex-col gap-6'>
             <figure className='relative aspect-video overflow-hidden rounded-md'>
               <AdvanceImage
-                src={cloudinaryLoader(cover.cloudinaryImageId)}
-                fill={true}
+                src={cover.cloudinaryImageId}
                 alt={cover.alternateText ?? title}
                 blurDataURL={cover.placeholder}
-                className='object-cover rounded-md'
+                width={500}
+                height={400}
+                priority={true}
+                className='object-cover rounded-md w-full'
               />
               {cover.caption && <figcaption>{cover.caption}</figcaption>}
             </figure>
@@ -117,7 +118,7 @@ const CommendAndShare = () => {
     >
       <Link
         href='#disqus'
-        aria-labelledby='Komentar'
+        aria-label='Komentar'
       >
         <ChatBubbleBottomIcon />
       </Link>
@@ -138,6 +139,7 @@ const ShareButton = () => {
     <button
       onClick={() => copy(urlWithParams)}
       className='appearance-none'
+      aria-label="share link"
     >
       <ShareIcon />
       <AnimatePresence>

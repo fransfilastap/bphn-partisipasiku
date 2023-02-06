@@ -5,7 +5,7 @@ import { Variables } from 'graphql-request';
 import { ContentIssue, ContentMeta, ContentTopic } from '@/types/model';
 import { parseMarkdown } from '@/lib/markdown';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
-import { DEFAULT_PLACEHOLDER } from '@/lib/image';
+import { DEFAULT_PLACEHOLDER } from '@/lib/strapi-image';
 import slug from '@/pages/diskusi/[slug]';
 
 export const getAbout = async (): Promise<{

@@ -3,8 +3,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Card from '@/components/card/Card';
 import AdvanceImage from '../image/AdvanceImage';
-import { cloudinaryLoader, DEFAULT_PLACEHOLDER } from '@/lib/image';
-import useBreakpoint from '@/hooks/useBreakpoint';
+import { DEFAULT_PLACEHOLDER } from '@/lib/strapi-image';
 
 interface IssueCardProps {
   title: string;
@@ -27,8 +26,6 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
   cover,
   priority = false,
 }: IssueCardProps) => {
-  const imageSource = cloudinaryLoader(cover.publicId);
-
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}
@@ -41,13 +38,13 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
       >
         <div className='relative overflow-hidden rounded-md w-[80px] h-[80px] md:w-full md:h-[150px]'>
           <AdvanceImage
-            src={imageSource}
-            className='object-cover rounded-md'
+            src={cover.publicId}
+            className='object-cover w-full h-full'
             loading={priority ? 'eager' : 'lazy'}
-            fill={true}
             alt={cover.altTxt ?? title}
             priority={priority}
-            sizes='100vw'
+            width={250}
+            height={150}
             blurDataURL={cover.placeholder ?? DEFAULT_PLACEHOLDER}
           />
         </div>
@@ -55,7 +52,9 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
           <h5 className='text-gray-800 dark:text-white font-[500] text-[1em] leading-[1.4] tracking-normal line-clamp-3'>
             {title}
           </h5>
-          <p className='text-[0.79em] text-gray-700'>{topic}</p>
+          <p className='text-[0.79em] text-gray-700 dark:text-gray-300'>
+            {topic}
+          </p>
         </div>
       </Card>
     </motion.div>

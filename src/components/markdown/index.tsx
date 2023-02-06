@@ -1,16 +1,17 @@
-import AdvanceImage from '@/components/image/AdvanceImage';
-import { ImageProps } from 'next/image';
-import { FunctionComponent, PropsWithChildren } from 'react';
+import Image, { ImageProps } from 'next/image';
+import { FunctionComponent, PropsWithChildren, useMemo } from 'react';
 import { MDXComponents } from 'mdx/types';
 import Link, { LinkProps } from 'next/link';
-import { DEFAULT_PLACEHOLDER } from '@/lib/image';
+import { DEFAULT_PLACEHOLDER } from '@/lib/strapi-image';
+import { cloudinaryUrl } from '@/lib/cloudinary';
 
 type MarkdownImageProps = ImageProps & {
   caption?: string;
 };
 const MarkdownImage: FunctionComponent<MarkdownImageProps> = (props) => {
   return (
-    <AdvanceImage
+    <Image
+      loader={cloudinaryUrl}
       width={800}
       height={600}
       quality={70}

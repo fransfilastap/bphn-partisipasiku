@@ -8,12 +8,14 @@ import clsxtw from '@/lib/clsxtw';
 
 export default function Footer(): ReactElement {
   return (
-    <footer className='font-sans text-gray-600 flex py-3 text-sm gap-1 flex-row items-center justify-center border-t dark:border-t-gray-800 bg-[#fafafa] dark:bg-[#111]'>
+    <footer className='font-sans flex py-3 text-sm gap-1 flex-row items-center justify-center border-t dark:border-t-gray-800 bg-[#fafafa] dark:bg-[#111]'>
       <Container className='flex flex-col items-start justify-between gap-20'>
         <div className='grid grid-rows-1 lg:grid-rows-none gap-10 lg:grid-cols-3 py-5'>
           <div className='w-full flex flex-col gap-2 justify-start items-start'>
             <Logo />
-            <p>Dikelola oleh Badan Pembinaan Hukum Nasional</p>
+            <p className="text-gray-600 dark:text-gray-400">
+              Dikelola oleh Badan Pembinaan Hukum Nasional
+            </p>
           </div>
           <div className='flex flex-col items-start gap-3 lg:mt-0 mt-10'>
             <h5 className='text-black dark:text-white font-body text-sm font-[500] dark:font-[300]'>
@@ -65,7 +67,7 @@ const FooterLink = forwardRef(
     <Link
       ref={ref}
       href={href}
-      className='text-gray-500 text-[0.99em] font-[300] hover:text-black dark:hover:text-gray-300'
+      className='text-gray-600 dark:text-gray-400 text-[0.99em] font-[300] hover:text-black dark:hover:text-gray-300'
     >
       {children}
     </Link>

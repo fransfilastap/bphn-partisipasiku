@@ -2,6 +2,7 @@ import React, { FunctionComponent, useCallback } from 'react';
 import Image, { ImageProps } from 'next/image';
 import clsxtw from '@/lib/clsxtw';
 import { useToggle } from '@/hooks';
+import { cloudinaryUrl } from '@/lib/cloudinary';
 
 type AdvanceImageProps = Omit<ImageProps, 'placeholder'>;
 const AdvanceImage: FunctionComponent<AdvanceImageProps> = ({
@@ -22,8 +23,10 @@ const AdvanceImage: FunctionComponent<AdvanceImageProps> = ({
     <Image
       className={clsxtw(loading ? 'img-blur' : 'unblur', className)}
       onLoadingComplete={loadingCompleteHandler}
+      loader={cloudinaryUrl}
       alt={alt}
       placeholder='blur'
+      loading={priority ? 'eager' : 'lazy'}
       {...props}
     />
   );

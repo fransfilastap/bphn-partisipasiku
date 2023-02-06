@@ -84,7 +84,7 @@ export default function IssueByTopicPage({
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className='font-body text-md tracking-tighter text-gray-600'
+            className='font-body text-md tracking-tighter text-gray-600 dark:text-gray-400'
           >
             {topic.description}
           </motion.p>

@@ -20,7 +20,7 @@ const Input: FunctionComponent<InputProps> = ({
   return (
     <div
       className={clsxtw(
-        'p-1.5 gap-2 placeholder-slate-500 dark:placeholder-slate-50 border border-gray-200 dark:border-gray-600 rounded-md flex flex-row group transition-colors duration-100 ease-in-out text-gray-400',
+        'p-1.5 gap-2 placeholder-slate-500 dark:placeholder-slate-100 border border-gray-200 dark:border-gray-600 rounded-md flex flex-row group transition-colors duration-100 ease-in-out text-gray-400',
         { 'border-black dark:border-slate-100': isFocus }
       )}
     >
