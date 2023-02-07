@@ -10,8 +10,6 @@ import { getIssues, getTopics } from '@/lib/content';
 import { ContentIssue, ContentTopic } from '@/types/model';
 import IssueGrid from '@/components/IssueGrid';
 import { AppInfo } from '@/configs';
-import SplitText from '@/components/SplitText';
-import { AnimatePresence, motion } from 'framer-motion';
 import useTimeout from '@/hooks/useTimeout';
 
 export const getStaticProps: GetStaticProps = async () => {
