@@ -13,14 +13,14 @@ export default function Footer(): ReactElement {
         <div className='grid grid-rows-1 lg:grid-rows-none gap-10 lg:grid-cols-3 py-5'>
           <div className='w-full flex flex-col gap-2 justify-start items-start'>
             <Logo />
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className='text-gray-600 dark:text-gray-400'>
               Dikelola oleh Badan Pembinaan Hukum Nasional
             </p>
           </div>
           <div className='flex flex-col items-start gap-3 lg:mt-0 mt-10'>
-            <h5 className='text-black dark:text-white font-body text-sm font-[500] dark:font-[300]'>
+            <p className='text-black dark:text-white font-body text-sm font-[500] dark:font-[300]'>
               Tautan Terkait
-            </h5>
+            </p>
             <ul className='list-none flex flex-col gap-1'>
               <li>
                 <FooterLink href='https://bphn.go.id'>

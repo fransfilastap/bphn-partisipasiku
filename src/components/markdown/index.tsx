@@ -11,11 +11,12 @@ type MarkdownImageProps = ImageProps & {
 const MarkdownImage: FunctionComponent<MarkdownImageProps> = (props) => {
   return (
     <Image
-      loader={cloudinaryUrl}
       width={800}
       height={600}
-      quality={70}
-      className='rounded-xl shadow-md'
+      priority={false}
+      loading="lazy"
+      placeholder="blur"
+      className="object-cover rounded-md"
       blurDataURL={DEFAULT_PLACEHOLDER}
       {...props}
     />

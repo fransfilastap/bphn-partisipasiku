@@ -37,6 +37,14 @@
 }
 
 @layer components {
+  figure.figure {
+    @apply relative overflow-hidden flex flex-col items-center justify-center;
+  }
+
+  figure.figure figcaption {
+    @apply text-gray-800 dark:text-gray-500 text-[0.8em];
+  }
+
   .img-blur {
     border: 1px solid black;
     filter: blur(15px);

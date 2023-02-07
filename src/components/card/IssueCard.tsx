@@ -49,10 +49,10 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
           />
         </div>
         <div className='flex flex-col w-full h-full flex-1 justify-between px-0 py-1'>
-          <h5 className='text-gray-800 dark:text-white font-[500] text-[1em] leading-[1.4] tracking-normal line-clamp-3'>
+          <h5 className='text-gray-800 dark:text-white font-[500] text-[0.9em] leading-[1.4] tracking-normal line-clamp-3'>
             {title}
           </h5>
-          <p className='text-[0.79em] text-gray-700 dark:text-gray-300'>
+          <p className='text-[0.7em] text-gray-700 dark:text-gray-300'>
             {topic}
           </p>
         </div>
