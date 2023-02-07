@@ -11,7 +11,7 @@ export default function IssueGrid({ issues }: { issues: ContentIssue[] }) {
   }
 
   return (
-    <div className='grid w-full grid-cols-1 gap-2 md:gap-8 md:grid-cols-4'>
+    <div className='grid w-full grid-cols-1 gap-2 md:gap-8 md:grid-cols-2 lg:grid-cols-3'>
       {issues.map((e: ContentIssue, i: number) => {
         return (
           <IssueCard

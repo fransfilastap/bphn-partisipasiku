@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import Container from '@/components/base/Container';
 import Seo from '@/components/seo/Seo';
 import clsxtw from '@/lib/clsxtw';
@@ -10,6 +10,9 @@ import { getIssues, getTopics } from '@/lib/content';
 import { ContentIssue, ContentTopic } from '@/types/model';
 import IssueGrid from '@/components/IssueGrid';
 import { AppInfo } from '@/configs';
+import SplitText from '@/components/SplitText';
+import { AnimatePresence, motion } from 'framer-motion';
+import useTimeout from '@/hooks/useTimeout';
 
 export const getStaticProps: GetStaticProps = async () => {
   const issues = await getIssues({
@@ -50,6 +53,10 @@ export default function Home({
 }
 
 const Masthead = () => {
+  const [visible, setVisible] = useState<boolean>(false);
+
+  useTimeout(() => setVisible(true), 300);
+
   return (
     <section
       className={clsxtw(
