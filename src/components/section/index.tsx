@@ -20,7 +20,7 @@ const Section: FunctionComponent<SectionProps> = ({
   return (
     <section className={clsxtw('flex flex-col gap-2')}>
       <div className='flex flex-row items-center justify-between'>
-        <h5 className='font-heading text-black dark:text-white font-[600] text-xl lg:text-2xl my-2'>
+        <h5 className='text-black dark:text-white font-[600] text-xl lg:text-2xl my-2'>
           {sectionTitle}
         </h5>
         <Link

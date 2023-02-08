@@ -42,7 +42,7 @@ export default function Home({
         description={AppInfo.siteDescription}
       />
       <Masthead />
-      <Container className='p-6 flex flex-col gap-10 md:p-4'>
+      <Container className='flex flex-col gap-10 p-6 md:p-4'>
         <HighlightedTopics topics={topics} />
         <HighlightedIssues issues={issues} />
       </Container>
@@ -51,29 +51,18 @@ export default function Home({
 }
 
 const Masthead = () => {
-  const [visible, setVisible] = useState<boolean>(false);
-
-  useTimeout(() => setVisible(true), 300);
-
   return (
     <section
       className={clsxtw(
-        'relative h-[60vh] inset-0 dark:bg-bottom bg-top bg-no-repeat bg-slate-50 dark:bg-black border-b-slate-500/[0.2] border-b',
+        'relative h-[40vh] inset-0 dark:bg-bottom bg-top bg-no-repeat border-b-slate-500/[0.2] border-b',
         styles.beams
       )}
     >
-      <div
-        className='absolute inset-0 bg-grid-slate-900/[0.04] dark:hidden bg-[bottom_1px_center] dark:bg-grid-slate-600/30 dark:bg-bottom dark:border-b dark:border-slate-100/5 z-[-1]'
-        style={{
-          maskImage: 'linear-gradient(to bottom, transparent, black)',
-          WebkitMaskImage: 'linear-gradient(to bottom, transparent, black)',
-        }}
-      ></div>
       <div className='flex flex-col items-center justify-center h-full p-4 gap-y-3'>
-        <h5 className='font-body w-full p-4 text-4xl font-bold tracking-normal text-center text-black dark:text-white lg:text-7xl'>
+        <h5 className='w-full p-4 text-4xl font-bold tracking-tight text-center text-black font-body dark:text-white lg:text-7xl'>
           Kolaborasi Membangun Hukum.
         </h5>
-        <p className='text-md text-center text-gray-500 dark:text-gray-100/80 md:text-2xl font-[400]'>
+        <p className='text-md text-center text-gray-500 dark:text-gray-100/80 lg:text-2xl font-[200] tracking-normal'>
           Yuk! Sampaikan pendapatmu terkait isu peraturan perundang-undangan di
           Indonesia 🇮🇩
         </p>
@@ -85,7 +74,7 @@ const Masthead = () => {
 const HighlightedTopics = ({ topics }: { topics: ContentTopic[] }) => {
   return (
     <Section
-      sectionTitle='Pilih Kategori'
+      sectionTitle='Pilih Kategori.'
       className='py-2 overflow-hidden'
       actionLink='/kategori'
       actionLabel='Lihat Semua'

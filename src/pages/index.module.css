@@ -6,6 +6,6 @@
 
 :global(.dark) .beams {
   background-image: url(../../public/images/Centauri.svg);
-  background-size: 30rem;
-  background-position: top right;
+  background-size: 25rem;
+  background-position: center center;
 }

@@ -29,7 +29,7 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
     <Card
       as={Link}
       href={`/diskusi/${slug}`}
-      className='flex p-3 gap-2 flex-row md:flex-col items-center transition duration-200 ease-in-out cursor-pointer group bg-white dark:bg-gray-700/30 ring-1 ring-gray-200 hover:bg-gray-100 dark:ring-gray-900 dark:hover:bg-slate-600/30  rounded-lg shadow-none h-full'
+      className='flex flex-row items-center gap-2 p-3 transition duration-200 ease-in-out bg-white rounded-lg shadow-none cursor-pointer md:flex-col group dark:bg-gray-700/30 ring-1 ring-gray-200 hover:bg-gray-100 dark:ring-gray-900 dark:hover:bg-slate-600/30'
     >
       <div className='hidden md:block relative overflow-hidden rounded-md w-[80px] h-[80px] md:w-full md:h-[150px]'>
         <AdvanceImage
@@ -43,7 +43,7 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
           blurDataURL={cover.placeholder ?? DEFAULT_PLACEHOLDER}
         />
       </div>
-      <div className='flex flex-col w-full flex-1 justify-between px-0 py-1'>
+      <div className='flex flex-col justify-between flex-1 w-full px-0 py-1'>
         <h5 className='text-gray-800 my-3 dark:text-white font-[600] text-[1.1em] lg:text-[1.1em] leading-[1.3] tracking-wider line-clamp-3'>
           {title}
         </h5>
