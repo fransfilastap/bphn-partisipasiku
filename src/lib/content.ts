@@ -117,6 +117,7 @@ export const getIssues = async (variables?: Variables) => {
             slug
             title
             background
+
             seo {
               metaTitle
               metaDescription

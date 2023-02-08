@@ -366,6 +366,7 @@ export type IntFilterInput = {
 
 export type Issue = {
   __typename?: 'Issue';
+  author?: Maybe<AuthorEntityResponse>;
   background: Scalars['String'];
   cover: UploadFileEntityResponse;
   createdAt?: Maybe<Scalars['DateTime']>;
@@ -396,6 +397,7 @@ export type IssueEntityResponseCollection = {
 
 export type IssueFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<IssueFiltersInput>>>;
+  author?: InputMaybe<AuthorFiltersInput>;
   background?: InputMaybe<StringFilterInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   id?: InputMaybe<IdFilterInput>;
@@ -410,6 +412,7 @@ export type IssueFiltersInput = {
 };
 
 export type IssueInput = {
+  author?: InputMaybe<Scalars['ID']>;
   background?: InputMaybe<Scalars['String']>;
   cover?: InputMaybe<Scalars['ID']>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;

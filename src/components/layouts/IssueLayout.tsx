@@ -17,6 +17,17 @@ import { useRouter } from 'next/router';
 import Disqus from '@/components/Disqus';
 import BackButton from '@/components/base/BackButton';
 import { AppInfo } from '@/configs';
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  TelegramIcon,
+  TelegramShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+} from 'react-share';
+import { useDiscussionUrl } from '@/hooks/useDiscussionUrl';
 
 type IssueProps = {
   title: string;
@@ -43,8 +54,11 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
   markdownContent,
   createdAt,
 }) => {
+  const discussionUrl = useDiscussionUrl();
+
   return (
-    <Container className='relative flex flex-col md:gap-6 md:divide-gray-300 gap-6'>
+    <div className='relative flex flex-col '>
+      <div className='absolute h-[40vh] bg-top inset-0 bg-gradient-to-b from-pink-200/30 dark:from-violet-500/20 to-transparent z-[-1]'></div>
       <Seo
         pageTitle={title}
         description={description}
@@ -53,7 +67,7 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
         url={`diskusi/${slug}`}
         image={`${AppInfo.url}/api/og?title=${encodeURI(title)}`}
       />
-      <div className='flex flex-col '>
+      <Container className='relative flex flex-col md:gap-6 md:divide-gray-300 gap-6'>
         <div className='flex flex-col gap-5 w-full lg:w-2/3 mx-auto'>
           <div className='flex flex-col py-5 gap-4'>
             <BackButton />
@@ -89,7 +103,11 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
               mdx={markdownContent}
               className='prose-md font-body pb-10 border-b border-b-gray-100 dark:border-b-gray-800'
             />
-            <CommendAndShare />
+            <CommendAndShare
+              url={discussionUrl}
+              title={title}
+              topic={topic}
+            />
             <Disqus
               id='disqus'
               identifier={`/diskusi/${slug}`}
@@ -98,14 +116,22 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
             />
           </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 };
 
 export default IssueLayout;
 
-const CommendAndShare = () => {
+const CommendAndShare = ({
+  url,
+  title,
+  topic,
+}: {
+  url: string;
+  title: string;
+  topic: string;
+}) => {
   return (
     <motion.div
       initial={{ translateY: 100, opacity: 0 }}
@@ -114,7 +140,7 @@ const CommendAndShare = () => {
         opacity: 1,
         transition: { delay: 0.8, type: 'spring', stiffness: 100 },
       }}
-      className='sticky bottom-[40px] gap-2 mx-auto max-w-max px-3 py-5 rounded-md ring-1 ring-gray-200 dark:ring-gray-800 bg-white/30 dark:bg-black/60 backdrop-blur-sm flex flex-row'
+      className='sticky bottom-[40px] gap-2 mx-auto max-w-max px-3 py-5 rounded-md ring-1 ring-gray-200 dark:ring-gray-800 bg-white/80 dark:bg-black/60 backdrop-blur-sm flex flex-row items-center justify-between'
     >
       <Link
         href='#disqus'
@@ -122,24 +148,56 @@ const CommendAndShare = () => {
       >
         <ChatBubbleBottomIcon />
       </Link>
-      <ShareButton />
+      <ShareButton url={url} />
+      <FacebookShareButton
+        url={url}
+        quote={title}
+        className=''
+      >
+        <FacebookIcon
+          size={32}
+          round
+        />
+      </FacebookShareButton>
+      <WhatsappShareButton
+        url={url}
+        title={title}
+      >
+        <WhatsappIcon
+          size={32}
+          round
+        />
+      </WhatsappShareButton>
+      <TwitterShareButton
+        title={title}
+        url={url}
+        hashtags={[topic]}
+      >
+        <TwitterIcon
+          size={32}
+          round
+        />
+      </TwitterShareButton>
+      <TelegramShareButton
+        title={title}
+        url={url}
+      >
+        <TelegramIcon
+          size={32}
+          round
+        />
+      </TelegramShareButton>
     </motion.div>
   );
 };
 
-const ShareButton = () => {
-  const url = useCurrentUrl();
-  const { query } = useRouter();
-  const urlWithParams = useMemo(() => {
-    return url.replace('[slug]', `${query.slug}`);
-  }, [url, query.slug]);
-
+const ShareButton = ({ url }: { url: string }) => {
   const [shareUrl, copy] = useCopyToClipboard();
   return (
     <button
-      onClick={() => copy(urlWithParams)}
+      onClick={() => copy(url)}
       className='appearance-none'
-      aria-label="share link"
+      aria-label='share link'
     >
       <ShareIcon />
       <AnimatePresence>

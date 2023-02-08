@@ -20,12 +20,12 @@ const Section: FunctionComponent<SectionProps> = ({
   return (
     <section className={clsxtw('flex flex-col gap-2')}>
       <div className='flex flex-row items-center justify-between'>
-        <h5 className='font-heading border-b-4 border-b-blue-500 dark:border-0 pb-2 text-black dark:text-white font-[600] text-xl lg:text-2xl my-2'>
+        <h5 className='font-heading text-black dark:text-white font-[600] text-xl lg:text-2xl my-2'>
           {sectionTitle}
         </h5>
         <Link
           href={actionLink}
-          className='inline-flex gap-2 border border-gray-100 dark:border-slate-800 bg-gray-50 dark:bg-gray-900 p-2 max-w-max rounded items-center text-xs text-slate-900 dark:text-white md:text-sm group'
+          className='inline-flex gap-2 ring-1 ring-gray-200 dark:ring-gray-800 bg-gray-50 dark:bg-gray-900 px-2 py-1 max-w-max rounded-full items-center text-[0.6em] md:text-xs text-slate-900 dark:text-white  group'
         >
           <span>{actionLabel}</span>{' '}
           <ArrowLongRightIcon className='w-5 h-5 transition-transform duration-150 ease-linear group-hover:translate-x-2' />

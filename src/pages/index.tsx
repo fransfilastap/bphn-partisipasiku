@@ -70,10 +70,10 @@ const Masthead = () => {
         }}
       ></div>
       <div className='flex flex-col items-center justify-center h-full p-4 gap-y-3'>
-        <h5 className='font-heading w-full p-4 text-4xl font-bold tracking-normal text-center text-black dark:text-white lg:text-7xl'>
+        <h5 className='font-body w-full p-4 text-4xl font-bold tracking-normal text-center text-black dark:text-white lg:text-7xl'>
           Kolaborasi Membangun Hukum.
         </h5>
-        <p className='font-heading text-md text-center text-gray-500 dark:text-gray-100/80 md:text-2xl font-[400]'>
+        <p className='text-md text-center text-gray-500 dark:text-gray-100/80 md:text-2xl font-[400]'>
           Yuk! Sampaikan pendapatmu terkait isu peraturan perundang-undangan di
           Indonesia 🇮🇩
         </p>
@@ -90,7 +90,7 @@ const HighlightedTopics = ({ topics }: { topics: ContentTopic[] }) => {
       actionLink='/kategori'
       actionLabel='Lihat Semua'
     >
-      <div className='grid grid-cols-2  gap-1 lg:flex lg:flex-row lg:gap-2'>
+      <div className='grid grid-cols-2 gap-1 md:grid-cols-2 lg:grid-cols-4'>
         {topics.map((e, _) => (
           <TopicCard
             key={e.slug}

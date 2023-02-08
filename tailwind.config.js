@@ -14,7 +14,7 @@ module.exports = {
     extend: {
       fontFamily: {
         body: ['var(--font-inter, "")', ...defaultTheme.fontFamily.sans],
-        heading: ['var(--font-inter, "")', ...defaultTheme.fontFamily.mono],
+        heading: ['var(--font-fira, "")', ...defaultTheme.fontFamily.mono],
       },
       colors: {
         divider: {
