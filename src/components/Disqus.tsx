@@ -3,6 +3,7 @@ import clsxtw from '@/lib/clsxtw';
 import { DiscussionEmbed } from 'disqus-react';
 import { AppInfo } from '@/configs';
 import { DISQUS_SHORTNAME } from '@/configs/env';
+import { useGlobalState } from '@/store';
 
 type DisqusProps = ComponentPropsWithoutRef<'div'> & {
   title: string;
@@ -17,13 +18,15 @@ const Disqus: FunctionComponent<DisqusProps> = ({
   title,
   ...props
 }) => {
+  const { colorMode } = useGlobalState();
+
   return (
     <div
       className={clsxtw('w-full', className)}
       {...props}
     >
       <DiscussionEmbed
-        key={`${locale}`}
+        key={`${locale}-${colorMode}`}
         shortname={DISQUS_SHORTNAME!}
         config={{
           title: `${title}`,

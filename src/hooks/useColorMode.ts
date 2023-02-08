@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ColorMode } from '@/types';
 import { useIsomorphicLayoutEffect, useIsMounted } from '@/hooks';
+import { useGlobalState } from '@/store';
 
 const updateColorMode = (): void => {
   if (
@@ -23,7 +24,7 @@ const useColorMode = (): [
   // eslint-disable-next-line no-unused-vars
   setColorMode: (colorMode: ColorMode) => void
 ] => {
-  const [colorMode, setColorMode] = useState<ColorMode>();
+  const { colorMode: globalColorMode, setColorMode } = useGlobalState();
   const isMounted = useIsMounted();
 
   useIsomorphicLayoutEffect(() => {
@@ -36,16 +37,16 @@ const useColorMode = (): [
   }, []);
 
   useIsomorphicLayoutEffect(() => {
-    if (colorMode === 'system') {
+    if (globalColorMode === 'system') {
       localStorage.removeItem('theme');
-    } else if (colorMode === 'light' || colorMode === 'dark') {
-      localStorage.theme = colorMode;
+    } else if (globalColorMode === 'light' || globalColorMode === 'dark') {
+      localStorage.theme = globalColorMode;
     }
 
     if (isMounted()) {
       updateColorMode();
     }
-  }, [colorMode]);
+  }, [globalColorMode]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -78,9 +79,9 @@ const useColorMode = (): [
 
       window.removeEventListener('storage', onStorageChangeHandler);
     };
-  }, []);
+  }, [setColorMode]);
 
-  return [colorMode ?? 'system', setColorMode];
+  return [globalColorMode ?? 'system', setColorMode];
 };
 
 export default useColorMode;

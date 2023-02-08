@@ -3,8 +3,7 @@ import Link from 'next/link';
 import Card from '@/components/card/Card';
 import AdvanceImage from '../image/AdvanceImage';
 import { DEFAULT_PLACEHOLDER } from '@/lib/strapi-image';
-import moment from 'moment';
-import { CalendarDays } from '../icons';
+import DateComponent from '@/components/base/DateComponent';
 
 interface IssueCardProps {
   title: string;
@@ -52,11 +51,11 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
           {title}
         </h5>
         <div className='flex flex-row items-center justify-between'>
-          <p className='inline-flex gap-2 text-[0.6em] items-center rounded-full bg-gray-50 dark:bg-gray-800/30 py-2 px-2'>
-            <CalendarDays className='w-3 h-3' />
-            <span>{moment(createdAt).format('MMMM Do, YYYY')}</span>
-          </p>
-          <p className='rounded-full px-2 py-2 dark:bg-gray-800/30 bg-gray-50 max-w-max text-[0.6em] '>
+          <DateComponent
+            date={createdAt}
+            className='items-center rounded-full bg-gray-100 dark:bg-gray-800/30 py-2 px-2'
+          />
+          <p className='rounded-full px-2 py-2 dark:bg-gray-800/30 bg-gray-100 max-w-max text-[0.7em] '>
             {topic}
           </p>
         </div>
