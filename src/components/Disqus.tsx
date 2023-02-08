@@ -4,6 +4,7 @@ import { DiscussionEmbed } from 'disqus-react';
 import { AppInfo } from '@/configs';
 import { DISQUS_SHORTNAME } from '@/configs/env';
 import { useGlobalState } from '@/store';
+import { useIsomorphicLayoutEffect } from '@/hooks';
 
 type DisqusProps = ComponentPropsWithoutRef<'div'> & {
   title: string;

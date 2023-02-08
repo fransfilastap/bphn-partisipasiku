@@ -53,7 +53,7 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
         <div className='flex flex-row items-center justify-between'>
           <DateComponent
             date={createdAt}
-            className='items-center rounded-full bg-gray-100 dark:bg-gray-800/30 py-2 px-2'
+            className='items-center dark:group-hover:bg-gray-700/30  group-hover:bg-gray-200/30 transition duration-100 ease-linear delay-100 rounded-full bg-gray-100 dark:bg-gray-800/30 py-2 px-2'
           />
           <p className='rounded-full px-2 py-2 dark:bg-gray-800/30 bg-gray-100 max-w-max text-[0.7em] '>
             {topic}

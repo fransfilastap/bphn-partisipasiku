@@ -59,7 +59,7 @@ export default function Header({
                 </li>
               </ul>
             </Navigation>
-            {/* <ColorModeSwitcher className='hidden' /> */}
+            <ColorModeSwitcher className='hidden' />
           </div>
           <MenuToggle
             whileTap={{ scale: 0.8 }}

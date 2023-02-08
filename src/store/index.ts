@@ -4,14 +4,14 @@ import { ColorMode } from '@/types';
 export interface GlobalState {
   menuOpen: boolean;
   toggleMenu: (nextValue?: boolean) => void;
-  colorMode: ColorMode;
+  colorMode: ColorMode | null;
   setColorMode: (colorMode: ColorMode) => void;
 }
 
-export const useGlobalState = create<GlobalState>()((set) => ({
+export const useGlobalState = create<GlobalState>()((set, get) => ({
   menuOpen: false,
   toggleMenu: (nextValue) =>
     set((state) => ({ menuOpen: nextValue ?? !state.menuOpen })),
-  colorMode: 'system',
+  colorMode: null,
   setColorMode: (colorMode) => set({ colorMode: colorMode }),
 }));

@@ -17,8 +17,8 @@ const DateComponent = forwardRef(
           props.className
         )}
       >
-        <CalendarDays className='w-3 h-3' />
-        <span className='text-[0.8em] dark:text-gray-400'>
+        <CalendarDays className='w-4 h-4' />
+        <span className='text-black text-xs dark:text-gray-200'>
           {moment(props.date).format('MMMM Do, YYYY')}
         </span>
       </span>

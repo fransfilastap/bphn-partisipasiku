@@ -4,6 +4,7 @@ import { ColorMode } from '@/types';
 import useIsMounted from '@/hooks/useIsMounted';
 import { MoonIcon, SunIcon, SystemIcon } from '@/components/icons';
 import clsxtw from '@/lib/clsxtw';
+import { useGlobalState } from '@/store';
 
 const Icons: Record<ColorMode, ReactElement> = {
   light: <SunIcon className='w-5 h-5' />,
@@ -16,7 +17,7 @@ const ColorModeSwitcher: FunctionComponent<ColorModeSelectionProps> = (
   props: ColorModeSelectionProps
 ) => {
   const { className, ...rest } = props;
-  const [colorMode, setColorMode] = useColorMode();
+  const { colorMode, setColorMode } = useGlobalState();
   useIsMounted();
 
   return (
