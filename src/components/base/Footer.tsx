@@ -113,7 +113,7 @@ const FooterLink = forwardRef(
       ref={ref}
       href={href}
       target='_blank'
-      className='text-gray-600 dark:text-gray-400 text-[0.99em] font-[300] hover:text-black dark:hover:text-gray-300'
+      className='group text-gray-600 dark:text-gray-400 text-[0.99em] font-[300] hover:text-black dark:hover:text-gray-300'
     >
       {children}
     </Link>
@@ -130,7 +130,7 @@ const SocialLink = ({ url, children }: { url: string; children: string }) => (
         viewBox='0 0 24 24'
         strokeWidth={1.5}
         stroke='currentColor'
-        className='w-4 h-4'
+        className='w-3 h-3 transition-all duration-75 ease-linear -translate-x-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-0'
       >
         <path
           strokeLinecap='round'

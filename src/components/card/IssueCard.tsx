@@ -3,12 +3,15 @@ import Link from 'next/link';
 import Card from '@/components/card/Card';
 import AdvanceImage from '../image/AdvanceImage';
 import { DEFAULT_PLACEHOLDER } from '@/lib/strapi-image';
+import moment from 'moment';
+import { CalendarDays } from '../icons';
 
 interface IssueCardProps {
   title: string;
   slug: string;
   topic?: string;
   priority?: boolean;
+  createdAt: Date;
   cover: {
     url: string;
     publicId: string;
@@ -23,6 +26,7 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
   slug,
   topic,
   cover,
+  createdAt,
   priority = false,
 }: IssueCardProps) => {
   return (
@@ -44,12 +48,18 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
         />
       </div>
       <div className='flex flex-col justify-between flex-1 w-full px-0 py-1'>
-        <h5 className='text-gray-800 my-3 dark:text-white font-[600] text-[1.1em] lg:text-[1.1em] leading-[1.3] tracking-wider line-clamp-3'>
+        <h5 className='text-gray-800 my-3 dark:text-white font-[600] text-[1.1em] lg:text-[1.1em] leading-[1.3] -tracking-tight line-clamp-3'>
           {title}
         </h5>
-        <p className='rounded-full px-2 py-2 dark:bg-gray-800/30 bg-gray-50 max-w-max text-[0.6em] text-gray-500 dark:text-gray-300'>
-          {topic}
-        </p>
+        <div className='flex flex-row items-center justify-between'>
+          <p className='inline-flex gap-2 text-[0.6em] items-center rounded-full bg-gray-50 dark:bg-gray-800/30 py-2 px-2'>
+            <CalendarDays className='w-3 h-3' />
+            <span>{moment(createdAt).format('MMMM Do, YYYY')}</span>
+          </p>
+          <p className='rounded-full px-2 py-2 dark:bg-gray-800/30 bg-gray-50 max-w-max text-[0.6em] '>
+            {topic}
+          </p>
+        </div>
       </div>
     </Card>
   );

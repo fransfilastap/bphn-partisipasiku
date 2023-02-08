@@ -1,16 +1,15 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment } from 'react';
+import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Container from '@/components/base/Container';
 import Seo from '@/components/seo/Seo';
 import clsxtw from '@/lib/clsxtw';
 import styles from './index.module.css';
-import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import TopicCard from '@/components/card/TopicCard';
 import Section from '@/components/section';
 import { getIssues, getTopics } from '@/lib/content';
 import { ContentIssue, ContentTopic } from '@/types/model';
 import IssueGrid from '@/components/IssueGrid';
 import { AppInfo } from '@/configs';
-import useTimeout from '@/hooks/useTimeout';
 
 export const getStaticProps: GetStaticProps = async () => {
   const issues = await getIssues({

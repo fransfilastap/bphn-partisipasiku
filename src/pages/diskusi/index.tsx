@@ -1,5 +1,5 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import { ChangeEvent, Fragment, useCallback, useMemo, useState } from 'react';
+import { ChangeEvent, Fragment, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import Seo from '@/components/seo/Seo';
 import Container from '@/components/base/Container';
@@ -9,7 +9,6 @@ import Input from '@/components/base/Input';
 import { SearchIcon } from '@/components/icons';
 import debounce from 'lodash.debounce';
 import IssueGrid from '@/components/IssueGrid';
-import { AppInfo } from '@/configs';
 
 export const getStaticProps: GetStaticProps = async () => {
   const issues = await getIssues();
@@ -49,7 +48,7 @@ export default function IssuePage({
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.1 }}
-          className='text-2xl font-body my-10 font-bold border-b-4 dark:border-none border-b-blue-500 max-w-max'
+          className='my-10 text-2xl font-bold font-body dark:border-none max-w-max'
         >
           Daftar Diskusi.
         </motion.h5>

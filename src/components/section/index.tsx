@@ -25,7 +25,7 @@ const Section: FunctionComponent<SectionProps> = ({
         </h5>
         <Link
           href={actionLink}
-          className='inline-flex gap-2 ring-1 ring-gray-200 dark:ring-gray-800 bg-gray-50 dark:bg-gray-900 px-2 py-1 max-w-max rounded-full items-center text-[0.6em] md:text-xs text-slate-900 dark:text-white  group'
+          className='inline-flex gap-2 px-2 py-1 max-w-max items-center text-[0.8em] md:text-xs text-slate-900 dark:text-white  group'
         >
           <span>{actionLabel}</span>{' '}
           <ArrowLongRightIcon className='w-5 h-5 transition-transform duration-150 ease-linear group-hover:translate-x-2' />

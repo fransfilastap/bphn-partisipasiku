@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion } from 'framer-motion';
 import Container from '@/components/base/Container';
 import Seo from '@/components/seo/Seo';
@@ -5,7 +6,6 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import { parseMarkdown } from '@/lib/markdown';
 import { getAbout } from '@/lib/content';
 import Markdown from '@/components/markdown/Markdown';
-import React from 'react';
 
 export const getStaticProps: GetStaticProps = async () => {
   const about = await getAbout();
@@ -21,8 +21,7 @@ export default function AboutPage({
   about,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <div className="relative">
-      {/* bg-grid-slate-900/[0.06] bg-[top_1px_center] dark:bg-grid-gray-700/[0.6] */}
+    <div className='relative'>
       <div
         className='absolute h-[40vh] bg-top inset-0 bg-gradient-to-b from-pink-200/30 dark:from-violet-500/20 to-transparent z-[-1]'
         style={{

@@ -5,7 +5,7 @@ export default function IssueGrid({ issues }: { issues: ContentIssue[] }) {
   if (issues.length <= 0) {
     return (
       <div className='flex flex-col items-center justify-center w-full p-6 h-[300px] border border-gray-100 dark:border-gray-600 rounded-md'>
-        <p className='text-zinc-700 dark:text-white text-lg'>Tidak ada entry</p>
+        <p className='text-lg text-zinc-700 dark:text-white'>Tidak ada entry</p>
       </div>
     );
   }
@@ -16,6 +16,7 @@ export default function IssueGrid({ issues }: { issues: ContentIssue[] }) {
         return (
           <IssueCard
             topic={e.topic}
+            createdAt={e.createdAt}
             cover={{
               publicId: e.cover.cloudinaryPublicId,
               placeholder: e.cover.placeholder,
