@@ -173,8 +173,7 @@ export const getIssues = async (variables?: Variables) => {
         },
         cover: {
           url: issue.attributes?.cover?.data?.attributes?.url,
-          coverUrl:
-            issue.attributes?.cover?.data?.attributes?.formats.small.url,
+          coverUrl: issue.attributes?.cover?.data?.attributes?.url,
           alternativeText:
             issue.attributes?.cover?.data?.attributes?.alternativeText!,
           caption: issue.attributes?.cover?.data?.attributes?.caption!,

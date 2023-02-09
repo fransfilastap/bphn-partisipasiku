@@ -13,7 +13,7 @@ import { AppInfo } from '@/configs';
 
 export const getStaticProps: GetStaticProps = async () => {
   const issues = await getIssues({
-    pagination: { limit: 10 },
+    pagination: { limit: 8 },
     sort: ['createdAt:desc'],
   });
   const topics = await getTopics({
