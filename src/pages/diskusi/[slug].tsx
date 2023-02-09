@@ -10,7 +10,7 @@ type IssuePageProps = {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const issues = await getIssues();
-  const paths = issues.map(({ slug, id }: ContentIssue, i) => ({
+  const paths = issues.data.map(({ slug, id }: ContentIssue, i) => ({
     params: { slug: slug },
   }));
 

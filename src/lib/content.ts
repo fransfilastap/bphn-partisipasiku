@@ -2,7 +2,12 @@ import fetcher from '@/lib/fetcher';
 import { graphql } from '@/gql';
 import { GetAboutQuery, GetIssuesQuery, GetTopicsQuery } from '@/gql/graphql';
 import { Variables } from 'graphql-request';
-import { ContentIssue, ContentMeta, ContentTopic } from '@/types/model';
+import {
+  ContentIssue,
+  ContentIssues,
+  ContentMeta,
+  ContentTopic,
+} from '@/types/model';
 import { parseMarkdown } from '@/lib/markdown';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { DEFAULT_PLACEHOLDER } from '@/lib/strapi-image';
@@ -97,10 +102,17 @@ export const getTopics = async (
 };
 
 export const getIssue = async (slug: string | string[] | undefined) => {
-  const issues: ContentIssue[] = await getIssues({
+  const issues: ContentIssues = await getIssues({
     filters: { slug: { eq: slug } },
   });
-  return issues[0];
+  return issues.data[0];
+};
+
+export const getIssuePerPage = async (page = 1): Promise<ContentIssues> => {
+  const issues: ContentIssues = await getIssues({
+    pagination: { page: page },
+  });
+  return issues;
 };
 
 export const getIssues = async (variables?: Variables) => {
@@ -153,6 +165,14 @@ export const getIssues = async (variables?: Variables) => {
             }
           }
         }
+        meta {
+          pagination {
+            page
+            pageCount
+            pageSize
+            total
+          }
+        }
       }
     }
   `);
@@ -160,7 +180,7 @@ export const getIssues = async (variables?: Variables) => {
   const issues: GetIssuesQuery = await fetcher(query, variables ?? {});
   const collection = issues.issues?.data;
 
-  return await Promise.all(
+  const data: ContentIssue[] = await Promise.all(
     collection!.map(async (issue, index): Promise<ContentIssue> => {
       const markdown = await parseMarkdown(issue.attributes?.background!);
 
@@ -191,4 +211,14 @@ export const getIssues = async (variables?: Variables) => {
       } as ContentIssue;
     })
   ).then((value) => value);
+
+  return {
+    data: data,
+    pagination: {
+      page: issues.issues?.meta.pagination.page,
+      pageCount: issues.issues?.meta.pagination.pageCount,
+      total: issues.issues?.meta.pagination.total,
+      pageSize: issues.issues?.meta.pagination.pageSize,
+    },
+  } as ContentIssues;
 };

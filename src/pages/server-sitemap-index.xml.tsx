@@ -4,10 +4,10 @@ import { getIssues, getTopics } from '@/lib/content';
 import { AppInfo } from '@/configs';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const issues = await getIssues();
+  const issues = await getIssues({ pagination: { limit: -1 } });
   const topics = await getTopics();
 
-  const fields: ISitemapField[] = issues.map((e) => ({
+  const fields: ISitemapField[] = issues.data.map((e) => ({
     loc: `${AppInfo.url}/diskusi/${e.slug}`,
     lastmod: new Date().toISOString(),
     priority: 0.7,

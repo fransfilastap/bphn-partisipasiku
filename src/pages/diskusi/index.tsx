@@ -1,5 +1,11 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import { ChangeEvent, Fragment, useMemo, useState } from 'react';
+import {
+  ChangeEvent,
+  Fragment,
+  MouseEventHandler,
+  useMemo,
+  useState,
+} from 'react';
 import { motion } from 'framer-motion';
 import Seo from '@/components/seo/Seo';
 import Container from '@/components/base/Container';
@@ -9,9 +15,14 @@ import Input from '@/components/base/Input';
 import { SearchIcon } from '@/components/icons';
 import debounce from 'lodash.debounce';
 import IssueGrid from '@/components/IssueGrid';
+import ReactPaginate from 'react-paginate';
 
 export const getStaticProps: GetStaticProps = async () => {
-  const issues = await getIssues();
+  const issues = await getIssues({
+    pagination: { limit: -1, start: 0 },
+    sort: ['createdAt:desc'],
+  });
+
   return {
     props: {
       issues,
@@ -24,7 +35,7 @@ export default function IssuePage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [searchValue, setSearchValue] = useState<string>('');
   const filteredIssue = useMemo((): ContentIssue[] => {
-    return issues.filter((issue: ContentIssue) =>
+    return issues.data.filter((issue: ContentIssue) =>
       issue.title.toLowerCase().includes(searchValue.toLowerCase())
     );
   }, [issues, searchValue]);
@@ -34,6 +45,17 @@ export default function IssuePage({
   };
 
   const debounceQueryChange = debounce(handleQueryChange, 300);
+
+  const [itemOffset, setItemOffset] = useState<number>(0);
+  const itemsPerPage = 12;
+  const endOffset = itemOffset + itemsPerPage;
+  const currentItems = filteredIssue.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(filteredIssue.length / itemsPerPage);
+  const pageChangeHandler = (selectedItem: { selected: number }) => {
+    const newOffset: number =
+      (selectedItem.selected * itemsPerPage) % filteredIssue.length;
+    setItemOffset(newOffset);
+  };
 
   return (
     <Fragment>
@@ -59,7 +81,16 @@ export default function IssuePage({
             leftIcon={<SearchIcon />}
           />
         </div>
-        <IssueGrid issues={filteredIssue} />
+        <IssueGrid issues={currentItems} />
+        <ReactPaginate
+          className="inline-flex w-full gap-3 my-5 items-center justify-center"
+          pageLinkClassName="block px-3 py-1 rounded-md bg-gray-100 dark:bg-gray-900 text-black dark:text-white hover:bg-gray-300 transition-color duration-100 ease-in-out"
+          activeLinkClassName="bg-blue-500 text-white"
+          onPageChange={pageChangeHandler}
+          pageRangeDisplayed={5}
+          breakLabel="..."
+          pageCount={pageCount}
+        />
       </Container>
     </Fragment>
   );

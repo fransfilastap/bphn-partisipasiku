@@ -11,6 +11,16 @@ export type ContentIssue = {
   createdAt: Date;
 };
 
+export type ContentIssues = {
+  data: ContentIssue[];
+  pagination: {
+    page: number | string;
+    pageCount: number | string;
+    pageSize: number | string;
+    total: number | string;
+  };
+};
+
 export type ContentMeta = {
   description: string;
   title: string;

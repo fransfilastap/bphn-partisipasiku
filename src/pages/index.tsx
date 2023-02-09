@@ -43,7 +43,7 @@ export default function Home({
       <Masthead />
       <Container className='flex flex-col gap-10 p-6 md:p-4'>
         <HighlightedTopics topics={topics} />
-        <HighlightedIssues issues={issues} />
+        <HighlightedIssues issues={issues.data} />
       </Container>
     </Fragment>
   );

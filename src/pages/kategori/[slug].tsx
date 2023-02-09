@@ -9,7 +9,6 @@ import Input from '@/components/base/Input';
 import { SearchIcon } from '@/components/icons';
 import debounce from 'lodash.debounce';
 import IssueGrid from '@/components/IssueGrid';
-import { AppInfo } from '@/configs';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const topics = await getTopics({ sort: 'createdAt:asc' });
@@ -35,6 +34,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const issues = await getIssues({
     filters: { topic: { slug: { eq: params?.slug } } },
+    pagination: { limit: -1 },
   });
 
   return {
@@ -51,7 +51,7 @@ export default function IssueByTopicPage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [searchValue, setSearchValue] = useState<string>('');
   const filteredIssue = useMemo((): ContentIssue[] => {
-    return issues.filter((issue: ContentIssue) =>
+    return issues.data.filter((issue: ContentIssue) =>
       issue.title.toLowerCase().includes(searchValue.toLowerCase())
     );
   }, [issues, searchValue]);

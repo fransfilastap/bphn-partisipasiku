@@ -1423,6 +1423,16 @@ export type GetIssuesQuery = {
         };
       } | null;
     }>;
+    meta: {
+      __typename?: 'ResponseCollectionMeta';
+      pagination: {
+        __typename?: 'Pagination';
+        page: number;
+        pageCount: number;
+        pageSize: number;
+        total: number;
+      };
+    };
   } | null;
 };
 
@@ -1957,6 +1967,40 @@ export const GetIssuesDocument = {
                                   },
                                 ],
                               },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'meta' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'pagination' },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'page' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'pageCount' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'pageSize' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'total' },
                             },
                           ],
                         },
