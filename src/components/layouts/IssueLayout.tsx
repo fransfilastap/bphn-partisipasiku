@@ -110,7 +110,7 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
             />
             <Disqus
               id='disqus'
-              identifier={`/diskusi/${slug}`}
+              identifier={`diskusi/${slug}`}
               title={title}
               locale='id-ID'
             />
