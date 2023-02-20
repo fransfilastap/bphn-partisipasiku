@@ -16,4 +16,7 @@ const AppInfo: IAppInfo = {
   ],
   twitter: '@bphn_kumham',
 };
+
+export const SIZE_PER_PAGE = 12;
+
 export { AppInfo };

@@ -10,7 +10,7 @@ const Markdown: FunctionComponent<MarkdownProps> = (props) => {
   return (
     <article
       className={clsxtw(
-        'prose prose-p:font-[300] prose-black prose-p:text-[0.9em] dark:prose-invert max-w-none',
+        'prose font-[300] prose-black dark:prose-invert max-w-none',
         props.className
       )}
     >
