@@ -6,6 +6,7 @@ import Container from '@/components/base/Container';
 import { getTopics } from '@/lib/content';
 import { ContentTopic } from '@/types/model';
 import TopicCard from '@/components/card/TopicCard';
+import { AppInfo } from '@/configs';
 
 export const getStaticProps: GetStaticProps = async () => {
   const topics = await getTopics({ sort: 'createdAt:asc' });
@@ -26,6 +27,9 @@ export default function TopicPage({
         description='Kategori Topik Isu Peraturan Perundangan-undangan'
         title='Kategori Topik isu Peraturan Perundangan-undangan'
         type='article'
+        image={`${AppInfo.url}/api/og?title=${encodeURI(
+          'Tentang Partisipasiku'
+        )}`}
       />
       <Container className='p-6 md:p-4 min-h-[80vh] w-full lg:w-2/3'>
         <motion.h5

@@ -16,6 +16,7 @@ import { SearchIcon } from '@/components/icons';
 import debounce from 'lodash.debounce';
 import IssueGrid from '@/components/IssueGrid';
 import ReactPaginate from 'react-paginate';
+import { AppInfo } from '@/configs';
 
 export const getStaticProps: GetStaticProps = async () => {
   const issues = await getIssues({
@@ -62,8 +63,11 @@ export default function IssuePage({
       <Seo
         pageTitle='Topik Isu Peraturan Perundang-undangan'
         description='Sampaikan pendapat anda'
-        title='Topik Isu Peraturan Perundang-undangan'
+        title='Daftar Isu Peraturan Perundang-undangan'
         type='article'
+        image={`${AppInfo.url}/api/og?title=${encodeURI(
+          'Ayo Berpartisipasi!'
+        )}`}
       />
       <Container className='p-6 md:p-4'>
         <motion.h5
@@ -83,12 +87,12 @@ export default function IssuePage({
         </div>
         <IssueGrid issues={currentItems} />
         <ReactPaginate
-          className="inline-flex w-full gap-3 my-5 items-center justify-center"
-          pageLinkClassName="block px-3 py-1 rounded-md bg-gray-100 dark:bg-gray-900 text-black dark:text-white hover:bg-gray-300 transition-color duration-100 ease-in-out"
-          activeLinkClassName="bg-blue-500 text-white"
+          className='inline-flex w-full gap-3 my-5 items-center justify-center'
+          pageLinkClassName='block px-3 py-1 rounded-md bg-gray-100 dark:bg-gray-900 text-black dark:text-white hover:bg-gray-300 transition-color duration-100 ease-in-out'
+          activeLinkClassName='bg-blue-500 text-white'
           onPageChange={pageChangeHandler}
           pageRangeDisplayed={5}
-          breakLabel="..."
+          breakLabel='...'
           pageCount={pageCount}
         />
       </Container>
