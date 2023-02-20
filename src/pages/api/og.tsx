@@ -13,18 +13,27 @@ const fontHeading = fetch(
 export default async function handler(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const topicTitle = searchParams.get('title');
+  const category = searchParams.get('cat');
   const fontData = await fontHeading;
 
-  return new ImageResponse(<OgTailwind caption={topicTitle} />, {
-    width: 1200,
-    height: 630,
-    emoji: 'twemoji',
-    fonts: [
-      {
-        name: 'Inter',
-        data: fontData,
-        style: 'normal',
-      },
-    ],
-  });
+  return new ImageResponse(
+    (
+      <OgTailwind
+        caption={topicTitle}
+        category={category}
+      />
+    ),
+    {
+      width: 1200,
+      height: 630,
+      emoji: 'twemoji',
+      fonts: [
+        {
+          name: 'Inter',
+          data: fontData,
+          style: 'normal',
+        },
+      ],
+    }
+  );
 }

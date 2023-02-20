@@ -7,6 +7,7 @@ import DateComponent from '@/components/base/DateComponent';
 
 interface IssueCardProps {
   title: string;
+  description: string | null;
   slug: string;
   topic?: string;
   priority?: boolean;
@@ -22,6 +23,7 @@ interface IssueCardProps {
 
 const IssueCard: FunctionComponent<IssueCardProps> = ({
   title,
+  description,
   slug,
   topic,
   cover,
@@ -47,13 +49,18 @@ const IssueCard: FunctionComponent<IssueCardProps> = ({
         />
       </div>
       <div className='flex flex-col justify-between flex-1 w-full px-0 py-1'>
-        <h5 className='text-gray-800 my-3 dark:text-white font-[600] text-[1.1em] lg:text-[1.1em] leading-[1.3] -tracking-tight line-clamp-3'>
-          {title}
-        </h5>
+        <div className='flex flex-col gap-1 my-3'>
+          <h5 className='text-gray-800  dark:text-white font-[600] text-[1.1em] lg:text-[1.1em] leading-[1.3] -tracking-tight line-clamp-3'>
+            {title}
+          </h5>
+          <p className='text-gray-600 dark:text-white font-[300] text-[0.8em] lg:text-[0.83em] leading-[1.3] -tracking-tight line-clamp-3'>
+            {description}
+          </p>
+        </div>
         <div className='flex flex-row items-center justify-between'>
           <DateComponent
             date={createdAt}
-            className='items-center dark:group-hover:bg-gray-700/30  group-hover:bg-gray-200/30 transition duration-100 ease-linear delay-100 rounded-full bg-gray-100 dark:bg-gray-800/30 py-2 px-2'
+            className='items-center text-ellipsis dark:group-hover:bg-gray-700/30  group-hover:bg-gray-200/30 transition duration-100 ease-linear delay-100 rounded-full bg-gray-100 dark:bg-gray-800/30 py-2 px-2'
           />
           <p className='rounded-full px-2 py-2 dark:bg-gray-800/30 bg-gray-100 max-w-max text-[0.7em] '>
             {topic}

@@ -27,6 +27,7 @@ export default function IssueGrid({ issues }: { issues: ContentIssue[] }) {
             priority={i <= 5}
             slug={e.slug}
             title={e.title}
+            description={e.description}
             key={e.slug}
           />
         );

@@ -3,6 +3,7 @@ import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 export type ContentIssue = {
   id: string;
   title: string;
+  description: string;
   topic: string;
   slug: string;
   cover: ContentImage;

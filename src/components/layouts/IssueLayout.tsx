@@ -76,6 +76,9 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
               <h5 className='text-[2em] lg:text-[2.5em] font-[600] leading-[1] tracking-tight'>
                 {title}
               </h5>
+              <p className='text-[1em] my-3 lg:text-[1.3em] font-[300] leading-[1] tracking-tight'>
+                {description}
+              </p>
             </div>
             <div className='flex flex-row'>
               <p className='inline-flex items-center justify-center gap-2'>

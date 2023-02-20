@@ -187,6 +187,7 @@ export const getIssues = async (variables?: Variables) => {
       return {
         id: issue.id,
         title: issue.attributes?.title,
+        description: issue.attributes?.seo?.metaDescription,
         meta: {
           title: issue.attributes?.seo?.metaTitle! ?? issue.attributes?.title,
           description: issue.attributes?.seo?.metaDescription! ?? '',
