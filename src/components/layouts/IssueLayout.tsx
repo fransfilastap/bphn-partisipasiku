@@ -73,10 +73,10 @@ const IssueLayout: FunctionComponent<IssueProps> = ({
               <h6 className='block p-2 bg-gray-500/30 text-black dark:text-white max-w-max font-[500] text-[0.7em] rounded-full'>
                 {topic}
               </h6>
-              <h5 className='text-[2em] lg:text-[2.5em] font-[600] leading-[1] tracking-tight'>
+              <h5 className='text-[2em] lg:text-[2.5em] font-[700] leading-[0.9] tracking-[0.98]'>
                 {title}
               </h5>
-              <p className='text-[1em] my-3 lg:text-[1.3em] font-[300] leading-[1] tracking-tight'>
+              <p className='text-[1.3em] my-3 font-[400] text-gray-500 dark:text-gray-400 leading-[1.1] tracking-[1]'>
                 {description}
               </p>
             </div>
