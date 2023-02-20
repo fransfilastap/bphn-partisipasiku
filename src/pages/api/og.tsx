@@ -1,61 +1,30 @@
 import { ImageResponse } from '@vercel/og';
 import { NextRequest } from 'next/server';
-import { AppInfo } from '@/configs';
+import OgTailwind from '@/components/og/OgTailwind';
 
 export const config = {
   runtime: 'edge',
 };
 
-const font = fetch(
-  new URL('../../../public/fonts/kaisei-tokumin-bold.ttf', import.meta.url)
+const fontHeading = fetch(
+  new URL('../../../public/fonts/Inter-Bold.ttf', import.meta.url)
 ).then((res) => res.arrayBuffer());
 
 export default async function handler(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const topicTitle = searchParams.get('title');
-  const fontData = await font;
+  const fontData = await fontHeading;
 
-  return new ImageResponse(
-    (
-      <div
-        style={{
-          height: '100%',
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          justifyContent: 'center',
-          backgroundImage: `url(${AppInfo.url}/og-bg.jpg)`,
-        }}
-      >
-        <div
-          style={{
-            marginLeft: 190,
-            marginRight: 190,
-            display: 'flex',
-            fontSize: 130,
-            fontFamily: 'Kaisei Tokumin',
-            letterSpacing: '-0.05em',
-            fontStyle: 'normal',
-            color: 'white',
-            lineHeight: '120px',
-            whiteSpace: 'pre-wrap',
-          }}
-        >
-          {topicTitle}
-        </div>
-      </div>
-    ),
-    {
-      width: 1920,
-      height: 1080,
-      fonts: [
-        {
-          name: 'Kaisei Tokumin',
-          data: fontData,
-          style: 'normal',
-        },
-      ],
-    }
-  );
+  return new ImageResponse(<OgTailwind caption={topicTitle} />, {
+    width: 1200,
+    height: 630,
+    emoji: 'twemoji',
+    fonts: [
+      {
+        name: 'Inter',
+        data: fontData,
+        style: 'normal',
+      },
+    ],
+  });
 }
