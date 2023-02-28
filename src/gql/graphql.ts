@@ -832,6 +832,7 @@ export type StringFilterInput = {
 export type Topic = {
   __typename?: 'Topic';
   attacments?: Maybe<UploadFileRelationResponseCollection>;
+  background: Scalars['String'];
   createdAt?: Maybe<Scalars['DateTime']>;
   description: Scalars['String'];
   name: Scalars['String'];
@@ -865,6 +866,7 @@ export type TopicEntityResponseCollection = {
 
 export type TopicFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<TopicFiltersInput>>>;
+  background?: InputMaybe<StringFilterInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   description?: InputMaybe<StringFilterInput>;
   id?: InputMaybe<IdFilterInput>;
@@ -878,6 +880,7 @@ export type TopicFiltersInput = {
 
 export type TopicInput = {
   attacments?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  background?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
@@ -1352,6 +1355,7 @@ export type GetTopicsQuery = {
       attributes?: {
         __typename?: 'Topic';
         description: string;
+        background: string;
         name: string;
         slug: string;
         createdAt?: any | null;
@@ -1651,6 +1655,10 @@ export const GetTopicsDocument = {
                             {
                               kind: 'Field',
                               name: { kind: 'Name', value: 'description' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'background' },
                             },
                             {
                               kind: 'Field',
