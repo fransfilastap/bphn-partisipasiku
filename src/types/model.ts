@@ -40,6 +40,7 @@ export type ContentImage = {
 export type ContentTopic = {
   id: string;
   description: string;
+  background: MDXRemoteSerializeResult;
   name: string;
   slug: string;
   createdAt: Date;

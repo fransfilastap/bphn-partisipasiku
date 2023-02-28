@@ -74,6 +74,7 @@ export const getTopics = async (
             id
             attributes {
               description
+              background
               name
               slug
               createdAt
@@ -90,10 +91,12 @@ export const getTopics = async (
 
   return Promise.all(
     collection!.map(async (e, i): Promise<ContentTopic> => {
+      const markdown = await parseMarkdown(e.attributes?.background!);
       return {
         slug: e.attributes?.slug,
         createdAt: e.attributes?.createdAt,
-        description: e.attributes?.description,
+        description: e.attributes?.description!,
+        background: markdown,
         name: e.attributes?.name,
         publishedAt: e.attributes?.publishedAt,
       } as ContentTopic;
@@ -187,7 +190,7 @@ export const getIssues = async (variables?: Variables) => {
       return {
         id: issue.id,
         title: issue.attributes?.title,
-        description: issue.attributes?.seo?.metaDescription,
+        description: issue.attributes?.seo?.metaDescription! ?? '',
         meta: {
           title: issue.attributes?.seo?.metaTitle! ?? issue.attributes?.title,
           description: issue.attributes?.seo?.metaDescription! ?? '',

@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
-import { ChangeEvent, Fragment, useMemo, useState } from 'react';
+import React, { ChangeEvent, Fragment, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import Seo from '@/components/seo/Seo';
 import Container from '@/components/base/Container';
@@ -9,6 +9,7 @@ import Input from '@/components/base/Input';
 import { SearchIcon } from '@/components/icons';
 import debounce from 'lodash.debounce';
 import IssueGrid from '@/components/IssueGrid';
+import Markdown from '@/components/markdown/Markdown';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const topics = await getTopics({ sort: 'createdAt:asc' });
@@ -80,14 +81,10 @@ export default function IssueByTopicPage({
           >
             {topic.name}
           </motion.h5>
-          <motion.p
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className='font-body text-md tracking-tighter text-gray-600 dark:text-gray-400'
-          >
-            {topic.description}
-          </motion.p>
+          <Markdown
+            mdx={topic.background}
+            className='pb-10 border-b prose-md font-body border-b-gray-100 dark:border-b-gray-800'
+          />
         </div>
 
         <div className='flex flex-col w-full my-8'>
