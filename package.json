@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@next/font": "13.1.6",
-    "@vercel/og": "^0.0.27",
+    "@vercel/og": "^0.3.0",
     "clsx": "^1.2.1",
     "disqus-react": "^1.1.5",
     "framer-motion": "^8.5.4",
