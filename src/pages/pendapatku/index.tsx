@@ -62,7 +62,7 @@ const AcceptedIssues = () => {
   const MAX_PAGE_SIZE = 12;
   const [page, setPage] = useState<number>(1);
   const { data, error, isLoading } = useSWR<PendapatKuResponse>(
-    `/pendapat-kus?populate[0]=biodata&pagination[page]=${page}&pagination[pageSize]=${MAX_PAGE_SIZE}`,
+    `pendapat-kus?populate[0]=biodata&pagination[page]=${page}&pagination[pageSize]=${MAX_PAGE_SIZE}`,
     restFetcher
   );
 
