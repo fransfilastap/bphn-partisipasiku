@@ -1,4 +1,10 @@
-import React, { Fragment, FunctionComponent, useState } from 'react';
+import React, {
+  Fragment,
+  FunctionComponent,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import Seo from '@/components/seo/Seo';
 import { AppInfo } from '@/configs';
 import Container from '@/components/base/Container';
@@ -61,18 +67,19 @@ const AcceptedIssues = () => {
   const { selectedOpinion, clearSelectedOpinion } = useOpinionState();
   const MAX_PAGE_SIZE = 12;
   const [page, setPage] = useState<number>(1);
+  const url = useMemo(
+    () =>
+      `pendapat-kus?populate[0]=biodata&pagination[page]=${page}&pagination[pageSize]=${MAX_PAGE_SIZE}&sort[0]=legacyDate&sort[1]=createdAt`,
+    [page]
+  );
   const { data, error, isLoading } = useSWR<PendapatKuResponse>(
-    `pendapat-kus?populate[0]=biodata&pagination[page]=${page}&pagination[pageSize]=${MAX_PAGE_SIZE}`,
+    url,
     restFetcher
   );
 
-  const [itemOffset, setItemOffset] = useState<number>(0);
-  const pageCount = Math.ceil(data?.meta.pagination.pageCount! / MAX_PAGE_SIZE);
+  const pageCount = data?.meta.pagination.pageCount!;
   const pageChangeHandler = (selectedItem: { selected: number }) => {
-    const newOffset: number =
-      (selectedItem.selected * MAX_PAGE_SIZE) % data!.data.length;
-    setItemOffset(newOffset);
-    setPage(selectedItem.selected);
+    setPage(selectedItem.selected + 1);
   };
 
   if (data?.data.length! <= 0)
@@ -87,12 +94,12 @@ const AcceptedIssues = () => {
       {isLoading && <PendapatkuSkeleton />}
       {!isLoading && !error && (
         <div>
+          <div className='flex flex-col items-center justify-center my-10'>
+            <h6 className='text-black dark:text-white font-[300] text-lg lg:text-2xl my-1'>
+              Berikut apa yang masyarakat katakan...
+            </h6>
+          </div>
           <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'>
-            <div className='flex flex-col items-center justify-center my-5'>
-              <h6 className='text-black dark:text-white font-[300] text-lg lg:text-2xl my-1'>
-                Berikut apa yang masyarakat katakan...
-              </h6>
-            </div>
             {data?.data.map((e, i) => (
               <PendapatKuCard
                 key={i}
@@ -125,7 +132,7 @@ const AcceptedIssues = () => {
               animate={{ y: 0 }}
               exit={{ y: 1000 }}
               transition={{ type: 'spring', stiffness: 75, delay: 0.04 }}
-              className='fixed z-[9999] w-full bottom-0 left-0 flex flex-col items-center justify-start p-4 h-[80vh] overflow-y-scroll bg-white rounded-t-2xl'
+              className='fixed z-[9999] w-full bottom-0 left-0 flex flex-col items-center justify-start p-4 h-[80vh] overflow-y-scroll bg-white dark:bg-slate-800 rounded-t-2xl'
             >
               <div className='flex flex-row w-full justify-end gap-2'>
                 <button onClick={clearSelectedOpinion}>
@@ -220,7 +227,7 @@ const PendapatKuCard: FunctionComponent<{ data: PendapatKu }> = (props) => {
         {props.data.attributes.judul}
       </h5>
       <ReactMarkdown
-        className='prose'
+        className='prose dark:prose-invert'
         remarkPlugins={[remarkGfm]}
       >
         {sliceByWord(props.data.attributes.pendapat, 150)}
