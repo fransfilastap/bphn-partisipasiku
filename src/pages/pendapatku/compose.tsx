@@ -8,8 +8,7 @@ import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { HCAPTCHA_SITEKEY, OG_URL } from '@/configs/env';
 import Seo from '@/components/seo/Seo';
 import Container from '@/components/base/Container';
-import axios from '@/lib/axios';
-import Portal from '@/components/base/Portal';
+import axiosInstance from '@/lib/axiosInstance';
 import Modal from '@/components/base/Modal';
 
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false });
@@ -18,12 +17,12 @@ export default function ComposePage() {
   return (
     <Fragment>
       <Seo
-        title="Masukan Pendapat"
-        pageTitle="PendapatKu"
+        title='Masukan Pendapat'
+        pageTitle='PendapatKu'
         image={`${OG_URL}/api/og?title=Pendapat+Hukum+Ku`}
-        description="Masukan pendapat anda terkait isu hukum di Indonesia."
+        description='Masukan pendapat anda terkait isu hukum di Indonesia.'
       />
-      <Container className="mt-10">
+      <Container className='mt-10'>
         <Masthead />
         <Form />
       </Container>
@@ -33,9 +32,9 @@ export default function ComposePage() {
 
 const Masthead = () => {
   return (
-    <section className="mb-6">
+    <section className='mb-6'>
       <h2 className='text-4xl font-extrabold dark:text-white'>
-        Submit masukan anda terkait isu hukum di Indonesia di sini!
+        Kirim masukan anda terkait isu hukum di Indonesia di sini.
       </h2>
     </section>
   );
@@ -72,10 +71,6 @@ const Form = () => {
     token: Yup.string().required('Required'),
   });
 
-  useEffect(() => {
-    setCaptchaKey(`hcapthca${new Date().getMilliseconds}`);
-  }, []);
-
   return (
     <>
       <Formik
@@ -84,7 +79,7 @@ const Form = () => {
         onSubmit={async (values, { setSubmitting, resetForm }) => {
           setSubmitting(true);
           const { pendapat, judul, token, ...biodata } = values;
-          const result = await axios('/pendapat-kus', {
+          const result = await axiosInstance('/pendapat-kus', {
             method: 'post',
             data: JSON.stringify({
               token: token,
@@ -115,7 +110,7 @@ const Form = () => {
           isSubmitting,
         }) => (
           <form
-            className="flex flex-col w-full"
+            className='flex flex-col w-full'
             onSubmit={handleSubmit}
           >
             <div className='mb-6'>
@@ -134,7 +129,7 @@ const Form = () => {
                 placeholder='Masukan Nama'
               />
               {touched.name && errors.name && (
-                <p className="text-xs text-red-400 italic">{errors.name}</p>
+                <p className='text-xs text-red-400 italic'>{errors.name}</p>
               )}
             </div>
             <div className='mb-6'>
@@ -153,7 +148,7 @@ const Form = () => {
                 placeholder='name@mail.com'
               />
               {touched.email && errors.email && (
-                <p className="text-xs text-red-400 italic">{errors.email}</p>
+                <p className='text-xs text-red-400 italic'>{errors.email}</p>
               )}
             </div>
             <div className='mb-6'>
@@ -172,7 +167,7 @@ const Form = () => {
                 placeholder='Undang-undang pemilu'
               />
               {touched.judul && errors.judul && (
-                <p className="text-xs text-red-400 italic">{errors.judul}</p>
+                <p className='text-xs text-red-400 italic'>{errors.judul}</p>
               )}
             </div>
             <div className='mb-6'>
@@ -184,16 +179,14 @@ const Form = () => {
               </label>
               <MDEditor
                 value={values.pendapat}
-                className="h-[250px] mb-10"
+                className='h-[250px] mb-10'
                 onChange={(v) => setFieldValue('pendapat', v)}
               />
               {touched.pendapat && errors.pendapat && (
-                <p className="text-xs text-red-400 italic">
-                  {errors.pendapat}
-                </p>
+                <p className='text-xs text-red-400 italic'>{errors.pendapat}</p>
               )}
             </div>
-            <div className="mb-6">
+            <div className='mb-6'>
               <HCaptcha
                 key={captchaKey}
                 sitekey={`${HCAPTCHA_SITEKEY}`}
@@ -204,12 +197,8 @@ const Form = () => {
               />
             </div>
             {!success && errorMessage && (
-              <div
-                className="mb-6 border border-red-50 rounded-md p-5 w-full justify-center items-center"
-              >
-                <p className="font-[500] text-lg text-center">
-                  {errorMessage}
-                </p>
+              <div className='mb-6 border border-red-50 rounded-md p-5 w-full justify-center items-center'>
+                <p className='font-[500] text-lg text-center'>{errorMessage}</p>
               </div>
             )}
             <button
@@ -244,7 +233,7 @@ const Form = () => {
       <Modal
         modalOpen={successModalOpen}
         closeMenuHandler={modalCloseHandler}
-        modalSize="lg"
+        modalSize='lg'
       >
         <svg
           viewBox='0 0 24 24'

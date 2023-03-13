@@ -1,21 +1,9 @@
-import React, {
-  Fragment,
-  FunctionComponent,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { Fragment, FunctionComponent, useState } from 'react';
 import Seo from '@/components/seo/Seo';
 import { AppInfo } from '@/configs';
 import Container from '@/components/base/Container';
 import clsxtw from '@/lib/clsxtw';
 import useSWR from 'swr';
-import {
-  HCAPTCHA_SITEKEY,
-  STRAPI_API_TOKEN,
-  STRAPI_REST_API_ENDPOINT,
-} from '@/configs/env';
 import { restFetcher } from '@/lib/fetcher';
 import { PendapatKu, PendapatKuResponse } from '@/types/model';
 import ReactPaginate from 'react-paginate';
@@ -74,7 +62,7 @@ const AcceptedIssues = () => {
   const MAX_PAGE_SIZE = 12;
   const [page, setPage] = useState<number>(1);
   const { data, error, isLoading } = useSWR<PendapatKuResponse>(
-    `${STRAPI_REST_API_ENDPOINT}/pendapat-kus?populate[0]=biodata&pagination[page]=${page}&pagination[pageSize]=${MAX_PAGE_SIZE}`,
+    `/pendapat-kus?populate[0]=biodata&pagination[page]=${page}&pagination[pageSize]=${MAX_PAGE_SIZE}`,
     restFetcher
   );
 
@@ -87,27 +75,24 @@ const AcceptedIssues = () => {
     setPage(selectedItem.selected);
   };
 
-  if (data?.data.length! <= 0) {
+  if (data?.data.length! <= 0)
     return (
       <div className='flex flex-col items-center justify-center w-full p-6 h-[300px] border border-gray-100 dark:border-gray-600 rounded-md'>
-        <p className='text-lg text-zinc-700 dark:text-white'>
-          Belum ada pendapat :(
-        </p>
+        <p className='text-lg text-zinc-700 dark:text-white'>Tidak ada entry</p>
       </div>
     );
-  }
 
   return (
     <section className={clsxtw('flex flex-col gap-2')}>
-      <div className='flex flex-col items-center justify-center my-5'>
-        <h6 className='text-black dark:text-white font-[300] text-lg lg:text-2xl my-1'>
-          Berikut apa yang masyarakat katakan...
-        </h6>
-      </div>
       {isLoading && <PendapatkuSkeleton />}
       {!isLoading && !error && (
         <div>
           <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'>
+            <div className='flex flex-col items-center justify-center my-5'>
+              <h6 className='text-black dark:text-white font-[300] text-lg lg:text-2xl my-1'>
+                Berikut apa yang masyarakat katakan...
+              </h6>
+            </div>
             {data?.data.map((e, i) => (
               <PendapatKuCard
                 key={i}

@@ -33,7 +33,7 @@ export async function restFetcher<JSON = any>(
   input: RequestInfo,
   init?: RequestInit
 ): Promise<JSON> {
-  const res = await fetch(input, {
+  const res = await fetch(`${STRAPI_REST_API_ENDPOINT}/${input}`, {
     ...init,
     headers: {
       Authorization: `Bearer ${STRAPI_API_TOKEN}`,
