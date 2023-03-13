@@ -59,7 +59,7 @@ const Masthead = () => {
           bagi pembangunan hukum.
         </h6>
         <Link
-          href="/pendapatku/compose"
+          href='/pendapatku/compose'
           className='text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700'
         >
           Submit Pendapat
@@ -87,6 +87,16 @@ const AcceptedIssues = () => {
     setPage(selectedItem.selected);
   };
 
+  if (data?.data.length! <= 0) {
+    return (
+      <div className='flex flex-col items-center justify-center w-full p-6 h-[300px] border border-gray-100 dark:border-gray-600 rounded-md'>
+        <p className='text-lg text-zinc-700 dark:text-white'>
+          Belum ada pendapat :(
+        </p>
+      </div>
+    );
+  }
+
   return (
     <section className={clsxtw('flex flex-col gap-2')}>
       <div className='flex flex-col items-center justify-center my-5'>
@@ -97,7 +107,7 @@ const AcceptedIssues = () => {
       {isLoading && <PendapatkuSkeleton />}
       {!isLoading && !error && (
         <div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'>
             {data?.data.map((e, i) => (
               <PendapatKuCard
                 key={i}
@@ -118,7 +128,7 @@ const AcceptedIssues = () => {
       )}
       <AnimatePresence>
         {selectedOpinion && (
-          <Portal id="detail-pendapatku-item">
+          <Portal id='detail-pendapatku-item'>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -130,9 +140,9 @@ const AcceptedIssues = () => {
               animate={{ y: 0 }}
               exit={{ y: 1000 }}
               transition={{ type: 'spring', stiffness: 75, delay: 0.04 }}
-              className="fixed z-[9999] w-full bottom-0 left-0 flex flex-col items-center justify-start p-4 h-[80vh] overflow-y-scroll bg-white rounded-t-2xl"
+              className='fixed z-[9999] w-full bottom-0 left-0 flex flex-col items-center justify-start p-4 h-[80vh] overflow-y-scroll bg-white rounded-t-2xl'
             >
-              <div className="flex flex-row w-full justify-end gap-2">
+              <div className='flex flex-row w-full justify-end gap-2'>
                 <button onClick={clearSelectedOpinion}>
                   <CloseIcon />
                 </button>
@@ -148,7 +158,7 @@ const AcceptedIssues = () => {
                   <p className='text-sm text-gray-500 truncate dark:text-gray-400'></p>
                 </div>
                 <ReactMarkdown
-                  className="prose-lg"
+                  className='prose-lg'
                   remarkPlugins={[remarkGfm]}
                 >
                   {selectedOpinion.attributes.pendapat}
@@ -164,7 +174,7 @@ const AcceptedIssues = () => {
 
 const PendapatkuSkeleton = () => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 animate-pulse">
+    <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 animate-pulse'>
       <PendapatKuSkeletonCard />
       <PendapatKuSkeletonCard />
       <PendapatKuSkeletonCard />
@@ -225,7 +235,7 @@ const PendapatKuCard: FunctionComponent<{ data: PendapatKu }> = (props) => {
         {props.data.attributes.judul}
       </h5>
       <ReactMarkdown
-        className="prose"
+        className='prose'
         remarkPlugins={[remarkGfm]}
       >
         {sliceByWord(props.data.attributes.pendapat, 150)}
