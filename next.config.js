@@ -3,7 +3,7 @@
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
-
+const removeImports = require('next-remove-imports')();
 
 const withPWA = require("next-pwa");
 
@@ -17,4 +17,4 @@ const nextConfig = {
 
 
 
-module.exports = withBundleAnalyzer(nextConfig);
+module.exports = removeImports(nextConfig);

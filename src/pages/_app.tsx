@@ -6,6 +6,7 @@ import RootLayout from '@/components/layouts/RootLayout';
 import { useRouter } from 'next/router';
 import { useGlobalState } from '@/store';
 import NextNProgress from 'nextjs-progressbar';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
 export default function App({ Component, pageProps }: AppProps): ReactElement {
   const router = useRouter();
@@ -24,7 +25,9 @@ export default function App({ Component, pageProps }: AppProps): ReactElement {
     <ThemeProvider>
       <RootLayout>
         <NextNProgress options={{ easing: 'ease', speed: 500 }} />
-        <Component {...pageProps} />
+        <ErrorBoundary>
+          <Component {...pageProps} />
+        </ErrorBoundary>
       </RootLayout>
     </ThemeProvider>
   );

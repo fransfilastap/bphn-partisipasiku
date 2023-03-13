@@ -43,6 +43,13 @@ export default function TopicPage({
         <div className='grid grid-cols-2 lg:grid-cols-4'>
           {topics.map((e: ContentTopic) => (
             <TopicCard
+              cover={{
+                url: e.attachment.url,
+                publicId: e.attachment.cloudinaryPublicId,
+                placeholder: e.attachment.placeholder,
+                altTxt: e.attachment.alternativeText,
+                caption: e.attachment.caption,
+              }}
               key={e.slug}
               id={e.id}
               name={e.name}

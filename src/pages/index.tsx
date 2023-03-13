@@ -10,11 +10,12 @@ import { getIssues, getTopics } from '@/lib/content';
 import { ContentIssue, ContentTopic } from '@/types/model';
 import IssueGrid from '@/components/IssueGrid';
 import { AppInfo } from '@/configs';
+import * as url from 'url';
 
 export const getStaticProps: GetStaticProps = async () => {
   const issues = await getIssues({
     pagination: { limit: 8 },
-    sort: ['createdAt:desc'],
+    sort: ['legacyDate:desc', 'createdAt:desc'],
   });
   const topics = await getTopics({
     pagination: { limit: 6 },
@@ -81,6 +82,13 @@ const HighlightedTopics = ({ topics }: { topics: ContentTopic[] }) => {
       <div className='grid grid-cols-2 gap-1 md:grid-cols-2 lg:grid-cols-4'>
         {topics.map((e, _) => (
           <TopicCard
+            cover={{
+              url: e.attachment.url,
+              publicId: e.attachment.cloudinaryPublicId,
+              placeholder: e.attachment.placeholder,
+              altTxt: e.attachment.alternativeText,
+              caption: e.attachment.caption,
+            }}
             key={e.slug}
             id={e.id}
             name={e.name}

@@ -1,11 +1,5 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
-import {
-  ChangeEvent,
-  Fragment,
-  MouseEventHandler,
-  useMemo,
-  useState,
-} from 'react';
+import { ChangeEvent, Fragment, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import Seo from '@/components/seo/Seo';
 import Container from '@/components/base/Container';
@@ -21,7 +15,7 @@ import { AppInfo } from '@/configs';
 export const getStaticProps: GetStaticProps = async () => {
   const issues = await getIssues({
     pagination: { limit: -1, start: 0 },
-    sort: ['createdAt:desc'],
+    sort: ['legacyDate:desc', 'createdAt:desc'],
   });
 
   return {
@@ -76,7 +70,7 @@ export default function IssuePage({
           transition={{ delay: 0.1 }}
           className='my-10 text-2xl font-bold font-body dark:border-none max-w-max'
         >
-          Daftar Diskusi.
+          Daftar Isu.
         </motion.h5>
         <div className='flex flex-col w-full my-8'>
           <Input

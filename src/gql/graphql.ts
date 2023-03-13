@@ -18,10 +18,14 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
+  Date: any;
   /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   DateTime: any;
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
+  /** The `BigInt` scalar type represents non-fractional signed whole numeric values. */
+  Long: any;
   /** The `Upload` scalar type represents a file upload. */
   Upload: any;
 };
@@ -49,6 +53,58 @@ export type AboutEntityResponse = {
 export type AboutInput = {
   Description?: InputMaybe<Scalars['String']>;
   Seo?: InputMaybe<ComponentSharedSeoInput>;
+  title?: InputMaybe<Scalars['String']>;
+};
+
+export type Activity = {
+  __typename?: 'Activity';
+  Sinopsis?: Maybe<Scalars['String']>;
+  content: Scalars['String'];
+  cover?: Maybe<UploadFileEntityResponse>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  seo?: Maybe<ComponentSharedSeo>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type ActivityEntity = {
+  __typename?: 'ActivityEntity';
+  attributes?: Maybe<Activity>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type ActivityEntityResponse = {
+  __typename?: 'ActivityEntityResponse';
+  data?: Maybe<ActivityEntity>;
+};
+
+export type ActivityEntityResponseCollection = {
+  __typename?: 'ActivityEntityResponseCollection';
+  data: Array<ActivityEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type ActivityFiltersInput = {
+  Sinopsis?: InputMaybe<StringFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<ActivityFiltersInput>>>;
+  content?: InputMaybe<StringFilterInput>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<ActivityFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ActivityFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  seo?: InputMaybe<ComponentSharedSeoFiltersInput>;
+  title?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type ActivityInput = {
+  Sinopsis?: InputMaybe<Scalars['String']>;
+  content?: InputMaybe<Scalars['String']>;
+  cover?: InputMaybe<Scalars['ID']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  seo?: InputMaybe<ComponentSharedSeoInput>;
   title?: InputMaybe<Scalars['String']>;
 };
 
@@ -119,6 +175,40 @@ export type BooleanFilterInput = {
   startsWith?: InputMaybe<Scalars['Boolean']>;
 };
 
+export type ComponentBiodataPartisipanPartisipan = {
+  __typename?: 'ComponentBiodataPartisipanPartisipan';
+  email: Scalars['String'];
+  id: Scalars['ID'];
+  instansi?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  onbehalf?: Maybe<Enum_Componentbiodatapartisipanpartisipan_Onbehalf>;
+  pekerjaan?: Maybe<Scalars['String']>;
+};
+
+export type ComponentBiodataPartisipanPartisipanFiltersInput = {
+  and?: InputMaybe<
+    Array<InputMaybe<ComponentBiodataPartisipanPartisipanFiltersInput>>
+  >;
+  email?: InputMaybe<StringFilterInput>;
+  instansi?: InputMaybe<StringFilterInput>;
+  name?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<ComponentBiodataPartisipanPartisipanFiltersInput>;
+  onbehalf?: InputMaybe<StringFilterInput>;
+  or?: InputMaybe<
+    Array<InputMaybe<ComponentBiodataPartisipanPartisipanFiltersInput>>
+  >;
+  pekerjaan?: InputMaybe<StringFilterInput>;
+};
+
+export type ComponentBiodataPartisipanPartisipanInput = {
+  email?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+  instansi?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  onbehalf?: InputMaybe<Enum_Componentbiodatapartisipanpartisipan_Onbehalf>;
+  pekerjaan?: InputMaybe<Scalars['String']>;
+};
+
 export type ComponentSharedMedia = {
   __typename?: 'ComponentSharedMedia';
   file?: Maybe<UploadFileEntityResponse>;
@@ -173,6 +263,30 @@ export type ComponentSharedSliderFilesArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+export type DateFilterInput = {
+  and?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  between?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  contains?: InputMaybe<Scalars['Date']>;
+  containsi?: InputMaybe<Scalars['Date']>;
+  endsWith?: InputMaybe<Scalars['Date']>;
+  eq?: InputMaybe<Scalars['Date']>;
+  eqi?: InputMaybe<Scalars['Date']>;
+  gt?: InputMaybe<Scalars['Date']>;
+  gte?: InputMaybe<Scalars['Date']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  lt?: InputMaybe<Scalars['Date']>;
+  lte?: InputMaybe<Scalars['Date']>;
+  ne?: InputMaybe<Scalars['Date']>;
+  not?: InputMaybe<DateFilterInput>;
+  notContains?: InputMaybe<Scalars['Date']>;
+  notContainsi?: InputMaybe<Scalars['Date']>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  notNull?: InputMaybe<Scalars['Boolean']>;
+  null?: InputMaybe<Scalars['Boolean']>;
+  or?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  startsWith?: InputMaybe<Scalars['Date']>;
+};
+
 export type DateTimeFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
   between?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
@@ -196,6 +310,11 @@ export type DateTimeFilterInput = {
   or?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
   startsWith?: InputMaybe<Scalars['DateTime']>;
 };
+
+export enum Enum_Componentbiodatapartisipanpartisipan_Onbehalf {
+  Instansi = 'Instansi',
+  Pribadi = 'Pribadi',
+}
 
 export enum Enum_Websitebuilderlog_Trigger {
   Cron = 'cron',
@@ -235,7 +354,9 @@ export type FloatFilterInput = {
 
 export type GenericMorph =
   | About
+  | Activity
   | Author
+  | ComponentBiodataPartisipanPartisipan
   | ComponentSharedMedia
   | ComponentSharedQuote
   | ComponentSharedRichText
@@ -244,6 +365,8 @@ export type GenericMorph =
   | Global
   | I18NLocale
   | Issue
+  | IssueView
+  | PendapatKu
   | Topic
   | UploadFile
   | UploadFolder
@@ -370,12 +493,14 @@ export type Issue = {
   background: Scalars['String'];
   cover: UploadFileEntityResponse;
   createdAt?: Maybe<Scalars['DateTime']>;
+  legacyDate?: Maybe<Scalars['Date']>;
   publishedAt?: Maybe<Scalars['DateTime']>;
   seo?: Maybe<ComponentSharedSeo>;
   slug: Scalars['String'];
   title: Scalars['String'];
   topic?: Maybe<TopicEntityResponse>;
   updatedAt?: Maybe<Scalars['DateTime']>;
+  views?: Maybe<Scalars['Long']>;
 };
 
 export type IssueEntity = {
@@ -401,6 +526,7 @@ export type IssueFiltersInput = {
   background?: InputMaybe<StringFilterInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   id?: InputMaybe<IdFilterInput>;
+  legacyDate?: InputMaybe<DateFilterInput>;
   not?: InputMaybe<IssueFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<IssueFiltersInput>>>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
@@ -409,17 +535,61 @@ export type IssueFiltersInput = {
   title?: InputMaybe<StringFilterInput>;
   topic?: InputMaybe<TopicFiltersInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
+  views?: InputMaybe<LongFilterInput>;
 };
 
 export type IssueInput = {
   author?: InputMaybe<Scalars['ID']>;
   background?: InputMaybe<Scalars['String']>;
   cover?: InputMaybe<Scalars['ID']>;
+  legacyDate?: InputMaybe<Scalars['Date']>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   seo?: InputMaybe<ComponentSharedSeoInput>;
   slug?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   topic?: InputMaybe<Scalars['ID']>;
+  views?: InputMaybe<Scalars['Long']>;
+};
+
+export type IssueView = {
+  __typename?: 'IssueView';
+  count?: Maybe<Scalars['Long']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  issue?: Maybe<IssueEntityResponse>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type IssueViewEntity = {
+  __typename?: 'IssueViewEntity';
+  attributes?: Maybe<IssueView>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type IssueViewEntityResponse = {
+  __typename?: 'IssueViewEntityResponse';
+  data?: Maybe<IssueViewEntity>;
+};
+
+export type IssueViewEntityResponseCollection = {
+  __typename?: 'IssueViewEntityResponseCollection';
+  data: Array<IssueViewEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type IssueViewFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<IssueViewFiltersInput>>>;
+  count?: InputMaybe<LongFilterInput>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  issue?: InputMaybe<IssueFiltersInput>;
+  not?: InputMaybe<IssueViewFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<IssueViewFiltersInput>>>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type IssueViewInput = {
+  count?: InputMaybe<Scalars['Long']>;
+  issue?: InputMaybe<Scalars['ID']>;
 };
 
 export type JsonFilterInput = {
@@ -446,12 +616,39 @@ export type JsonFilterInput = {
   startsWith?: InputMaybe<Scalars['JSON']>;
 };
 
+export type LongFilterInput = {
+  and?: InputMaybe<Array<InputMaybe<Scalars['Long']>>>;
+  between?: InputMaybe<Array<InputMaybe<Scalars['Long']>>>;
+  contains?: InputMaybe<Scalars['Long']>;
+  containsi?: InputMaybe<Scalars['Long']>;
+  endsWith?: InputMaybe<Scalars['Long']>;
+  eq?: InputMaybe<Scalars['Long']>;
+  eqi?: InputMaybe<Scalars['Long']>;
+  gt?: InputMaybe<Scalars['Long']>;
+  gte?: InputMaybe<Scalars['Long']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Long']>>>;
+  lt?: InputMaybe<Scalars['Long']>;
+  lte?: InputMaybe<Scalars['Long']>;
+  ne?: InputMaybe<Scalars['Long']>;
+  not?: InputMaybe<LongFilterInput>;
+  notContains?: InputMaybe<Scalars['Long']>;
+  notContainsi?: InputMaybe<Scalars['Long']>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['Long']>>>;
+  notNull?: InputMaybe<Scalars['Boolean']>;
+  null?: InputMaybe<Scalars['Boolean']>;
+  or?: InputMaybe<Array<InputMaybe<Scalars['Long']>>>;
+  startsWith?: InputMaybe<Scalars['Long']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   /** Change user password. Confirm with the current password. */
   changePassword?: Maybe<UsersPermissionsLoginPayload>;
+  createActivity?: Maybe<ActivityEntityResponse>;
   createAuthor?: Maybe<AuthorEntityResponse>;
   createIssue?: Maybe<IssueEntityResponse>;
+  createIssueView?: Maybe<IssueViewEntityResponse>;
+  createPendapatKu?: Maybe<PendapatKuEntityResponse>;
   createTopic?: Maybe<TopicEntityResponse>;
   createUploadFile?: Maybe<UploadFileEntityResponse>;
   createUploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -461,9 +658,12 @@ export type Mutation = {
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   createWebsiteBuilderLog?: Maybe<WebsiteBuilderLogEntityResponse>;
   deleteAbout?: Maybe<AboutEntityResponse>;
+  deleteActivity?: Maybe<ActivityEntityResponse>;
   deleteAuthor?: Maybe<AuthorEntityResponse>;
   deleteGlobal?: Maybe<GlobalEntityResponse>;
   deleteIssue?: Maybe<IssueEntityResponse>;
+  deleteIssueView?: Maybe<IssueViewEntityResponse>;
+  deletePendapatKu?: Maybe<PendapatKuEntityResponse>;
   deleteTopic?: Maybe<TopicEntityResponse>;
   deleteUploadFile?: Maybe<UploadFileEntityResponse>;
   deleteUploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -484,10 +684,13 @@ export type Mutation = {
   /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
   updateAbout?: Maybe<AboutEntityResponse>;
+  updateActivity?: Maybe<ActivityEntityResponse>;
   updateAuthor?: Maybe<AuthorEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
   updateGlobal?: Maybe<GlobalEntityResponse>;
   updateIssue?: Maybe<IssueEntityResponse>;
+  updateIssueView?: Maybe<IssueViewEntityResponse>;
+  updatePendapatKu?: Maybe<PendapatKuEntityResponse>;
   updateTopic?: Maybe<TopicEntityResponse>;
   updateUploadFile?: Maybe<UploadFileEntityResponse>;
   updateUploadFolder?: Maybe<UploadFolderEntityResponse>;
@@ -505,12 +708,24 @@ export type MutationChangePasswordArgs = {
   passwordConfirmation: Scalars['String'];
 };
 
+export type MutationCreateActivityArgs = {
+  data: ActivityInput;
+};
+
 export type MutationCreateAuthorArgs = {
   data: AuthorInput;
 };
 
 export type MutationCreateIssueArgs = {
   data: IssueInput;
+};
+
+export type MutationCreateIssueViewArgs = {
+  data: IssueViewInput;
+};
+
+export type MutationCreatePendapatKuArgs = {
+  data: PendapatKuInput;
 };
 
 export type MutationCreateTopicArgs = {
@@ -537,11 +752,23 @@ export type MutationCreateWebsiteBuilderLogArgs = {
   data: WebsiteBuilderLogInput;
 };
 
+export type MutationDeleteActivityArgs = {
+  id: Scalars['ID'];
+};
+
 export type MutationDeleteAuthorArgs = {
   id: Scalars['ID'];
 };
 
 export type MutationDeleteIssueArgs = {
+  id: Scalars['ID'];
+};
+
+export type MutationDeleteIssueViewArgs = {
+  id: Scalars['ID'];
+};
+
+export type MutationDeletePendapatKuArgs = {
   id: Scalars['ID'];
 };
 
@@ -606,6 +833,11 @@ export type MutationUpdateAboutArgs = {
   data: AboutInput;
 };
 
+export type MutationUpdateActivityArgs = {
+  data: ActivityInput;
+  id: Scalars['ID'];
+};
+
 export type MutationUpdateAuthorArgs = {
   data: AuthorInput;
   id: Scalars['ID'];
@@ -622,6 +854,16 @@ export type MutationUpdateGlobalArgs = {
 
 export type MutationUpdateIssueArgs = {
   data: IssueInput;
+  id: Scalars['ID'];
+};
+
+export type MutationUpdateIssueViewArgs = {
+  data: IssueViewInput;
+  id: Scalars['ID'];
+};
+
+export type MutationUpdatePendapatKuArgs = {
+  data: PendapatKuInput;
   id: Scalars['ID'];
 };
 
@@ -678,6 +920,61 @@ export type PaginationArg = {
   start?: InputMaybe<Scalars['Int']>;
 };
 
+export type PendapatKu = {
+  __typename?: 'PendapatKu';
+  attachment?: Maybe<UploadFileEntityResponse>;
+  biodata: ComponentBiodataPartisipanPartisipan;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  judul: Scalars['String'];
+  legacyDate?: Maybe<Scalars['Date']>;
+  pendapat: Scalars['String'];
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  response?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type PendapatKuEntity = {
+  __typename?: 'PendapatKuEntity';
+  attributes?: Maybe<PendapatKu>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type PendapatKuEntityResponse = {
+  __typename?: 'PendapatKuEntityResponse';
+  data?: Maybe<PendapatKuEntity>;
+};
+
+export type PendapatKuEntityResponseCollection = {
+  __typename?: 'PendapatKuEntityResponseCollection';
+  data: Array<PendapatKuEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type PendapatKuFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<PendapatKuFiltersInput>>>;
+  biodata?: InputMaybe<ComponentBiodataPartisipanPartisipanFiltersInput>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  judul?: InputMaybe<StringFilterInput>;
+  legacyDate?: InputMaybe<DateFilterInput>;
+  not?: InputMaybe<PendapatKuFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<PendapatKuFiltersInput>>>;
+  pendapat?: InputMaybe<StringFilterInput>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  response?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type PendapatKuInput = {
+  attachment?: InputMaybe<Scalars['ID']>;
+  biodata?: InputMaybe<ComponentBiodataPartisipanPartisipanInput>;
+  judul?: InputMaybe<Scalars['String']>;
+  legacyDate?: InputMaybe<Scalars['Date']>;
+  pendapat?: InputMaybe<Scalars['String']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  response?: InputMaybe<Scalars['String']>;
+};
+
 export enum PublicationState {
   Live = 'LIVE',
   Preview = 'PREVIEW',
@@ -686,14 +983,20 @@ export enum PublicationState {
 export type Query = {
   __typename?: 'Query';
   about?: Maybe<AboutEntityResponse>;
+  activities?: Maybe<ActivityEntityResponseCollection>;
+  activity?: Maybe<ActivityEntityResponse>;
   author?: Maybe<AuthorEntityResponse>;
   authors?: Maybe<AuthorEntityResponseCollection>;
   global?: Maybe<GlobalEntityResponse>;
   i18NLocale?: Maybe<I18NLocaleEntityResponse>;
   i18NLocales?: Maybe<I18NLocaleEntityResponseCollection>;
   issue?: Maybe<IssueEntityResponse>;
+  issueView?: Maybe<IssueViewEntityResponse>;
+  issueViews?: Maybe<IssueViewEntityResponseCollection>;
   issues?: Maybe<IssueEntityResponseCollection>;
   me?: Maybe<UsersPermissionsMe>;
+  pendapatKu?: Maybe<PendapatKuEntityResponse>;
+  pendapatKus?: Maybe<PendapatKuEntityResponseCollection>;
   topic?: Maybe<TopicEntityResponse>;
   topics?: Maybe<TopicEntityResponseCollection>;
   uploadFile?: Maybe<UploadFileEntityResponse>;
@@ -706,6 +1009,17 @@ export type Query = {
   usersPermissionsUsers?: Maybe<UsersPermissionsUserEntityResponseCollection>;
   websiteBuilderLog?: Maybe<WebsiteBuilderLogEntityResponse>;
   websiteBuilderLogs?: Maybe<WebsiteBuilderLogEntityResponseCollection>;
+};
+
+export type QueryActivitiesArgs = {
+  filters?: InputMaybe<ActivityFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type QueryActivityArgs = {
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 export type QueryAuthorArgs = {
@@ -732,8 +1046,29 @@ export type QueryIssueArgs = {
   id?: InputMaybe<Scalars['ID']>;
 };
 
+export type QueryIssueViewArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+export type QueryIssueViewsArgs = {
+  filters?: InputMaybe<IssueViewFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
 export type QueryIssuesArgs = {
   filters?: InputMaybe<IssueFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+export type QueryPendapatKuArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+export type QueryPendapatKusArgs = {
+  filters?: InputMaybe<PendapatKuFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -831,7 +1166,7 @@ export type StringFilterInput = {
 
 export type Topic = {
   __typename?: 'Topic';
-  attacments?: Maybe<UploadFileRelationResponseCollection>;
+  attacments: UploadFileEntityResponse;
   background: Scalars['String'];
   createdAt?: Maybe<Scalars['DateTime']>;
   description: Scalars['String'];
@@ -839,12 +1174,6 @@ export type Topic = {
   publishedAt?: Maybe<Scalars['DateTime']>;
   slug: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
-};
-
-export type TopicAttacmentsArgs = {
-  filters?: InputMaybe<UploadFileFiltersInput>;
-  pagination?: InputMaybe<PaginationArg>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type TopicEntity = {
@@ -879,7 +1208,7 @@ export type TopicFiltersInput = {
 };
 
 export type TopicInput = {
-  attacments?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  attacments?: InputMaybe<Scalars['ID']>;
   background?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
@@ -1360,6 +1689,22 @@ export type GetTopicsQuery = {
         slug: string;
         createdAt?: any | null;
         publishedAt?: any | null;
+        attacments: {
+          __typename?: 'UploadFileEntityResponse';
+          data?: {
+            __typename?: 'UploadFileEntity';
+            attributes?: {
+              __typename?: 'UploadFile';
+              url: string;
+              caption?: string | null;
+              placeholder?: string | null;
+              blurhash?: string | null;
+              formats?: any | null;
+              alternativeText?: string | null;
+              provider_metadata?: any | null;
+            } | null;
+          } | null;
+        };
       } | null;
     }>;
   } | null;
@@ -1385,6 +1730,7 @@ export type GetIssuesQuery = {
         slug: string;
         title: string;
         background: string;
+        legacyDate?: any | null;
         createdAt?: any | null;
         seo?: {
           __typename?: 'ComponentSharedSeo';
@@ -1654,6 +2000,85 @@ export const GetTopicsDocument = {
                           selections: [
                             {
                               kind: 'Field',
+                              name: { kind: 'Name', value: 'attacments' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'data' },
+                                    selectionSet: {
+                                      kind: 'SelectionSet',
+                                      selections: [
+                                        {
+                                          kind: 'Field',
+                                          name: {
+                                            kind: 'Name',
+                                            value: 'attributes',
+                                          },
+                                          selectionSet: {
+                                            kind: 'SelectionSet',
+                                            selections: [
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'url',
+                                                },
+                                              },
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'caption',
+                                                },
+                                              },
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'placeholder',
+                                                },
+                                              },
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'blurhash',
+                                                },
+                                              },
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'formats',
+                                                },
+                                              },
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'alternativeText',
+                                                },
+                                              },
+                                              {
+                                                kind: 'Field',
+                                                name: {
+                                                  kind: 'Name',
+                                                  value: 'provider_metadata',
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: 'Field',
                               name: { kind: 'Name', value: 'description' },
                             },
                             {
@@ -1791,6 +2216,10 @@ export const GetIssuesDocument = {
                             {
                               kind: 'Field',
                               name: { kind: 'Name', value: 'background' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'legacyDate' },
                             },
                             {
                               kind: 'Field',

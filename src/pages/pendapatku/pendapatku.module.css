@@ -1,0 +1,11 @@
+.beams {
+  @apply -z-10 top-0 left-0 w-full h-full;
+  background-image: url(../../../public/images/pendapatku-hero.png);
+  background-repeat: no-repeat;
+  background-size: 60rem;
+  background-position: center center;
+}
+
+:global(.dark) .beams {
+  background-image: url(../../../public/images/pendapatku-hero.png);
+}

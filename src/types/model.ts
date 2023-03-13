@@ -45,4 +45,50 @@ export type ContentTopic = {
   slug: string;
   createdAt: Date;
   publishedAt: Date;
+  attachment: ContentImage;
+};
+
+export type ViewCountResponse = {
+  data: [
+    {
+      id: number;
+      attributes: {
+        issue: number;
+        count: number;
+      };
+    }
+  ];
+};
+
+export type Biodata = {
+  name: string;
+  email: string;
+  onbehalf: string;
+  pekerjaan: string;
+  instansi: string;
+};
+
+export type PendapatKu = {
+  id: number;
+  attributes: {
+    judul: string;
+    pendapat: string;
+    response: string;
+    attachment: string;
+    biodata: Biodata;
+    legacyDate: Date;
+    createdAt: Date;
+  };
+};
+
+export type PendapatKuResponse = {
+  data: [PendapatKu];
+  meta: {
+    pagination: {
+      page: number;
+      pageCount: number;
+      pageSize: number;
+      total: number;
+    };
+  };
 };

@@ -89,10 +89,14 @@ export default function Footer(): ReactElement {
           </div>
         </div>
         <div className='flex flex-col-reverse items-center justify-between w-full gap-2 lg:flex-row'>
-          <p className='text-[0.9em]'>
+          <p className='flex flex-col text-[0.9em] text-center lg:text-left'>
             Copyright &copy; {new Date().getFullYear()} BPHN.go.id. All rights
             reserved{' '}
+            <span className="text-gray-600">
+              Developed and Maintained by Sub Bagian Rumah Tangga
+            </span>
           </p>
+
           <ColorModeSwitcher />
         </div>
       </Container>

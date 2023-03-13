@@ -72,6 +72,19 @@ export const getTopics = async (
           data {
             id
             attributes {
+              attacments {
+                data {
+                  attributes {
+                    url
+                    caption
+                    placeholder
+                    blurhash
+                    formats
+                    alternativeText
+                    provider_metadata
+                  }
+                }
+              }
               description
               background
               name
@@ -98,6 +111,17 @@ export const getTopics = async (
         background: markdown,
         name: e.attributes?.name,
         publishedAt: e.attributes?.publishedAt,
+        attachment: {
+          url: e.attributes?.attacments.data?.attributes?.url,
+          cloudinaryPublicId:
+            e.attributes?.attacments.data?.attributes?.provider_metadata
+              .public_id,
+          coverUrl: e.attributes?.attacments.data?.attributes?.url,
+          placeholder: e.attributes?.attacments.data?.attributes?.placeholder,
+          caption: e.attributes?.attacments.data?.attributes?.caption,
+          alternativeText:
+            e.attributes?.attacments.data?.attributes?.alternativeText,
+        },
       } as ContentTopic;
     })
   ).then((value) => value);
@@ -131,7 +155,7 @@ export const getIssues = async (variables?: Variables) => {
             slug
             title
             background
-
+            legacyDate
             seo {
               metaTitle
               metaDescription
@@ -210,7 +234,7 @@ export const getIssues = async (variables?: Variables) => {
         slug: issue.attributes?.slug!,
         markdown: markdown,
         topic: issue.attributes?.topic?.data?.attributes?.name,
-        createdAt: issue.attributes?.createdAt,
+        createdAt: issue.attributes?.legacyDate ?? issue.attributes?.createdAt,
       } as ContentIssue;
     })
   ).then((value) => value);

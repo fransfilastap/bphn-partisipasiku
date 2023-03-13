@@ -42,25 +42,26 @@ export default function Header({
       >
         <Container className='flex flex-row items-center justify-between'>
           <Logo />
-          <div className='flex flex-row items-center justify-between gap-8'>
-            <Navigation className='flex-row items-center justify-between hidden md:flex md:gap-2'>
-              <ul className='inline-flex gap-4'>
-                <li>
-                  <NavLink href='/'>Beranda</NavLink>
-                </li>
-                <li>
-                  <NavLink href='/kategori'>Kategori</NavLink>
-                </li>
-                <li>
-                  <NavLink href='/diskusi'>Diskusi</NavLink>
-                </li>
-                <li>
-                  <NavLink href='/tentang-kami'>Tentang Kami</NavLink>
-                </li>
-              </ul>
-            </Navigation>
-            <ColorModeSwitcher className='hidden' />
-          </div>
+          <Navigation className='flex-row items-center justify-between hidden md:flex md:gap-2'>
+            <ul className='inline-flex gap-4'>
+              <li>
+                <NavLink href='/'>Beranda</NavLink>
+              </li>
+              <li>
+                <NavLink href='/pendapatku'>PendapatKu</NavLink>
+              </li>
+              <li>
+                <NavLink href='/kategori'>Kategori</NavLink>
+              </li>
+              <li>
+                <NavLink href='/diskusi'>Daftar Isu</NavLink>
+              </li>
+              <li>
+                <NavLink href='/tentang-kami'>Tentang Kami</NavLink>
+              </li>
+            </ul>
+          </Navigation>
+          <ColorModeSwitcher className='hidden' />
           <MenuToggle
             whileTap={{ scale: 0.8 }}
             onClick={() => toggleMenu()}
@@ -98,6 +99,7 @@ export default function Header({
                   </div>
                   <ul className='flex flex-col gap-1 py-2'>
                     <MNavLink href='/'>Beranda</MNavLink>
+                    <MNavLink href='/pendapatku'>PendapatKu</MNavLink>
                     <MNavLink href='/kategori'>Kategori</MNavLink>
                     <MNavLink href='/diskusi'>Diskusi</MNavLink>
                     <MNavLink href='/tentang-kami'>Tentang Kami</MNavLink>
